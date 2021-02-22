@@ -12,6 +12,8 @@ scipy = "^1.6.0"
 pytest = "^6.2.2"
 rich = "^9.11.0"
 click = "^7.1.2"
+typer = "^0.3.2"
+black = "^20.8b1"
 
 [tool.poetry.dev-dependencies]
 
