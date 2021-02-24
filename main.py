@@ -14,11 +14,14 @@ import typer
 from rich.console import Console
 from rich.style import Style
 
+from ingress import parse_sbol_xml_tree
+
 console = Console()
 app = typer.Typer()
 
 base_style = Style.parse("cyan")
 console.print("Hello, World", style=base_style + Style(underline=True))
+
 
 # TODO: For Eric-
 # - Write a Commandline Interface that takes in the following input from the
@@ -139,8 +142,9 @@ def main(
     """
 
     # Convert input-, output-paths to Path objects
+    gc = parse_sbol_xml_tree(in_filepath)
     in_filepath, out_filepath = convert_to_path_obj(in_filepath, out_filepath)
-
+    print(in_filepath)
     # Import necessary modules to do the thing
 
     # Here's a preliminary progress bar
