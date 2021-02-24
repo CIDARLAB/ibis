@@ -1,0 +1,1553 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:sbol="http://sbols.org/v2#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#dateTime/" xmlns:om="http://www.ontology-of-units-of-measure.org/resource/om-2/" xmlns:synbiohub="http://synbiohub.org#" xmlns:sbh="http://wiki.synbiohub.org/wiki/Terms/synbiohub#" xmlns:sybio="http://www.sybio.ncl.ac.uk#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ncbi="http://www.ncbi.nlm.nih.gov#" xmlns:igem="http://wiki.synbiohub.org/wiki/Terms/igem#" xmlns:genbank="http://www.ncbi.nlm.nih.gov/genbank#" xmlns:gbconv="http://sbols.org/genBankConversion#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:obo="http://purl.obolibrary.org/obo/">
+  <sbol:ModuleDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module"/>
+    <sbol:displayId>Design0_Module</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/1"/>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group2"/>
+        <sbol:displayId>Design0_Group2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group1"/>
+        <sbol:displayId>Design0_Group1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/Design0_Group0"/>
+        <sbol:displayId>Design0_Group0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Module/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#none"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+  </sbol:ModuleDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0"/>
+    <sbol:displayId>Design0_Group0</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1"/>
+    <sbol:displayId>Design0_Group1</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object0_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object0_Component"/>
+        <sbol:displayId>Group1_Object0_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object1_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object1_Component"/>
+        <sbol:displayId>Group1_Object1_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object2_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object2_Component"/>
+        <sbol:displayId>Group1_Object2_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>145</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object0_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation1"/>
+        <sbol:displayId>SequenceAnnotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation1/SequenceAnnotation1_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation1/SequenceAnnotation1_Range"/>
+            <sbol:displayId>SequenceAnnotation1_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+            <sbol:start>146</sbol:start>
+            <sbol:end>216</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object1_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation2"/>
+        <sbol:displayId>SequenceAnnotation2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation2/SequenceAnnotation2_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/SequenceAnnotation2/SequenceAnnotation2_Range"/>
+            <sbol:displayId>SequenceAnnotation2_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+            <sbol:start>217</sbol:start>
+            <sbol:end>290</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object2_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Design0_Group1_Constraint1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Design0_Group1_Constraint1"/>
+        <sbol:displayId>Design0_Group1_Constraint1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object0_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object1_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Design0_Group1_Constraint2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Design0_Group1_Constraint2"/>
+        <sbol:displayId>Design0_Group1_Constraint2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object1_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1/Group1_Object2_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2"/>
+    <sbol:displayId>Design0_Group2</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/Group2_Object0_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/Group2_Object0_Component"/>
+        <sbol:displayId>Group2_Object0_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>952</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2/Group2_Object0_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0"/>
+    <sbol:displayId>Design0_Group1_Object0</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pHlyIIR_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pHlyIIR_Component"/>
+        <sbol:displayId>pHlyIIR_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pSrpR_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pSrpR_Component"/>
+        <sbol:displayId>pSrpR_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/PhlF_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/PhlF_Component"/>
+        <sbol:displayId>PhlF_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/RiboJ53_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/RiboJ53_Component"/>
+        <sbol:displayId>RiboJ53_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/ECK120033737_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/ECK120033737_Component"/>
+        <sbol:displayId>ECK120033737_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/P2_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/P2_Component"/>
+        <sbol:displayId>P2_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>82</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pSrpR_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation1"/>
+        <sbol:displayId>SequenceAnnotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation1/SequenceAnnotation1_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation1/SequenceAnnotation1_Range"/>
+            <sbol:displayId>SequenceAnnotation1_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>83</sbol:start>
+            <sbol:end>145</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pHlyIIR_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation2"/>
+        <sbol:displayId>SequenceAnnotation2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation2/SequenceAnnotation2_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation2/SequenceAnnotation2_Range"/>
+            <sbol:displayId>SequenceAnnotation2_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>146</sbol:start>
+            <sbol:end>224</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/RiboJ53_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation3"/>
+        <sbol:displayId>SequenceAnnotation3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation3/SequenceAnnotation3_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation3/SequenceAnnotation3_Range"/>
+            <sbol:displayId>SequenceAnnotation3_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>225</sbol:start>
+            <sbol:end>261</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/P2_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation4"/>
+        <sbol:displayId>SequenceAnnotation4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation4/SequenceAnnotation4_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation4/SequenceAnnotation4_Range"/>
+            <sbol:displayId>SequenceAnnotation4_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>262</sbol:start>
+            <sbol:end>864</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/PhlF_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation5/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation5"/>
+        <sbol:displayId>SequenceAnnotation5</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation5/SequenceAnnotation5_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/SequenceAnnotation5/SequenceAnnotation5_Range"/>
+            <sbol:displayId>SequenceAnnotation5_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+            <sbol:start>865</sbol:start>
+            <sbol:end>921</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/ECK120033737_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint3"/>
+        <sbol:displayId>Design0_Group1_Object0_Constraint3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/RiboJ53_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/P2_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint2"/>
+        <sbol:displayId>Design0_Group1_Object0_Constraint2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pHlyIIR_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/RiboJ53_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint5/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint5"/>
+        <sbol:displayId>Design0_Group1_Object0_Constraint5</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/PhlF_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/ECK120033737_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint4"/>
+        <sbol:displayId>Design0_Group1_Object0_Constraint4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/P2_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/PhlF_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/Design0_Group1_Object0_Constraint1"/>
+        <sbol:displayId>Design0_Group1_Object0_Constraint1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pSrpR_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0/pHlyIIR_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1"/>
+    <sbol:displayId>Design0_Group1_Object1</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/pTac_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/pTac_Component"/>
+        <sbol:displayId>pTac_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SrpR_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SrpR_Component"/>
+        <sbol:displayId>SrpR_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/S2_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/S2_Component"/>
+        <sbol:displayId>S2_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/ECK120029600_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/ECK120029600_Component"/>
+        <sbol:displayId>ECK120029600_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/RiboJ10_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/RiboJ10_Component"/>
+        <sbol:displayId>RiboJ10_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>71</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/pTac_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation1"/>
+        <sbol:displayId>SequenceAnnotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation1/SequenceAnnotation1_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation1/SequenceAnnotation1_Range"/>
+            <sbol:displayId>SequenceAnnotation1_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+            <sbol:start>72</sbol:start>
+            <sbol:end>150</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/RiboJ10_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation2"/>
+        <sbol:displayId>SequenceAnnotation2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation2/SequenceAnnotation2_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation2/SequenceAnnotation2_Range"/>
+            <sbol:displayId>SequenceAnnotation2_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+            <sbol:start>151</sbol:start>
+            <sbol:end>188</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/S2_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation3"/>
+        <sbol:displayId>SequenceAnnotation3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation3/SequenceAnnotation3_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation3/SequenceAnnotation3_Range"/>
+            <sbol:displayId>SequenceAnnotation3_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+            <sbol:start>189</sbol:start>
+            <sbol:end>830</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SrpR_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation4"/>
+        <sbol:displayId>SequenceAnnotation4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation4/SequenceAnnotation4_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SequenceAnnotation4/SequenceAnnotation4_Range"/>
+            <sbol:displayId>SequenceAnnotation4_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+            <sbol:start>831</sbol:start>
+            <sbol:end>920</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/ECK120029600_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint2"/>
+        <sbol:displayId>Design0_Group1_Object1_Constraint2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/RiboJ10_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/S2_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint1"/>
+        <sbol:displayId>Design0_Group1_Object1_Constraint1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/pTac_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/RiboJ10_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint4"/>
+        <sbol:displayId>Design0_Group1_Object1_Constraint4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SrpR_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/ECK120029600_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/Design0_Group1_Object1_Constraint3"/>
+        <sbol:displayId>Design0_Group1_Object1_Constraint3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/S2_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1/SrpR_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2"/>
+    <sbol:displayId>Design0_Group1_Object2</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/pTet_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/pTet_Component"/>
+        <sbol:displayId>pTet_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/RiboJ51_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/RiboJ51_Component"/>
+        <sbol:displayId>RiboJ51_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/H1_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/H1_Component"/>
+        <sbol:displayId>H1_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/HlyIIR_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/HlyIIR_Component"/>
+        <sbol:displayId>HlyIIR_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/ECK120033736_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/ECK120033736_Component"/>
+        <sbol:displayId>ECK120033736_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>74</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/pTet_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation1"/>
+        <sbol:displayId>SequenceAnnotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation1/SequenceAnnotation1_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation1/SequenceAnnotation1_Range"/>
+            <sbol:displayId>SequenceAnnotation1_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+            <sbol:start>75</sbol:start>
+            <sbol:end>153</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/RiboJ51_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation2"/>
+        <sbol:displayId>SequenceAnnotation2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation2/SequenceAnnotation2_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation2/SequenceAnnotation2_Range"/>
+            <sbol:displayId>SequenceAnnotation2_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+            <sbol:start>154</sbol:start>
+            <sbol:end>162</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/H1_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation3"/>
+        <sbol:displayId>SequenceAnnotation3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation3/SequenceAnnotation3_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation3/SequenceAnnotation3_Range"/>
+            <sbol:displayId>SequenceAnnotation3_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+            <sbol:start>163</sbol:start>
+            <sbol:end>798</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/HlyIIR_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation4"/>
+        <sbol:displayId>SequenceAnnotation4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation4/SequenceAnnotation4_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/SequenceAnnotation4/SequenceAnnotation4_Range"/>
+            <sbol:displayId>SequenceAnnotation4_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+            <sbol:start>799</sbol:start>
+            <sbol:end>851</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/ECK120033736_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint4"/>
+        <sbol:displayId>Design0_Group1_Object2_Constraint4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/HlyIIR_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/ECK120033736_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint1"/>
+        <sbol:displayId>Design0_Group1_Object2_Constraint1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/pTet_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/RiboJ51_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint3"/>
+        <sbol:displayId>Design0_Group1_Object2_Constraint3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/H1_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/HlyIIR_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/Design0_Group1_Object2_Constraint2"/>
+        <sbol:displayId>Design0_Group1_Object2_Constraint2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/RiboJ51_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2/H1_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0"/>
+    <sbol:displayId>Design0_Group2_Object0</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/YFP_cassette_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/YFP_cassette_Component"/>
+        <sbol:displayId>YFP_cassette_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:component>
+      <sbol:Component rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/pPhlF_Component/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/pPhlF_Component"/>
+        <sbol:displayId>pPhlF_Component</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:definition rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF/1"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+      </sbol:Component>
+    </sbol:component>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation0"/>
+        <sbol:displayId>SequenceAnnotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation0/SequenceAnnotation0_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation0/SequenceAnnotation0_Range"/>
+            <sbol:displayId>SequenceAnnotation0_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>66</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/pPhlF_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation1"/>
+        <sbol:displayId>SequenceAnnotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation1/SequenceAnnotation1_Range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/SequenceAnnotation1/SequenceAnnotation1_Range"/>
+            <sbol:displayId>SequenceAnnotation1_Range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <obo:OBI_0001617>1</obo:OBI_0001617>
+            <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+            <sbol:start>67</sbol:start>
+            <sbol:end>952</sbol:end>
+          </sbol:Range>
+        </sbol:location>
+        <sbol:component rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/YFP_cassette_Component/1"/>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceConstraint>
+      <sbol:SequenceConstraint rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/Design0_Group2_Object0_Constraint1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/Design0_Group2_Object0_Constraint1"/>
+        <sbol:displayId>Design0_Group2_Object0_Constraint1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <obo:OBI_0001617>1</obo:OBI_0001617>
+        <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/1"/>
+        <sbol:restriction rdf:resource="http://sbols.org/v2#precedes"/>
+        <sbol:subject rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/pPhlF_Component/1"/>
+        <sbol:object rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0/YFP_cassette_Component/1"/>
+      </sbol:SequenceConstraint>
+    </sbol:sequenceConstraint>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0_Sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600"/>
+    <sbol:displayId>ECK120029600</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736"/>
+    <sbol:displayId>ECK120033736</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737"/>
+    <sbol:displayId>ECK120033737</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000141"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1"/>
+    <sbol:displayId>H1</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2"/>
+    <sbol:displayId>P2</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF"/>
+    <sbol:displayId>PhlF</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10"/>
+    <sbol:displayId>RiboJ10</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001977"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53"/>
+    <sbol:displayId>RiboJ53</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001977"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2"/>
+    <sbol:displayId>S2</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000139"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR"/>
+    <sbol:displayId>SrpR</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR"/>
+    <sbol:displayId>pHlyIIR</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR"/>
+    <sbol:displayId>pSrpR</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac"/>
+    <sbol:displayId>pTac</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR"/>
+    <sbol:displayId>HlyIIR</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51"/>
+    <sbol:displayId>RiboJ51</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0001977"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette"/>
+    <sbol:displayId>YFP_cassette</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF"/>
+    <sbol:displayId>pPhlF</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet"/>
+    <sbol:displayId>pTet</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet/1"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet_sequence/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0_Sequence"/>
+    <sbol:displayId>Design0_Group0_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group0_Sequence/1"/>
+    <sbol:elements></sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Sequence"/>
+    <sbol:displayId>Design0_Group1_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Sequence/1"/>
+    <sbol:elements>TCTATGATTGGTCCAGATTCGTTACCAATTGACAGCTAGCTCAGTCCTAGGTATATACATACATGCTTGTTTGTTTGTAAACACCAGGAATCTGAACGATTCGTTACCAATTGACATATTTAAAATTCTTGTTTAAAatgctagcAACGATCGTTGGCTGTGTTGACAATTAATCATCGGCTCGTATAATGTGTGGAATTGTGAGCGCTCACAATTTACTCCACCGTTGGCTTTTTTCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATAATGAGCAC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Sequence"/>
+    <sbol:displayId>Design0_Group2_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Sequence/1"/>
+    <sbol:elements>CGACGTACGGTGGAATCTGATTCGTTACCAATTGACATGATACGAAACGTACCGTATCGTTAAGGTCTGAAGCTGTCACCGGATGTGCTTTCCGGTCTGATGAGTCCGTGAGGACGAAACAGCCTCTACAAATAATTTTGTTTAATACTAGAGAAAGAGGGGAAATACTAGATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACAGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCCTGCAATGCTTCGCCCGCTACCCCGACCACATGAAGCTGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACAACAGCCACAACGTCTATATCATGGCCGACAAGCAGAAGAACGGCATCAAGGTGAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCAATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTTAGCTACCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAACTCGGTACCAAATTCCAGAAAAGAGGCCTCCCGAAAGGGGGGCCTTTTTTCGTTTTGGTCC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0_Sequence"/>
+    <sbol:displayId>Design0_Group1_Object0_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object0_Sequence/1"/>
+    <sbol:elements>TCTATGATTGGTCCAGATTCGTTACCAATTGACAGCTAGCTCAGTCCTAGGTATATACATACATGCTTGTTTGTTTGTAAACACCAGGAATCTGAACGATTCGTTACCAATTGACATATTTAAAATTCTTGTTTAAAatgctagcCTGAAGCGGTCAACGCATGTGCTTTGCGTTCTGATGAGACAGTGATGTCGAAACCGCCTCTACAAATAATTTTGTTTAAGGAGCTATGGACTATGTTTGAAAGGCTGAAATACTAGATGGCACGTACCCCGAGCCGTAGCAGCATTGGTAGCCTGCGTAGTCCGCATACCCATAAAGCAATTCTGACCAGCACCATTGAAATCCTGAAAGAATGTGGTTATAGCGGTCTGAGCATTGAAAGCGTTGCACGTCGTGCCGGTGCAAGCAAACCGACCATTTATCGTTGGTGGACCAATAAAGCAGCACTGATTGCCGAAGTGTATGAAAATGAAAGCGAACAGGTGCGTAAATTTCCGGATCTGGGTAGCTTTAAAGCCGATCTGGATTTTCTGCTGCGTAATCTGTGGAAAGTTTGGCGTGAAACCATTTGTGGTGAAGCATTTCGTTGTGTTATTGCAGAAGCACAGCTGGACCCTGCAACCCTGACCCAGCTGAAAGATCAGTTTATGGAACGTCGTCGTGAGATGCCGAAAAAACTGGTTGAAAATGCCATTAGCAATGGTGAACTGCCGAAAGATACCAATCGTGAACTGCTGCTGGATATGATTTTTGGTTTTTGTTGGTATCGCCTGCTGACCGAACAGCTGACCGTTGAACAGGATATTGAAGAATTTACCTTCCTGCTGATTAATGGTGTTTGTCCGGGTACACAGCGTTAAGGAAACACAGAAAAAAGCCCGCACCTGACAGTGCGGGCTTTTTTTTTCGACCAAAGG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1_Sequence"/>
+    <sbol:displayId>Design0_Group1_Object1_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object1_Sequence/1"/>
+    <sbol:elements>AACGATCGTTGGCTGTGTTGACAATTAATCATCGGCTCGTATAATGTGTGGAATTGTGAGCGCTCACAATTCTGAAGCGCTCAACGGGTGTGCTTCCCGTTCTGATGAGTCCGTGAGGACGAAAGCGCCTCTACAAATAATTTTGTTTAAGAGTCTATGGACTATGTTTTCACATATGAGATACCAGGATGGCACGTAAAACCGCAGCAGAAGCAGAAGAAACCCGTCAGCGTATTATTGATGCAGCACTGGAAGTTTTTGTTGCACAGGGTGTTAGTGATGCAACCCTGGATCAGATTGCACGTAAAGCCGGTGTTACCCGTGGTGCAGTTTATTGGCATTTTAATGGTAAACTGGAAGTTCTGCAGGCAGTTCTGGCAAGCCGTCAGCATCCGCTGGAACTGGATTTTACACCGGATCTGGGTATTGAACGTAGCTGGGAAGCAGTTGTTGTTGCAATGCTGGATGCAGTTCATAGTCCGCAGAGCAAACAGTTTAGCGAAATTCTGATTTATCAGGGTCTGGATGAAAGCGGTCTGATTCATAATCGTATGGTTCAGGCAAGCGATCGTTTTCTGCAGTATATTCATCAGGTTCTGCGTCATGCAGTTACCCAGGGTGAACTGCCGATTAATCTGGATCTGCAGACCAGCATTGGTGTTTTTAAAGGTCTGATTACCGGTCTGCTGTATGAAGGTCTGCGTAGCAAAGATCAGCAGGCACAGATTATCAAAGTTGCACTGGGTAGCTTTTGGGCACTGCTGCGTGAACCGCCTCGTTTTCTGCTGTGTGAAGAAGCACAGATTAAACAGGTGAAATCCTTCGAATAATTCAGCCAAAAAACTTAAGACCGCCGGTCTTGTCCACTACCTTGCAGTAATGCGGTGGACAGGATCGGCGGTTTTCTTTTCTCTTCTCAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2_Sequence"/>
+    <sbol:displayId>Design0_Group1_Object2_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group1_Object2_Sequence/1"/>
+    <sbol:elements>TACTCCACCGTTGGCTTTTTTCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATAATGAGCACCTGAAGTAGTCACCGGCTGTGCTTGCCGGTCTGATGAGCCTGTGAAGGCGAAACTACCTCTACAAATAATTTTGTTTAAACCCCCGAGATGAAATACATCCTGTTTGAGGTGTGCGAAATGGGTAAAAGCCGTGAACAGACCATGGAAAATATTCTGAAAGCAGCCAAAAAGAAATTCGGCGAACGTGGTTATGAAGGCACCAGCATTCAAGAAATTACCAAAGAAGCCAAAGTTAACGTTGCAATGGCCAGCTATTACTTTAATGGCAAAGAGAACCTGTACTACGAGGTGTTCAAAAAATACGGTCTGGCAAATGAACTGCCGAACTTTCTGGAAAAAAACCAGTTTAATCCGATTAATGCCCTGCGTGAATATCTGACCGTTTTTACCACCCACATTAAAGAAAATCCGGAAATTGGCACCCTGGCCTATGAAGAAATTATCAAAGAAAGCGCACGCCTGGAAAAAATCAAACCGTATTTTATCGGCAGCTTCGAACAGCTGAAAGAAATTCTGCAAGAGGGTGAAAAACAGGGTGTGTTTCACTTTTTTAGCATCAACCATACCATCCATTGGATTACCAGCATTGTTCTGTTTCCGAAATTCAAAAAATTCATCGATAGCCTGGGTCCGAATGAAACCAATGATACCAATCATGAATGGATGCCGGAAGATCTGGTTAGCCGTATTATTAGCGCACTGACCGATAAACCGAACATTTAAaacgcatgagAAAGCCCCCGGAAGATCACCTTCCGGGGGCTTTtttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0_Sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0_Sequence"/>
+    <sbol:displayId>Design0_Group2_Object0_Sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/Design0_Group2_Object0_Sequence/1"/>
+    <sbol:elements>CGACGTACGGTGGAATCTGATTCGTTACCAATTGACATGATACGAAACGTACCGTATCGTTAAGGTCTGAAGCTGTCACCGGATGTGCTTTCCGGTCTGATGAGTCCGTGAGGACGAAACAGCCTCTACAAATAATTTTGTTTAATACTAGAGAAAGAGGGGAAATACTAGATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACAGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCCTGCAATGCTTCGCCCGCTACCCCGACCACATGAAGCTGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACAACAGCCACAACGTCTATATCATGGCCGACAAGCAGAAGAACGGCATCAAGGTGAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCAATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTTAGCTACCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAACTCGGTACCAAATTCCAGAAAAGAGGCCTCCCGAAAGGGGGGCCTTTTTTCGTTTTGGTCC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600_sequence"/>
+    <sbol:displayId>ECK120029600_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120029600_sequence/1"/>
+    <sbol:elements>TTCAGCCAAAAAACTTAAGACCGCCGGTCTTGTCCACTACCTTGCAGTAATGCGGTGGACAGGATCGGCGGTTTTCTTTTCTCTTCTCAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736_sequence"/>
+    <sbol:displayId>ECK120033736_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033736_sequence/1"/>
+    <sbol:elements>aacgcatgagAAAGCCCCCGGAAGATCACCTTCCGGGGGCTTTtttattgcgc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737_sequence"/>
+    <sbol:displayId>ECK120033737_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/ECK120033737_sequence/1"/>
+    <sbol:elements>GGAAACACAGAAAAAAGCCCGCACCTGACAGTGCGGGCTTTTTTTTTCGACCAAAGG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1_sequence"/>
+    <sbol:displayId>H1_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/H1_sequence/1"/>
+    <sbol:elements>ACCCCCGAG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2_sequence"/>
+    <sbol:displayId>P2_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/P2_sequence/1"/>
+    <sbol:elements>GGAGCTATGGACTATGTTTGAAAGGCTGAAATACTAG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF_sequence"/>
+    <sbol:displayId>PhlF_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/PhlF_sequence/1"/>
+    <sbol:elements>ATGGCACGTACCCCGAGCCGTAGCAGCATTGGTAGCCTGCGTAGTCCGCATACCCATAAAGCAATTCTGACCAGCACCATTGAAATCCTGAAAGAATGTGGTTATAGCGGTCTGAGCATTGAAAGCGTTGCACGTCGTGCCGGTGCAAGCAAACCGACCATTTATCGTTGGTGGACCAATAAAGCAGCACTGATTGCCGAAGTGTATGAAAATGAAAGCGAACAGGTGCGTAAATTTCCGGATCTGGGTAGCTTTAAAGCCGATCTGGATTTTCTGCTGCGTAATCTGTGGAAAGTTTGGCGTGAAACCATTTGTGGTGAAGCATTTCGTTGTGTTATTGCAGAAGCACAGCTGGACCCTGCAACCCTGACCCAGCTGAAAGATCAGTTTATGGAACGTCGTCGTGAGATGCCGAAAAAACTGGTTGAAAATGCCATTAGCAATGGTGAACTGCCGAAAGATACCAATCGTGAACTGCTGCTGGATATGATTTTTGGTTTTTGTTGGTATCGCCTGCTGACCGAACAGCTGACCGTTGAACAGGATATTGAAGAATTTACCTTCCTGCTGATTAATGGTGTTTGTCCGGGTACACAGCGTTAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10_sequence"/>
+    <sbol:displayId>RiboJ10_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ10_sequence/1"/>
+    <sbol:elements>CTGAAGCGCTCAACGGGTGTGCTTCCCGTTCTGATGAGTCCGTGAGGACGAAAGCGCCTCTACAAATAATTTTGTTTAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53_sequence"/>
+    <sbol:displayId>RiboJ53_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ53_sequence/1"/>
+    <sbol:elements>CTGAAGCGGTCAACGCATGTGCTTTGCGTTCTGATGAGACAGTGATGTCGAAACCGCCTCTACAAATAATTTTGTTTAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2_sequence"/>
+    <sbol:displayId>S2_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/S2_sequence/1"/>
+    <sbol:elements>GAGTCTATGGACTATGTTTTCACATATGAGATACCAGG</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR_sequence"/>
+    <sbol:displayId>SrpR_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/SrpR_sequence/1"/>
+    <sbol:elements>ATGGCACGTAAAACCGCAGCAGAAGCAGAAGAAACCCGTCAGCGTATTATTGATGCAGCACTGGAAGTTTTTGTTGCACAGGGTGTTAGTGATGCAACCCTGGATCAGATTGCACGTAAAGCCGGTGTTACCCGTGGTGCAGTTTATTGGCATTTTAATGGTAAACTGGAAGTTCTGCAGGCAGTTCTGGCAAGCCGTCAGCATCCGCTGGAACTGGATTTTACACCGGATCTGGGTATTGAACGTAGCTGGGAAGCAGTTGTTGTTGCAATGCTGGATGCAGTTCATAGTCCGCAGAGCAAACAGTTTAGCGAAATTCTGATTTATCAGGGTCTGGATGAAAGCGGTCTGATTCATAATCGTATGGTTCAGGCAAGCGATCGTTTTCTGCAGTATATTCATCAGGTTCTGCGTCATGCAGTTACCCAGGGTGAACTGCCGATTAATCTGGATCTGCAGACCAGCATTGGTGTTTTTAAAGGTCTGATTACCGGTCTGCTGTATGAAGGTCTGCGTAGCAAAGATCAGCAGGCACAGATTATCAAAGTTGCACTGGGTAGCTTTTGGGCACTGCTGCGTGAACCGCCTCGTTTTCTGCTGTGTGAAGAAGCACAGATTAAACAGGTGAAATCCTTCGAATAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR_sequence"/>
+    <sbol:displayId>HlyIIR_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/HlyIIR_sequence/1"/>
+    <sbol:elements>ATGAAATACATCCTGTTTGAGGTGTGCGAAATGGGTAAAAGCCGTGAACAGACCATGGAAAATATTCTGAAAGCAGCCAAAAAGAAATTCGGCGAACGTGGTTATGAAGGCACCAGCATTCAAGAAATTACCAAAGAAGCCAAAGTTAACGTTGCAATGGCCAGCTATTACTTTAATGGCAAAGAGAACCTGTACTACGAGGTGTTCAAAAAATACGGTCTGGCAAATGAACTGCCGAACTTTCTGGAAAAAAACCAGTTTAATCCGATTAATGCCCTGCGTGAATATCTGACCGTTTTTACCACCCACATTAAAGAAAATCCGGAAATTGGCACCCTGGCCTATGAAGAAATTATCAAAGAAAGCGCACGCCTGGAAAAAATCAAACCGTATTTTATCGGCAGCTTCGAACAGCTGAAAGAAATTCTGCAAGAGGGTGAAAAACAGGGTGTGTTTCACTTTTTTAGCATCAACCATACCATCCATTGGATTACCAGCATTGTTCTGTTTCCGAAATTCAAAAAATTCATCGATAGCCTGGGTCCGAATGAAACCAATGATACCAATCATGAATGGATGCCGGAAGATCTGGTTAGCCGTATTATTAGCGCACTGACCGATAAACCGAACATTTAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51_sequence"/>
+    <sbol:displayId>RiboJ51_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/RiboJ51_sequence/1"/>
+    <sbol:elements>CTGAAGTAGTCACCGGCTGTGCTTGCCGGTCTGATGAGCCTGTGAAGGCGAAACTACCTCTACAAATAATTTTGTTTAA</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette_sequence"/>
+    <sbol:displayId>YFP_cassette_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/YFP_cassette_sequence/1"/>
+    <sbol:elements>CTGAAGCTGTCACCGGATGTGCTTTCCGGTCTGATGAGTCCGTGAGGACGAAACAGCCTCTACAAATAATTTTGTTTAATACTAGAGAAAGAGGGGAAATACTAGATGGTGAGCAAGGGCGAGGAGCTGTTCACCGGGGTGGTGCCCATCCTGGTCGAGCTGGACGGCGACGTAAACGGCCACAAGTTCAGCGTGTCCGGCGAGGGCGAGGGCGATGCCACCTACGGCAAGCTGACCCTGAAGTTCATCTGCACCACAGGCAAGCTGCCCGTGCCCTGGCCCACCCTCGTGACCACCTTCGGCTACGGCCTGCAATGCTTCGCCCGCTACCCCGACCACATGAAGCTGCACGACTTCTTCAAGTCCGCCATGCCCGAAGGCTACGTCCAGGAGCGCACCATCTTCTTCAAGGACGACGGCAACTACAAGACCCGCGCCGAGGTGAAGTTCGAGGGCGACACCCTGGTGAACCGCATCGAGCTGAAGGGCATCGACTTCAAGGAGGACGGCAACATCCTGGGGCACAAGCTGGAGTACAACTACAACAGCCACAACGTCTATATCATGGCCGACAAGCAGAAGAACGGCATCAAGGTGAACTTCAAGATCCGCCACAACATCGAGGACGGCAGCGTGCAGCTCGCCGACCACTACCAGCAGAACACCCCAATCGGCGACGGCCCCGTGCTGCTGCCCGACAACCACTACCTTAGCTACCAGTCCGCCCTGAGCAAAGACCCCAACGAGAAGCGCGATCACATGGTCCTGCTGGAGTTCGTGACCGCCGCCGGGATCACTCTCGGCATGGACGAGCTGTACAAGTAACTCGGTACCAAATTCCAGAAAAGAGGCCTCCCGAAAGGGGGGCCTTTTTTCGTTTTGGTCC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR_sequence"/>
+    <sbol:displayId>pHlyIIR_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pHlyIIR_sequence/1"/>
+    <sbol:elements>ACCAGGAATCTGAACGATTCGTTACCAATTGACATATTTAAAATTCTTGTTTAAAatgctagc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF_sequence"/>
+    <sbol:displayId>pPhlF_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pPhlF_sequence/1"/>
+    <sbol:elements>CGACGTACGGTGGAATCTGATTCGTTACCAATTGACATGATACGAAACGTACCGTATCGTTAAGGT</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR_sequence"/>
+    <sbol:displayId>pSrpR_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pSrpR_sequence/1"/>
+    <sbol:elements>TCTATGATTGGTCCAGATTCGTTACCAATTGACAGCTAGCTCAGTCCTAGGTATATACATACATGCTTGTTTGTTTGTAAAC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac_sequence"/>
+    <sbol:displayId>pTac_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTac_sequence/1"/>
+    <sbol:elements>AACGATCGTTGGCTGTGTTGACAATTAATCATCGGCTCGTATAATGTGTGGAATTGTGAGCGCTCACAATT</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+  <sbol:Sequence rdf:about="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet_sequence/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet_sequence"/>
+    <sbol:displayId>pTet_sequence</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <obo:OBI_0001617>1</obo:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.programmingbiology.org/user/wrjackso/test/pTet_sequence/1"/>
+    <sbol:elements>TACTCCACCGTTGGCTTTTTTCCCTATCAGTGATAGAGATTGACATCCCTATCAGTGATAGAGATAATGAGCAC</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
