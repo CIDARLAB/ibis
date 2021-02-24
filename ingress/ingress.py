@@ -32,12 +32,21 @@ ABOUT_KEY = f"{W3_KEY}about"
 RESOURCE_KEY = f"{W3_KEY}resource"
 
 
-# What I need to do:
-#   I need to parse the tree and take out all of the circuit elements.
-#   I need to be able to assemble the circuit in the correct order.
-#   I need to take this information and put it into a genetic circuit.
-def sort_by_sequence_position(reference: str, parent_node):
-    sequences = parent_node.findall(f"{SBOL_PREFIX}sequenceAnnotation")
+def get_part_position(reference: str, root_node: ET.Element) -> int:
+    """
+    Finds the starting position of the part.
+
+    Args:
+        reference: Persistent text reference key that ties SBOL Components to
+            SBOL Sequence Annotation
+        root_node: The root node of the XML tree. Needed information is on
+            seperate 'branches', so you need to iterate over the root.
+
+    Returns:
+        The starting position of the requested part.
+
+    """
+    sequences = root_node.findall(f"{SBOL_PREFIX}sequenceAnnotation")
     for sequence in sequences:
         seq = sequence.find(f"{SBOL_PREFIX}SequenceAnnotation")
         if seq.find(f"{SBOL_PREFIX}component").attrib[RESOURCE_KEY] == reference:
@@ -51,10 +60,33 @@ def sort_by_sequence_position(reference: str, parent_node):
 
 
 def get_part_name(reference: str) -> str:
+    """
+    Extracts the part name from a passed in SBOL Component reference.
+
+    Args:
+        reference: Input string. Should look something like
+        <https://synbiohub.programmingbiology.org/user/wrjackso/test/
+        Design0_Group1_Object2/pTet_Component/1>
+
+    Returns:
+        Base Component Name. With above example, would be 'pTet'
+
+    """
     return reference.split("/")[-2].split("_Component")[0]
 
 
-def get_part_type(part_name: str, root_node):
+def get_part_type(part_name: str, root_node: ET.Element) -> str:
+    """
+    Gets the part type.
+
+    Args:
+        part_name: The base name of the part, e.g, 'yfp_cassette'
+        root_node: The root node of the XML tree.
+
+    Returns:
+        The string name of the part. Reference `datastructures/parts` for
+        ensuring 1:1 mapping between strings and classes.
+    """
     identifiers_lut = {
         "0000167": "promoter",
         "0001977": "ribosome_nuclease_site",
@@ -75,7 +107,20 @@ def get_part_type(part_name: str, root_node):
     raise RuntimeError(f"Unable to identify part number for {part_name}")
 
 
-def get_sequence_string(part_name: str, root_node):
+def get_sequence_string(part_name: str, root_node: ET.Element) -> str:
+    """
+    Gets the genetic sequence associated with the passed in part name.
+
+    TODO: We might need it? Unsure. -Jx.
+
+    Args:
+        part_name: The base name of the part, e.g, 'yfp_cassette'
+        root_node: The root node of the XML tree.
+
+    Returns:
+        GCAT representation of the sequence.
+
+    """
     sequence_name = part_name + "_sequence"
     sequences = root_node.findall(f"{SBOL_PREFIX}Sequence")
     for sequence in sequences:
@@ -85,6 +130,16 @@ def get_sequence_string(part_name: str, root_node):
 
 
 def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
+    """
+    Parses an XML file and returns a `GeneticCircuit` Datastructure.
+
+    Args:
+        fp: The filepath to the circuit.
+
+    Returns:
+        `GeneticCircuit` Datastructure.
+
+    """
     # We probably shouldn't put a guard or catch around this because file not
     # found should be self explanatory
     tree = ET.parse(fp)
@@ -117,10 +172,10 @@ def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
             part_name = get_part_name(reference)
             part_type = get_part_type(part_name, root)
             dna_sequence = get_sequence_string(part_name, root)
-            part_position = sort_by_sequence_position(reference, object_node)
-            unsorted_parts.append(tuple(
-                [part, part_position, part_name, part_type, dna_sequence]
-            ))
+            part_position = get_part_position(reference, object_node)
+            unsorted_parts.append(
+                tuple([part, part_position, part_name, part_type, dna_sequence])
+            )
         sorted_parts = sorted(unsorted_parts, key=lambda x: x[1])
         for part in sorted_parts:
             part, _, part_name, part_type, dna_sequence = part
