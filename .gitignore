@@ -130,3 +130,6 @@ dmypy.json
 
 # IntelliJ IDEs
 .idea
+
+# Pytest Output
+.pytest_cache
