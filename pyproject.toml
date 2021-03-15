@@ -1,9 +1,13 @@
 [tool.poetry]
-name = "scoring-project"
+name = "genetic-ibis"
 version = "0.1.0"
 description = "Genetic Circuit Scoring Algorithms"
 authors = ["W.R. Jackson, Ben Bremer, Eric South"]
 license = "MIT"
+packages = [
+    { include="ibis", from="." },
+]
+
 
 [tool.poetry.dependencies]
 python = "^3.8"

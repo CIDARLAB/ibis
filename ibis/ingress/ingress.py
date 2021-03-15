@@ -24,7 +24,7 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 import os
 import xml.etree.ElementTree as ET
 
-from datastucture import GeneticGroup, GeneticCircuit, get_part_object_from_str
+from ibis.datastucture import GeneticGroup, GeneticCircuit, get_part_object_from_str
 
 SBOL_PREFIX = "{http://sbols.org/v2#}"
 W3_KEY = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
@@ -187,6 +187,6 @@ def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
 
 
 if __name__ == "__main__":
-    input_file = "../tests/test_circuits/example_and_gate.xml"
+    input_file = "../../tests/test_circuits/example_and_gate.xml"
     gc = parse_sbol_xml_tree(input_file)
     print(gc)

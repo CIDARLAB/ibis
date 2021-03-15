@@ -14,7 +14,7 @@ import typer
 from rich.console import Console
 from rich.style import Style
 
-from ingress import parse_sbol_xml_tree
+from ibis.ingress import parse_sbol_xml_tree
 
 console = Console()
 app = typer.Typer()

@@ -6,7 +6,7 @@ Tests for the Ingress Module
 Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
-from ingress import parse_sbol_xml_tree
+from ibis.ingress import parse_sbol_xml_tree
 
 
 def test_ingress_module():
