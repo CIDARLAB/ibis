@@ -11,16 +11,23 @@ from typing import (
     Dict,
 )
 
+import networkx as nx
+
 from .parts import BasePart
 
 
 @dataclass
-class GeneticGroup:
+class SBOLGeneticGroup:
     name: str
     components: Dict[str, BasePart] = field(default_factory=dict)
 
 
 @dataclass
-class GeneticCircuit:
+class SBOLGeneticCircuit:
     name: str
-    groups: Dict[str, GeneticGroup] = field(default_factory=dict)
+    groups: Dict[str, SBOLGeneticGroup] = field(default_factory=dict)
+
+
+# ----------------------- Network Based Genetic Circuits  ----------------------
+class NetworkGeneticCircuit:
+    pass

@@ -24,7 +24,11 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 import os
 import xml.etree.ElementTree as ET
 
-from ibis.datastucture import GeneticGroup, GeneticCircuit, get_part_object_from_str
+from ibis.datastucture import (
+    SBOLGeneticGroup,
+    SBOLGeneticCircuit,
+    get_part_object_from_str,
+)
 
 SBOL_PREFIX = "{http://sbols.org/v2#}"
 W3_KEY = "{http://www.w3.org/1999/02/22-rdf-syntax-ns#}"
@@ -129,7 +133,7 @@ def get_sequence_string(part_name: str, root_node: ET.Element) -> str:
             return seq_text
 
 
-def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
+def parse_sbol_xml_tree(fp: str) -> SBOLGeneticCircuit:
     """
     Parses an XML file and returns a `GeneticCircuit` Datastructure.
 
@@ -147,7 +151,7 @@ def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
     # Some sort of validation goes here to ensure compliance with standard.
     # Currently this is using Cello output as the standard, beware.
     circuit_name = os.path.splitext(os.path.basename(fp))[0]
-    genetic_circuit = GeneticCircuit(name=circuit_name)
+    genetic_circuit = SBOLGeneticCircuit(name=circuit_name)
     design_groups = []
     for item in root.findall(f"{SBOL_PREFIX}ComponentDefinition"):
         display_name = item.find(f"{SBOL_PREFIX}displayId").text
@@ -155,7 +159,7 @@ def parse_sbol_xml_tree(fp: str) -> GeneticCircuit:
             design_groups.append(item)
     for group in design_groups:
         group_name = group.find(f"{SBOL_PREFIX}displayId").text
-        genetic_group = GeneticGroup(group_name)
+        genetic_group = SBOLGeneticGroup(group_name)
         raw_parts = []
         object_node = group
         # The following loops are just to order the parts and pull out relevant

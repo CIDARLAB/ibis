@@ -5,7 +5,14 @@
 Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
-from .circuits import GeneticCircuit, GeneticGroup
+from .circuits import (
+    SBOLGeneticCircuit,
+    SBOLGeneticGroup,
+)
+from .logic import (
+    InputSignal,
+    LogicFunction,
+)
 from .parts import (
     BasePart,
     Promoter,
