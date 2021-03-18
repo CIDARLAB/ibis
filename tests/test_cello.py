@@ -13,6 +13,7 @@ from ibis.datastucture import (
 )
 from ibis.scoring.cello_score import (
     CelloRepressor,
+    optimize_repressor,
 )
 
 # -------------------------------- Test Fixtures -------------------------------
