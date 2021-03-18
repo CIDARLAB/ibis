@@ -8,8 +8,8 @@
 on:
   push:
     branches:
-      - master
-      - feat/ci-and-cd
+      - main
+      - feat/better-ci-and-cd
 
 name: Perform Tests on Available Platforms.
 
@@ -86,7 +86,12 @@ jobs:
       - name: Bump library and Publish.
         run: |
           poetry build
-          poetry version minor
+          poetry version patch
+          git add pyproject.toml
+          git config --global user.name 'W.R. Jackson'
+          git config --global user.email 'wrjackso@bu.edu'
+          git commit -am 'Automated Bump {CI/CD}'
+          git push
           poetry publish --build -u ${{ secrets.pypi_username }} -p ${{ secrets.pypi_password }}
 
       # -----------------------------------------------------------------------
