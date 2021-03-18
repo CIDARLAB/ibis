@@ -44,7 +44,7 @@ def get_part_position(reference: str, root_node: ET.Element) -> int:
         reference: Persistent text reference key that ties SBOL Components to
             SBOL Sequence Annotation
         root_node: The root node of the XML tree. Needed information is on
-            seperate 'branches', so you need to iterate over the root.
+            separate 'branches', so you need to iterate over the root.
 
     Returns:
         The starting position of the requested part.

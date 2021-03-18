@@ -25,6 +25,45 @@ import scipy.optimize as opt
 
 from ibis.datastucture.logic import InputSignal, LogicFunction
 
+from ibis.scoring.scorer import BaseRequirement, BaseScoring
+
+
+class CelloRequirement(BaseRequirement):
+    """
+
+    Args:
+        ucf_fp: <Absolute Filepath to User Constraint File>
+        input_signal_fp: <Absolute Filepath to Input Signal File>
+        output_signal_fp: <Absolute Filepath to Output Signal File>
+        verilog_file_fp: <Absolute Filepath to Input Signal File>
+    """
+
+    def __init__(
+        self,
+        ucf_fp: str = None,
+        input_signal_fp: str = None,
+        output_signal_fp: str = None,
+        verilog_file_fp: str = None,
+    ):
+        self.ucf_fp = ucf_fp
+        self.input_signal_fp = input_signal_fp
+        self.output_signal_fp = output_signal_fp
+        self.verilog_file_fp = verilog_file_fp
+
+    def get_required_inputs(self):
+        pass
+
+    def validate(self):
+        pass
+
+
+class CelloScoring(BaseScoring):
+    def score(self):
+        pass
+
+    def get_requirements(self):
+        pass
+
 
 class CelloRepressor:
     def __init__(
@@ -535,3 +574,8 @@ def simple_calculate_response_function(x, coefficients: list) -> float:
     """
     y_min, y_max, k, n = map(np.float64, coefficients)
     return y_min + ((y_max - y_min) / (1.0 + (x / k) ** n))
+
+
+if __name__ == "__main__":
+    thing = CelloRequirement()
+    print(thing.stuff)

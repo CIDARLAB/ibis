@@ -8,6 +8,8 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 from .circuits import (
     SBOLGeneticCircuit,
     SBOLGeneticGroup,
+    NetworkGeneticNode,
+    NetworkGeneticCircuit,
 )
 from .logic import (
     InputSignal,
@@ -22,4 +24,5 @@ from .parts import (
     RibonucleaseSite,
     EngineeredRegion,
     get_part_object_from_str,
+    PART_LUT,
 )
