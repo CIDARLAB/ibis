@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "genetic-ibis"
-version = "0.1.1"
+version = "0.1.2"
 description = "Genetic Circuit Scoring Algorithms"
 authors = ["W.R. Jackson, Ben Bremer, Eric South"]
 license = "MIT"
