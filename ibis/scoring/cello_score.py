@@ -9,6 +9,7 @@ Written by W.R. Jackson <wrjackso@bu.edu>, DAMP Lab 2020
 """
 import copy
 from functools import partial
+import inspect
 import itertools
 from typing import (
     Callable,
@@ -30,6 +31,8 @@ from ibis.scoring.scorer import BaseRequirement, BaseScoring
 
 class CelloRequirement(BaseRequirement):
     """
+    Built-in Cello module which predicts how well its circuits are likely to
+    perform.
 
     Args:
         ucf_fp: <Absolute Filepath to User Constraint File>
@@ -55,6 +58,7 @@ class CelloRequirement(BaseRequirement):
 
     def validate(self):
         pass
+
 
 
 class CelloScoring(BaseScoring):
@@ -578,4 +582,4 @@ def simple_calculate_response_function(x, coefficients: list) -> float:
 
 if __name__ == "__main__":
     thing = CelloRequirement()
-    print(thing.stuff)
+    thing.get_description()

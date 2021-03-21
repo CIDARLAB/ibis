@@ -8,8 +8,12 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 """
 import abc
 import inspect
-from typing import List
-
+from typing import (
+    Dict,
+    List,
+    Optional,
+    Type,
+)
 import yaml
 
 
@@ -33,6 +37,14 @@ import yaml
 class BaseRequirement(metaclass=abc.ABCMeta):
     @classmethod
     def __subclasshook__(cls, subclass):
+        """
+
+        Args:
+            subclass:
+
+        Returns:
+
+        """
         required_methods = [
             "validate",
             "get_required_inputs",
@@ -48,82 +60,75 @@ class BaseRequirement(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def validate(self):
-        """Load in the data set"""
+        """
+
+        Returns:
+
+        """
         raise NotImplementedError
 
     @abc.abstractmethod
     def get_required_inputs(self):
-        """Extract text from the data set"""
+        """
+
+        Returns:
+
+        """
         raise NotImplementedError
 
+    def get_description(self) -> str:
+        """
 
-def get_score_association(scorer_name: str) -> BaseRequirement:
+        Returns:
+
+        """
+        req_annotations = inspect.getdoc(self)
+        description_string = req_annotations.split('\n\n')[0].replace('\n', ' ')
+        return description_string
+
+
+def get_scorer_map() -> Dict[str, Type[BaseRequirement]]:
     """
-
-    Args:
-        scorer_name:
+    Primary entry-point for our 'modular' solvers. A new solver should only
+    have to have it's relative import statement added here and have an entry
+    in the solver map dictionary
 
     Returns:
 
     """
-    # This import pattern is technically bad form, but I think it should be fine
-    # for our initial attempt.
-    from .cello_score import CelloRequirement
-
-    score_map = {
-        "cello": CelloRequirement,
-    }
-    if scorer_name not in list(score_map.keys()):
-        raise RuntimeError(
-            f"Unable to locate requirements for {scorer_name}. Please Investigate."
-        )
-    return score_map[scorer_name]
-
-
-def generate_template_yaml(
-        requested_scorers: List[str],
-        output_fn: str = "example_input.yml",
-):
-    # This import pattern is technically bad form, but I think it should be fine
-    # for our initial attempt.
     from ibis.scoring.cello_score import CelloRequirement
 
-    score_map = {
+    solver_map = {
         "cello": CelloRequirement,
     }
-    for scorer in requested_scorers:
-        if scorer not in list(score_map.keys()):
-            raise RuntimeError(
-                f"{scorer} is not recognized as a valid scoring metric. Valid"
-                f"scoring metrics are {score_map.keys()}"
-            )
-    requirement_dict = {}
-    for scorer in requested_scorers:
-        # ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ
-        # I'll take things that would get me fired from a real job for 300 Alex.
-        requirement_dict[scorer] = {}
-        requirements = score_map[scorer]
-        req_annotations = inspect.getdoc(requirements)
-        sig_annotations = inspect.signature(requirements)
-        raw_annotations = list(
-            filter(
-                lambda x: len(x) > 1,
-                req_annotations.replace("    ", "").split("Args:")[1].splitlines(),
-            )
-        )
-        annotation_dict = {}
-        for line in raw_annotations:
-            key, value = line.split(':')
-            annotation_dict[key] = value
-        if not list(sig_annotations.parameters.keys()) == list(annotation_dict.keys()):
-            raise RuntimeError(
-                'Argument annotations are incorrect for this scoring module.'
-                'Please Investigate.'
-            )
-        for req in sig_annotations.parameters:
-            requirement_dict[scorer][req] = annotation_dict[req]
-    with open(output_fn, 'w') as out_file:
-        yaml.dump(requirement_dict, out_file)
+    return solver_map
+
+
+class BaseScoring(metaclass=abc.ABCMeta):
+    @classmethod
+    def __subclasshook__(cls, subclass):
+        required_methods = [
+            "score",
+            "get_requirements",
+        ]
+        subclass_reqs = True
+        for method in required_methods:
+            # Ensures that the class has the required function as an attribute
+            subclass_reqs = subclass_reqs & hasattr(method, subclass)
+            # Ensure that the attribute is a function
+            fn = getattr(subclass, method)
+            subclass_reqs = subclass_reqs & callable(fn)
+        return subclass_reqs
+
+    @abc.abstractmethod
+    def score(self):
+        """Load in the data set"""
+        raise NotImplementedError
+
+    @abc.abstractmethod
+    def get_requirements(self):
+        """Extract text from the data set"""
+        raise NotImplementedError
 
 
 # ----------------------------- Scoring Base Class -----------------------------
@@ -159,6 +164,105 @@ class BaseScoring(metaclass=abc.ABCMeta):
         raise NotImplementedError
 
 
+# ------------------------- Scoring Utility Functions --------------------------
+# Various utilities that allow attribute access or retrieve specific information
+# from any of the modular solvers.
+
+def get_scorer_description():
+    """
+
+    Returns:
+
+    """
+    score_map = get_scorer_map()
+    ret_list = []
+    for scorer in score_map:
+        scr = score_map[scorer]()
+        scr_name = scr.__class__.__name__.replace('Requirement', '')
+        ret_list.append(f'{scr_name}: {scr.get_description()}')
+    return ret_list
+
+
+def get_score_association(scorer_name: str) -> Type[BaseRequirement]:
+    """
+
+    Args:
+        scorer_name:
+
+    Returns:
+
+    """
+    # This import pattern is technically bad form, but I think it should be fine
+    # for our initial attempt.
+    score_map = get_scorer_map()
+    if scorer_name not in list(score_map.keys()):
+        raise RuntimeError(
+            f"Unable to locate requirements for {scorer_name}. Please Investigate."
+        )
+    return score_map[scorer_name]
+
+
+def generate_template_yaml(
+        requested_scorers: Optional[List[str]] = None,
+        output_fn: str = "input.yml",
+):
+    """
+
+    Args:
+        requested_scorers:
+        output_fn:
+
+    Returns:
+
+    """
+    # This import pattern is technically bad form, but I think it should be fine
+    # for our initial attempt.
+    score_map = get_scorer_map()
+    if not requested_scorers:
+        requested_scorers = score_map.keys()
+    for scorer in requested_scorers:
+        if scorer not in list(score_map.keys()):
+            raise RuntimeError(
+                f"{scorer} is not recognized as a valid scoring metric. Valid"
+                f"scoring metrics are {score_map.keys()}"
+            )
+    requirement_dict = {}
+    for scorer in requested_scorers:
+        # ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ
+        # I'll take things that would get me fired from a real job for 300 Alex.
+        requirement_dict[scorer] = {}
+        requirements = score_map[scorer]
+        req_annotations = inspect.getdoc(requirements)
+        sig_annotations = inspect.signature(requirements)
+        raw_annotations = list(
+            filter(
+                lambda x: len(x) > 1,
+                req_annotations.replace("    ", "").split("Args:")[1].splitlines(),
+            )
+        )
+        annotation_dict = {}
+        for line in raw_annotations:
+            key, value = line.split(':')
+            annotation_dict[key] = value
+        if not list(sig_annotations.parameters.keys()) == list(annotation_dict.keys()):
+            raise RuntimeError(
+                'Argument annotations are incorrect for this scoring module.'
+                'Please Investigate.'
+            )
+        for req in sig_annotations.parameters:
+            requirement_dict[scorer][req] = annotation_dict[req]
+    with open(output_fn, 'w') as out_file:
+        yaml.dump(requirement_dict, out_file)
+
+def validate_input_file(input_fn: str):
+    # Open the file.
+    # Use the keys from the file to call the respective scoring metric that is
+    # being indicated.
+    # Use the static typing for validation of the input field
+    # Return a boolean indicating success or failure.
+
+
+
+
 if __name__ == "__main__":
-    scorers = ["cello"]
-    generate_template_yaml(scorers)
+    print(get_scorer_description())
