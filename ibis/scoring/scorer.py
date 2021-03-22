@@ -8,13 +8,13 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 """
 import abc
 import inspect
+import os
 from typing import (
     Dict,
     List,
     Optional,
     Type,
 )
-import yaml
 
 
 # --------------------------- Requirement Base Class ---------------------------
@@ -87,7 +87,7 @@ class BaseRequirement(metaclass=abc.ABCMeta):
         return description_string
 
 
-def get_scorer_map() -> Dict[str, Type[BaseRequirement]]:
+def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
     """
     Primary entry-point for our 'modular' solvers. A new solver should only
     have to have it's relative import statement added here and have an entry
@@ -98,10 +98,10 @@ def get_scorer_map() -> Dict[str, Type[BaseRequirement]]:
     """
     from ibis.scoring.cello_score import CelloRequirement
 
-    solver_map = {
+    requirement_map = {
         "cello": CelloRequirement,
     }
-    return solver_map
+    return requirement_map
 
 
 class BaseScoring(metaclass=abc.ABCMeta):
@@ -167,6 +167,22 @@ class BaseScoring(metaclass=abc.ABCMeta):
 # ------------------------- Scoring Utility Functions --------------------------
 # Various utilities that allow attribute access or retrieve specific information
 # from any of the modular solvers.
+def get_scorer_map() -> Dict[str, Type[BaseScoring]]:
+    """
+    Primary entry-point for our 'modular' solvers. A new solver should only
+    have to have it's relative import statement added here and have an entry
+    in the solver map dictionary
+
+    Returns:
+
+    """
+    from ibis.scoring.cello_score import CelloScoring
+
+    scoring_map = {
+        "cello": CelloScoring,
+    }
+    return scoring_map
+
 
 def get_scorer_description():
     """
@@ -174,7 +190,7 @@ def get_scorer_description():
     Returns:
 
     """
-    score_map = get_scorer_map()
+    score_map = get_requirement_map()
     ret_list = []
     for scorer in score_map:
         scr = score_map[scorer]()
@@ -194,7 +210,7 @@ def get_score_association(scorer_name: str) -> Type[BaseRequirement]:
     """
     # This import pattern is technically bad form, but I think it should be fine
     # for our initial attempt.
-    score_map = get_scorer_map()
+    score_map = get_requirement_map()
     if scorer_name not in list(score_map.keys()):
         raise RuntimeError(
             f"Unable to locate requirements for {scorer_name}. Please Investigate."
@@ -217,21 +233,21 @@ def generate_template_yaml(
     """
     # This import pattern is technically bad form, but I think it should be fine
     # for our initial attempt.
-    score_map = get_scorer_map()
+    req_map = get_requirement_map()
     if not requested_scorers:
-        requested_scorers = score_map.keys()
+        requested_scorers = req_map.keys()
     for scorer in requested_scorers:
-        if scorer not in list(score_map.keys()):
+        if scorer not in list(req_map.keys()):
             raise RuntimeError(
                 f"{scorer} is not recognized as a valid scoring metric. Valid"
-                f"scoring metrics are {score_map.keys()}"
+                f"scoring metrics are {req_map.keys()}"
             )
     requirement_dict = {}
     for scorer in requested_scorers:
         # ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴ ゴゴ ゴ ゴ ゴ ゴ ゴ ゴ
         # I'll take things that would get me fired from a real job for 300 Alex.
         requirement_dict[scorer] = {}
-        requirements = score_map[scorer]
+        requirements = req_map[scorer]
         req_annotations = inspect.getdoc(requirements)
         sig_annotations = inspect.signature(requirements)
         raw_annotations = list(
@@ -254,14 +270,28 @@ def generate_template_yaml(
     with open(output_fn, 'w') as out_file:
         yaml.dump(requirement_dict, out_file)
 
-def validate_input_file(input_fn: str):
-    # Open the file.
-    # Use the keys from the file to call the respective scoring metric that is
-    # being indicated.
-    # Use the static typing for validation of the input field
-    # Return a boolean indicating success or failure.
+
+def validate_input_file(input_fp: str, requested_scorers: List[str]):
+    if not os.path.isfile(input_fp):
+        raise RuntimeError(f'{input_fp} is not a recognized filename. Please investigate.')
+    # Generate our template file...
+    req_map = get_requirement_map()
+    requirement_dict = {}
+    for scorer in requested_scorers:
+        requirement_dict[scorer] = {}
+        requirements = req_map[scorer]
+        req_annotations = inspect.signature(requirements)
 
 
+    with open(input_fp, 'r') as input_file:
+        yaml.
+
+
+# Open the file.
+# Use the keys from the file to call the respective scoring metric that is
+# being indicated.
+# Use the static typing for validation of the input field
+# Return a boolean indicating success or failure.
 
 
 if __name__ == "__main__":

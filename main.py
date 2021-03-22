@@ -19,7 +19,7 @@ from rich.console import Console
 
 from ibis.ingress import parse_sbol_xml_tree
 from ibis.scoring import (
-    get_scorer_map,
+    get_requirement_map,
     get_scorer_description,
     generate_template_yaml,
 )
@@ -34,7 +34,7 @@ def name_callback(value: str) -> str:
     """
     Checks whether the first input argument is a valid solver.
     """
-    score_map = get_scorer_map()
+    score_map = get_requirement_map()
     if value.lower() not in score_map.keys():
         raise typer.BadParameter("Solver not identified")
     return value
@@ -62,7 +62,7 @@ def version_callback(value: bool):
 
 
 def complete_name(incomplete: str):
-    score_map = get_scorer_map()
+    score_map = get_requirement_map()
     for name, help_text in score_map:
         if name.startswith(incomplete):
             yield name, help_text
