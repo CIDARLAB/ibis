@@ -6,6 +6,7 @@ Primary Entrypoint into <scoring-project>
 Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
+import datetime
 import os
 import time
 from typing import (
@@ -17,11 +18,15 @@ import pkg_resources
 import typer
 from rich.console import Console
 
+from ibis.datastucture import NetworkGeneticCircuit
 from ibis.ingress import parse_sbol_xml_tree
 from ibis.scoring import (
     get_requirement_map,
+    get_scorer_map,
     get_scorer_description,
     generate_template_yaml,
+    get_available_scorers,
+    validate_input_file,
 )
 
 console = Console()
@@ -123,47 +128,69 @@ def validate(
         raise typer.Exit()
 
 
-
 @app.command()
 def solve(
-        solver: str = typer.Argument(
+        requested_solvers: List[str] = typer.Argument(
             ...,
-            help="The name of the solver",
-            callback=name_callback,
-            autocompletion=complete_name,
+            help='The Input Solvers',
         ),
-        in_filepath: str = typer.Argument(
-            ...,
+        sbol_filepath: str = typer.Option(
+            os.path.join(os.getcwd(), 'tests', 'test_circuits', 'example_and_gate.xml'),
             help="Filepath: location of the SBOL file that constitutes the genetic "
                  "circuit",
         ),
-        out_filepath: str = typer.Argument(
-            ..., help="Filepath: location to write the output of the solved function"
+        parameter_filepath: str = typer.Option(
+            os.path.join(os.getcwd(), 'input.yml'),
+            help="Filepath: location of the SBOL file that constitutes the genetic "
+                 "circuit",
         ),
-        solver_info: Optional[bool] = typer.Option(
-            None,
-            "--info",
-            "-i",
-            help="Provides info on available solvers",
-            callback=solver_details_callback,
-            is_eager=True,
-        ),
-        version: Optional[bool] = typer.Option(
-            None, "--version", "-v", callback=version_callback, is_eager=True
+        out_filepath: str = typer.Option(
+            "output",
+            help="Filepath: location to write the output of the solved function"
         ),
 ):
     """
     Takes an SBOL file, evaluates the quality of a genetic circuit, and then outputs performance metrics.
     """
-
-    # Convert input-, output-paths to Path objects
-    gc = parse_sbol_xml_tree(in_filepath)
-    print(in_filepath)
-    # Import necessary modules to do the thing
-
-    # Here's a preliminary progress bar
-    total = 0
-    typer.echo(f"Processed {solver} solver.")
+    # We take in our input values and normalize them.
+    requested_solvers = [solver.lower() for solver in requested_solvers]
+    available_solvers = get_available_scorers()
+    for solver in requested_solvers:
+        if solver not in available_solvers:
+            raise RuntimeError(
+                f'Unable to find a scorer with the name {solver}, please '
+                f'investigate.'
+            )
+    # We then ensure that our filepaths are correct so we're not breaking down
+    # the line.
+    if not os.path.isfile(parameter_filepath):
+        raise RuntimeError(
+            f'Unable to locate input file {parameter_filepath}. Please Investigate.'
+        )
+    # We assume that we'll have multiple forms of output, so what we're doing is
+    # validating the output is just an extant directory. If not, we try to
+    # generate one.
+    if not os.path.isdir(out_filepath):
+        os.mkdir(out_filepath)
+    # We now need to ensure that our files, while extant, contain the information
+    # required to compute the score. Individual errors are propagated via the
+    # function.
+    if not validate_input_file(
+            input_fp=parameter_filepath,
+            requested_scorers=requested_solvers,
+    ):
+        raise RuntimeError(
+            f'Input File failed to pass validation. Exiting.'
+        )
+    # We should now be good to go so we just move forward with parsing the input
+    # data and sending it off to the requested solvers.
+    gc = parse_sbol_xml_tree(sbol_filepath)
+    network = NetworkGeneticCircuit(gc)
+    scoring_map = get_scorer_map()
+    for solver in requested_solvers:
+        solver_class = scoring_map[solver]
+        solver_obj = solver_class(network)
+        solver_class.score()
 
 
 if __name__ == "__main__":

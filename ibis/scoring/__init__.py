@@ -12,5 +12,8 @@ from .scorer import (
     get_scorer_description,
     get_score_association,
     generate_template_yaml,
+    get_available_scorers,
+    get_scorer_map,
+    validate_input_file,
 )
 from .cello_score import CelloScoring

@@ -11,6 +11,7 @@ import copy
 from functools import partial
 import inspect
 import itertools
+from pathlib import Path
 from typing import (
     Callable,
     List,
@@ -43,10 +44,10 @@ class CelloRequirement(BaseRequirement):
 
     def __init__(
         self,
-        ucf_fp: str = None,
-        input_signal_fp: str = None,
-        output_signal_fp: str = None,
-        verilog_file_fp: str = None,
+        ucf_fp: Path = None,
+        input_signal_fp: Path = None,
+        output_signal_fp: Path = None,
+        verilog_file_fp: Path = None,
     ):
         self.ucf_fp = ucf_fp
         self.input_signal_fp = input_signal_fp

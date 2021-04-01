@@ -15,6 +15,7 @@ from typing import (
     Optional,
     Type,
 )
+import yaml
 
 
 # --------------------------- Requirement Base Class ---------------------------
@@ -184,6 +185,16 @@ def get_scorer_map() -> Dict[str, Type[BaseScoring]]:
     return scoring_map
 
 
+def get_available_scorers() -> List:
+    """
+
+    Returns:
+
+    """
+    score_map = get_scorer_map()
+    return list(score_map.keys())
+
+
 def get_scorer_description():
     """
 
@@ -277,14 +288,51 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
     # Generate our template file...
     req_map = get_requirement_map()
     requirement_dict = {}
-    for scorer in requested_scorers:
-        requirement_dict[scorer] = {}
-        requirements = req_map[scorer]
-        req_annotations = inspect.signature(requirements)
-
-
     with open(input_fp, 'r') as input_file:
-        yaml.
+        input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
+        # Aggregate all of our required scoring metrics.
+        for scorer in requested_scorers:
+            requirements = req_map[scorer]
+            req_annotations = inspect.signature(requirements).parameters
+            anno_dict = {}
+            for k in req_annotations:
+                anno = req_annotations[k].annotation
+                anno_dict[k] = anno
+            requirement_dict[scorer] = anno_dict
+        # Not purposefully contained within the loop because we might have to
+        # do some additional calculation or pulling at this point.
+        # Now we validate each of the metrics.
+        for key in input_dict:
+            # Shouldn't be able to get here, but just in case.
+            if key not in requirement_dict:
+                raise RuntimeError(
+                    f'Unable to find entry for {key}. Please Investigate'
+                )
+            sub_entry_dict = input_dict[key]
+            sub_requirement_dict = requirement_dict[key]
+            if sub_entry_dict.keys() != sub_requirement_dict.keys():
+                diff = set(sub_requirement_dict.keys()) - set(sub_entry_dict)
+                raise RuntimeError(
+                    f'Input Dictionary and Requirements differ. Delta is {diff}'
+                )
+            for entry in sub_entry_dict:
+                field_type = sub_requirement_dict[entry]
+                # Some of these might require a cast because how they are
+                # persisted to the file might differ from it's type in Python
+                # space.
+                actual_field = sub_entry_dict[entry]
+                if type(actual_field) != field_type:
+                    try:
+                        field_type(actual_field)
+                    except ValueError:
+                        raise RuntimeError(
+                            f'{key}: Field {actual_field} in {entry} is not of '
+                            f'type {field_type}. Please investigate'
+                        )
+        return True
+
+
+
 
 
 # Open the file.
