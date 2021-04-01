@@ -15,7 +15,10 @@ from typing import (
     Optional,
     Type,
 )
+
 import yaml
+
+from ibis.datastucture.circuits import NetworkGeneticCircuit, NetworkGeneticNode
 
 
 # --------------------------- Requirement Base Class ---------------------------
@@ -139,6 +142,10 @@ class BaseScoring(metaclass=abc.ABCMeta):
 
 
 class BaseScoring(metaclass=abc.ABCMeta):
+
+    def __init__(self, network_graph: NetworkGeneticCircuit):
+        self.network_graph = network_graph
+
     @classmethod
     def __subclasshook__(cls, subclass):
         required_methods = [
@@ -330,9 +337,6 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
                             f'type {field_type}. Please investigate'
                         )
         return True
-
-
-
 
 
 # Open the file.

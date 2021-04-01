@@ -9,7 +9,6 @@ Written by W.R. Jackson <wrjackso@bu.edu>, DAMP Lab 2020
 """
 import copy
 from functools import partial
-import inspect
 import itertools
 from pathlib import Path
 from typing import (
@@ -64,10 +63,11 @@ class CelloRequirement(BaseRequirement):
 
 class CelloScoring(BaseScoring):
     def score(self):
-        pass
+        for node in self.network_graph.graph.nodes:
+            print(node)
 
     def get_requirements(self):
-        pass
+        return CelloRequirement
 
 
 class CelloRepressor:

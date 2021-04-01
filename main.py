@@ -190,7 +190,7 @@ def solve(
     for solver in requested_solvers:
         solver_class = scoring_map[solver]
         solver_obj = solver_class(network)
-        solver_class.score()
+        solver_obj.score()
 
 
 if __name__ == "__main__":
