@@ -10,6 +10,7 @@ Written by W.R. Jackson <wrjackso@bu.edu>, DAMP Lab 2020
 import copy
 from functools import partial
 import itertools
+from pathlib import Path
 from typing import (
     Callable,
     List,
@@ -24,12 +25,14 @@ from matplotlib import ticker
 import scipy.optimize as opt
 
 from ibis.datastucture.logic import InputSignal, LogicFunction
-
+from ibis.datastucture.circuits import NetworkGeneticCircuit
 from ibis.scoring.scorer import BaseRequirement, BaseScoring
 
 
 class CelloRequirement(BaseRequirement):
     """
+    Built-in Cello module which predicts how well its circuits are likely to
+    perform.
 
     Args:
         ucf_fp: <Absolute Filepath to User Constraint File>
@@ -39,11 +42,11 @@ class CelloRequirement(BaseRequirement):
     """
 
     def __init__(
-        self,
-        ucf_fp: str = None,
-        input_signal_fp: str = None,
-        output_signal_fp: str = None,
-        verilog_file_fp: str = None,
+            self,
+            ucf_fp: Path = None,
+            input_signal_fp: Path = None,
+            output_signal_fp: Path = None,
+            verilog_file_fp: Path = None,
     ):
         self.ucf_fp = ucf_fp
         self.input_signal_fp = input_signal_fp
@@ -58,21 +61,35 @@ class CelloRequirement(BaseRequirement):
 
 
 class CelloScoring(BaseScoring):
+
+    def __init__(
+            self,
+            network_graph: NetworkGeneticCircuit,
+            requirement: CelloRequirement,
+    ):
+        super().__init__(network_graph, requirement)
+        self.ucf_fp = requirement.ucf_fp
+        self.input_signal_fp = requirement.input_signal_fp
+        self.output_signal_fp = requirement.output_signal_fp
+        self.verilog_file_fp = requirement.verilog_file_fp
+
+
     def score(self):
-        pass
+        for node in self.network_graph.graph.nodes:
+            print(node)
 
     def get_requirements(self):
-        pass
+        return CelloRequirement
 
 
 class CelloRepressor:
     def __init__(
-        self,
-        n: float,
-        k: float,
-        y_min: float,
-        y_max: float,
-        number_of_inputs: int,
+            self,
+            n: float,
+            k: float,
+            y_min: float,
+            y_max: float,
+            number_of_inputs: int,
     ):
         """
 
@@ -134,15 +151,15 @@ class CelloRepressor:
                 else:
                     current_x += input_signal.off_value
         self.biological_output = self.y_min + (
-            (self.y_max - self.y_min) / (1.0 + (current_x / self.k) ** self.n)
+                (self.y_max - self.y_min) / (1.0 + (current_x / self.k) ** self.n)
         )
         return self.biological_output
 
     def set_biological_inputs(
-        self,
-        biological_inputs: List[
-            Union[Tuple[float, float], "CelloRepressor", InputSignal]
-        ],
+            self,
+            biological_inputs: List[
+                Union[Tuple[float, float], "CelloRepressor", InputSignal]
+            ],
     ):
         """
         Sets the biological inputs to the repressor.
@@ -166,15 +183,15 @@ class CelloRepressor:
                     )
                 )
             if (
-                type(chemical_input) == CelloRepressor
-                or type(chemical_input) == InputSignal
+                    type(chemical_input) == CelloRepressor
+                    or type(chemical_input) == InputSignal
             ):
                 input_list.append(chemical_input)
         self.biological_inputs.extend(biological_inputs)
 
     def set_logical_inputs(
-        self,
-        logical_inputs: List[Union[int, "CelloRepressor"]],
+            self,
+            logical_inputs: List[Union[int, "CelloRepressor"]],
     ):
         """
         Sets the logical inputs to the repressor. This can either be via a
@@ -356,10 +373,10 @@ class CelloRepressor:
 
 # ------------------------ Publicly Available Functions ------------------------
 def graph_response_function(
-    func: Callable,
-    start: int = 0.001,
-    stop: int = 1000,
-    number_of_observations: int = 1000000,
+        func: Callable,
+        start: int = 0.001,
+        stop: int = 1000,
+        number_of_observations: int = 1000000,
 ):
     """
     Generates a graph for the passed in function in the same style as the log
@@ -387,9 +404,9 @@ def graph_response_function(
 
 
 def optimize_repressor(
-    input_repressor: CelloRepressor,
-    optimization_method: str,
-    bio_optimization: str = "DNA",
+        input_repressor: CelloRepressor,
+        optimization_method: str,
+        bio_optimization: str = "DNA",
 ):
     """
     Monolithic entrypoint and wrapper around the optimization functionality
@@ -522,7 +539,7 @@ def optimizable_response_function_dna(x, input_repressor: CelloRepressor) -> flo
 
 
 def optimizable_response_function_dna_and_protein(
-    x, input_repressor: CelloRepressor
+        x, input_repressor: CelloRepressor
 ) -> float:
     """
     Alters the linear coefficents that determine the score of a repressor and
@@ -578,4 +595,4 @@ def simple_calculate_response_function(x, coefficients: list) -> float:
 
 if __name__ == "__main__":
     thing = CelloRequirement()
-    print(thing.stuff)
+    thing.get_description()
