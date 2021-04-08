@@ -27,6 +27,7 @@ from ibis.scoring import (
     generate_template_yaml,
     get_available_scorers,
     validate_input_file,
+    generate_requirement_classes,
 )
 
 console = Console()
@@ -135,7 +136,7 @@ def solve(
             help='The Input Solvers',
         ),
         sbol_filepath: str = typer.Option(
-            os.path.join(os.getcwd(), 'tests', 'test_circuits', 'example_and_gate.xml'),
+            os.path.join(os.getcwd(), 'tests', 'test_cello', 'example_and_gate.xml'),
             help="Filepath: location of the SBOL file that constitutes the genetic "
                  "circuit",
         ),
@@ -186,10 +187,13 @@ def solve(
     # data and sending it off to the requested solvers.
     gc = parse_sbol_xml_tree(sbol_filepath)
     network = NetworkGeneticCircuit(gc)
+    requested_requirements = generate_requirement_classes(
+        parameter_filepath,
+        requested_solvers)
     scoring_map = get_scorer_map()
-    for solver in requested_solvers:
+    for solver, requirement in zip(requested_solvers, requested_requirements):
         solver_class = scoring_map[solver]
-        solver_obj = solver_class(network)
+        solver_obj = solver_class(network, requirement)
         solver_obj.score()
 
 

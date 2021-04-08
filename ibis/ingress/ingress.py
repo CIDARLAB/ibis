@@ -191,6 +191,6 @@ def parse_sbol_xml_tree(fp: str) -> SBOLGeneticCircuit:
 
 
 if __name__ == "__main__":
-    input_file = "../../tests/test_circuits/example_and_gate.xml"
+    input_file = "../../tests/test_cello/example_and_gate.xml"
     gc = parse_sbol_xml_tree(input_file)
     print(gc)

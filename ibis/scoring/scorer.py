@@ -108,33 +108,6 @@ def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
     return requirement_map
 
 
-class BaseScoring(metaclass=abc.ABCMeta):
-    @classmethod
-    def __subclasshook__(cls, subclass):
-        required_methods = [
-            "score",
-            "get_requirements",
-        ]
-        subclass_reqs = True
-        for method in required_methods:
-            # Ensures that the class has the required function as an attribute
-            subclass_reqs = subclass_reqs & hasattr(method, subclass)
-            # Ensure that the attribute is a function
-            fn = getattr(subclass, method)
-            subclass_reqs = subclass_reqs & callable(fn)
-        return subclass_reqs
-
-    @abc.abstractmethod
-    def score(self):
-        """Load in the data set"""
-        raise NotImplementedError
-
-    @abc.abstractmethod
-    def get_requirements(self):
-        """Extract text from the data set"""
-        raise NotImplementedError
-
-
 # ----------------------------- Scoring Base Class -----------------------------
 # A scorer represents some sort of quality metric applied to a genetic circuit.
 # Each scorer abstracts the implementation details behind a unified interface,
@@ -143,8 +116,13 @@ class BaseScoring(metaclass=abc.ABCMeta):
 
 class BaseScoring(metaclass=abc.ABCMeta):
 
-    def __init__(self, network_graph: NetworkGeneticCircuit):
+    def __init__(
+            self,
+            network_graph: NetworkGeneticCircuit,
+            requirements: BaseRequirement,
+    ):
         self.network_graph = network_graph
+        self.requirements = requirements
 
     @classmethod
     def __subclasshook__(cls, subclass):
@@ -339,11 +317,21 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
         return True
 
 
-# Open the file.
-# Use the keys from the file to call the respective scoring metric that is
-# being indicated.
-# Use the static typing for validation of the input field
-# Return a boolean indicating success or failure.
+def generate_requirement_classes(input_fp: str, requested_scorers: List[str]):
+    if not os.path.isfile(input_fp):
+        raise RuntimeError(
+            f'{input_fp} is not a recognized filename. Please investigate.'
+        )
+    req_map = get_requirement_map()
+    out_list = []
+    with open(input_fp, 'r') as input_file:
+        input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
+        for scorer in requested_scorers:
+            requirements = req_map[scorer]
+            input_keys_for_requirement = input_dict[scorer]
+            requirement_cls = requirements(**input_keys_for_requirement)
+            out_list.append(requirement_cls)
+    return out_list
 
 
 if __name__ == "__main__":

@@ -15,5 +15,6 @@ from .scorer import (
     get_available_scorers,
     get_scorer_map,
     validate_input_file,
+    generate_requirement_classes,
 )
 from .cello_score import CelloScoring
