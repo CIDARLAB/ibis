@@ -12,8 +12,7 @@ from .circuits import (
     NetworkGeneticCircuit,
 )
 from .logic import (
-    InputSignal,
-    LogicFunction,
+    CircuitNetwork,
 )
 from .parts import (
     BasePart,

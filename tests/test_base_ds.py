@@ -11,6 +11,11 @@ import pathlib
 from ibis.scoring import (
     BaseScoring,
     BaseRequirement,
+    # CelloScoring,
+)
+
+from ibis.datastucture import (
+    logic,
 )
 from ibis.ingress import parse_sbol_xml_tree
 from ibis.datastucture import NetworkGeneticCircuit, NetworkGeneticNode

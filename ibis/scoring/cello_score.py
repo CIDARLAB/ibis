@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 from matplotlib import ticker
 import scipy.optimize as opt
 
-from ibis.datastucture.logic import InputSignal, LogicFunction
+# from ibis.datastucture.logic import BiologicalInputSignal, LogicFunction
 from ibis.datastucture.circuits import NetworkGeneticCircuit
 from ibis.scoring.scorer import BaseRequirement, BaseScoring
 
@@ -143,7 +143,7 @@ class CelloRepressor:
                 current_x += input_signal.calculate_response_function()
             if type(input_signal) is tuple:
                 current_x += input_signal[signal_index]
-            if type(input_signal) is InputSignal:
+            if type(input_signal) is BiologicalInputSignal:
                 if signal_index:
                     current_x += input_signal.on_value
                 else:
@@ -154,10 +154,10 @@ class CelloRepressor:
         return self.biological_output
 
     def set_biological_inputs(
-        self,
-        biological_inputs: List[
-            Union[Tuple[float, float], "CelloRepressor", InputSignal]
-        ],
+            self,
+            biological_inputs: List[
+                Union[Tuple[float, float], "CelloRepressor", BiologicalInputSignal]
+            ],
     ):
         """
         Sets the biological inputs to the repressor.
@@ -172,7 +172,7 @@ class CelloRepressor:
         for chemical_input in biological_inputs:
             if type(chemical_input) == Tuple:
                 input_list.append(
-                    InputSignal(
+                    BiologicalInputSignal(
                         label="N/A",  # Possibly bad form. I think you'd have a db
                         # backing this in production that would probably have all
                         # signals predefined.
@@ -181,8 +181,8 @@ class CelloRepressor:
                     )
                 )
             if (
-                type(chemical_input) == CelloRepressor
-                or type(chemical_input) == InputSignal
+                    type(chemical_input) == CelloRepressor
+                    or type(chemical_input) == BiologicalInputSignal
             ):
                 input_list.append(chemical_input)
         self.biological_inputs.extend(biological_inputs)
