@@ -36,6 +36,7 @@ app = typer.Typer()
 
 # ----------------------- Command Line Utility Functions -----------------------
 
+
 def name_callback(value: str) -> str:
     """
     Checks whether the first input argument is a valid solver.
@@ -61,7 +62,7 @@ def version_callback(value: bool):
     """
     Returns version of scoring-project when the --version or -v options are called.
     """
-    current_ver = pkg_resources.get_distribution('genetic-ibis').version
+    current_ver = pkg_resources.get_distribution("genetic-ibis").version
     if value:
         typer.echo(f"CLI Version: {current_ver}")
         raise typer.Exit()
@@ -77,8 +78,8 @@ def complete_name(incomplete: str):
 # ---------------------------- Application Commands ----------------------------
 @app.command()
 def generate_template(
-        requested_solvers: Optional[List[str]] = typer.Option(None),
-        output_fn: Optional[str] = "input.yml",
+    requested_solvers: Optional[List[str]] = typer.Option(None),
+    output_fn: Optional[str] = "input.yml",
 ):
     """
 
@@ -90,30 +91,24 @@ def generate_template(
 
     """
     if requested_solvers is not None:
-        typer.echo(
-            f"Generating template yaml file for all available solvers..."
-        )
+        typer.echo(f"Generating template yaml file for all available solvers...")
     else:
-        typer.echo(
-            f"Generating template yaml file for the following solvers:"
-        )
+        typer.echo(f"Generating template yaml file for the following solvers:")
         for solver in requested_solvers:
             typer.echo(
-                f' - {solver}',
+                f" - {solver}",
             )
     generate_template_yaml(
         requested_scorers=requested_solvers,
         output_fn=output_fn,
     )
-    typer.echo(
-        f'Template File {output_fn} written to {os.getcwd()}'
-    )
+    typer.echo(f"Template File {output_fn} written to {os.getcwd()}")
 
 
 @app.command()
 def validate(
-        input_fn: Optional[str] = "input.yml",
-        verbose: Optional[bool] = False,
+    input_fn: Optional[str] = "input.yml",
+    verbose: Optional[bool] = False,
 ):
     """
 
@@ -131,24 +126,23 @@ def validate(
 
 @app.command()
 def solve(
-        requested_solvers: List[str] = typer.Argument(
-            ...,
-            help='The Input Solvers',
-        ),
-        sbol_filepath: str = typer.Option(
-            os.path.join(os.getcwd(), 'tests', 'test_cello', 'example_and_gate.xml'),
-            help="Filepath: location of the SBOL file that constitutes the genetic "
-                 "circuit",
-        ),
-        parameter_filepath: str = typer.Option(
-            os.path.join(os.getcwd(), 'input.yml'),
-            help="Filepath: location of the SBOL file that constitutes the genetic "
-                 "circuit",
-        ),
-        out_filepath: str = typer.Option(
-            "output",
-            help="Filepath: location to write the output of the solved function"
-        ),
+    requested_solvers: List[str] = typer.Argument(
+        ...,
+        help="The Input Solvers",
+    ),
+    sbol_filepath: str = typer.Option(
+        os.path.join(os.getcwd(), "tests", "test_cello", "example_and_gate.xml"),
+        help="Filepath: location of the SBOL file that constitutes the genetic "
+        "circuit",
+    ),
+    parameter_filepath: str = typer.Option(
+        os.path.join(os.getcwd(), "input.yml"),
+        help="Filepath: location of the SBOL file that constitutes the genetic "
+        "circuit",
+    ),
+    out_filepath: str = typer.Option(
+        "output", help="Filepath: location to write the output of the solved function"
+    ),
 ):
     """
     Takes an SBOL file, evaluates the quality of a genetic circuit, and then outputs performance metrics.
@@ -159,14 +153,14 @@ def solve(
     for solver in requested_solvers:
         if solver not in available_solvers:
             raise RuntimeError(
-                f'Unable to find a scorer with the name {solver}, please '
-                f'investigate.'
+                f"Unable to find a scorer with the name {solver}, please "
+                f"investigate."
             )
     # We then ensure that our filepaths are correct so we're not breaking down
     # the line.
     if not os.path.isfile(parameter_filepath):
         raise RuntimeError(
-            f'Unable to locate input file {parameter_filepath}. Please Investigate.'
+            f"Unable to locate input file {parameter_filepath}. Please Investigate."
         )
     # We assume that we'll have multiple forms of output, so what we're doing is
     # validating the output is just an extant directory. If not, we try to
@@ -177,19 +171,17 @@ def solve(
     # required to compute the score. Individual errors are propagated via the
     # function.
     if not validate_input_file(
-            input_fp=parameter_filepath,
-            requested_scorers=requested_solvers,
+        input_fp=parameter_filepath,
+        requested_scorers=requested_solvers,
     ):
-        raise RuntimeError(
-            f'Input File failed to pass validation. Exiting.'
-        )
+        raise RuntimeError(f"Input File failed to pass validation. Exiting.")
     # We should now be good to go so we just move forward with parsing the input
     # data and sending it off to the requested solvers.
     gc = parse_sbol_xml_tree(sbol_filepath)
     network = NetworkGeneticCircuit(gc)
     requested_requirements = generate_requirement_classes(
-        parameter_filepath,
-        requested_solvers)
+        parameter_filepath, requested_solvers
+    )
     scoring_map = get_scorer_map()
     for solver, requirement in zip(requested_solvers, requested_requirements):
         solver_class = scoring_map[solver]

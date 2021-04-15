@@ -87,7 +87,7 @@ class BaseRequirement(metaclass=abc.ABCMeta):
 
         """
         req_annotations = inspect.getdoc(self)
-        description_string = req_annotations.split('\n\n')[0].replace('\n', ' ')
+        description_string = req_annotations.split("\n\n")[0].replace("\n", " ")
         return description_string
 
 
@@ -115,11 +115,10 @@ def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
 
 
 class BaseScoring(metaclass=abc.ABCMeta):
-
     def __init__(
-            self,
-            network_graph: NetworkGeneticCircuit,
-            requirements: BaseRequirement,
+        self,
+        network_graph: NetworkGeneticCircuit,
+        requirements: BaseRequirement,
     ):
         self.network_graph = network_graph
         self.requirements = requirements
@@ -190,8 +189,8 @@ def get_scorer_description():
     ret_list = []
     for scorer in score_map:
         scr = score_map[scorer]()
-        scr_name = scr.__class__.__name__.replace('Requirement', '')
-        ret_list.append(f'{scr_name}: {scr.get_description()}')
+        scr_name = scr.__class__.__name__.replace("Requirement", "")
+        ret_list.append(f"{scr_name}: {scr.get_description()}")
     return ret_list
 
 
@@ -215,8 +214,8 @@ def get_score_association(scorer_name: str) -> Type[BaseRequirement]:
 
 
 def generate_template_yaml(
-        requested_scorers: Optional[List[str]] = None,
-        output_fn: str = "input.yml",
+    requested_scorers: Optional[List[str]] = None,
+    output_fn: str = "input.yml",
 ):
     """
 
@@ -254,26 +253,28 @@ def generate_template_yaml(
         )
         annotation_dict = {}
         for line in raw_annotations:
-            key, value = line.split(':')
+            key, value = line.split(":")
             annotation_dict[key] = value
         if not list(sig_annotations.parameters.keys()) == list(annotation_dict.keys()):
             raise RuntimeError(
-                'Argument annotations are incorrect for this scoring module.'
-                'Please Investigate.'
+                "Argument annotations are incorrect for this scoring module."
+                "Please Investigate."
             )
         for req in sig_annotations.parameters:
             requirement_dict[scorer][req] = annotation_dict[req]
-    with open(output_fn, 'w') as out_file:
+    with open(output_fn, "w") as out_file:
         yaml.dump(requirement_dict, out_file)
 
 
 def validate_input_file(input_fp: str, requested_scorers: List[str]):
     if not os.path.isfile(input_fp):
-        raise RuntimeError(f'{input_fp} is not a recognized filename. Please investigate.')
+        raise RuntimeError(
+            f"{input_fp} is not a recognized filename. Please investigate."
+        )
     # Generate our template file...
     req_map = get_requirement_map()
     requirement_dict = {}
-    with open(input_fp, 'r') as input_file:
+    with open(input_fp, "r") as input_file:
         input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
         # Aggregate all of our required scoring metrics.
         for scorer in requested_scorers:
@@ -291,14 +292,14 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
             # Shouldn't be able to get here, but just in case.
             if key not in requirement_dict:
                 raise RuntimeError(
-                    f'Unable to find entry for {key}. Please Investigate'
+                    f"Unable to find entry for {key}. Please Investigate"
                 )
             sub_entry_dict = input_dict[key]
             sub_requirement_dict = requirement_dict[key]
             if sub_entry_dict.keys() != sub_requirement_dict.keys():
                 diff = set(sub_requirement_dict.keys()) - set(sub_entry_dict)
                 raise RuntimeError(
-                    f'Input Dictionary and Requirements differ. Delta is {diff}'
+                    f"Input Dictionary and Requirements differ. Delta is {diff}"
                 )
             for entry in sub_entry_dict:
                 field_type = sub_requirement_dict[entry]
@@ -311,8 +312,8 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
                         field_type(actual_field)
                     except ValueError:
                         raise RuntimeError(
-                            f'{key}: Field {actual_field} in {entry} is not of '
-                            f'type {field_type}. Please investigate'
+                            f"{key}: Field {actual_field} in {entry} is not of "
+                            f"type {field_type}. Please investigate"
                         )
         return True
 
@@ -320,11 +321,11 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
 def generate_requirement_classes(input_fp: str, requested_scorers: List[str]):
     if not os.path.isfile(input_fp):
         raise RuntimeError(
-            f'{input_fp} is not a recognized filename. Please investigate.'
+            f"{input_fp} is not a recognized filename. Please investigate."
         )
     req_map = get_requirement_map()
     out_list = []
-    with open(input_fp, 'r') as input_file:
+    with open(input_fp, "r") as input_file:
         input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
         for scorer in requested_scorers:
             requirements = req_map[scorer]

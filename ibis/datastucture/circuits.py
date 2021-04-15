@@ -28,6 +28,7 @@ class GeneticCircuit:
     _exp_data is either set upon reading in experimental data or after
     simulating the circuit via Cello
     """
+
     def __init__(self):
         self._intended_truth_table: List = None
         self.num_inputs: int = None
@@ -74,10 +75,10 @@ class GeneticCircuit:
         ett = self.exp_data
         assert ett is not None
 
-        itt_mag = sum(i**2 for i in itt) ** (1/2)
-        ett_mag = sum(e**2 for e in ett) ** (1/2)
+        itt_mag = sum(i ** 2 for i in itt) ** (1 / 2)
+        ett_mag = sum(e ** 2 for e in ett) ** (1 / 2)
 
-        dot = sum(i*e for i, e in zip(itt, ett))
+        dot = sum(i * e for i, e in zip(itt, ett))
         cos_theta = dot / (itt_mag * ett_mag)
         theta = degrees(acos(cos_theta))
 
