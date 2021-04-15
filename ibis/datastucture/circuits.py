@@ -7,6 +7,7 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
 from dataclasses import dataclass, field, asdict
+from math import acos, degrees
 from typing import (
     Dict,
     List,
@@ -17,6 +18,71 @@ import matplotlib.pyplot as plt
 import networkx as nx
 
 from .parts import BasePart, PART_LUT
+
+
+class GeneticCircuit:
+    """Want to have more general representation for gc that doesn't need a
+    network. I.e. what if we have experimental data and we want to score a
+    given circuit without constructing and simulating it.
+
+    _exp_data is either set upon reading in experimental data or after
+    simulating the circuit via Cello
+    """
+
+    def __init__(self):
+        self._intended_truth_table: List = None
+        self.num_inputs: int = None
+        self.num_outputs: int = None
+        self._exp_data: int = None  # want better name, can be sim or exp
+        # might want separate sim_data variable?
+        # add things needed for other circuits, e.g. noise for SNR?
+
+    @property
+    def intended_truth_table(self):
+        return self._intended_truth_table
+
+    @intended_truth_table.setter
+    def intended_truth_table(self, value: list[int]):
+        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
+        assert all(x in (0, 1) for x in value)
+        self._intended_truth_table = value
+
+    @property
+    def exp_data(self):
+        return self._exp_data
+
+    @exp_data.setter
+    def exp_data(self, value: list[float]):
+        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
+        self._exp_data = value
+
+    def dynamic_range(self) -> float:
+        itt = self.intended_truth_table
+        assert itt is not None
+
+        ett = self.exp_data
+        assert ett is not None
+
+        max_low = max(e for i, e in zip(itt, ett) if i == 0)
+        min_high = min(e for i, e in zip(itt, ett) if i == 1)
+
+        return min_high / max_low
+
+    def vector_proximity(self) -> float:
+        itt = self.intended_truth_table
+        assert itt is not None
+
+        ett = self.exp_data
+        assert ett is not None
+
+        itt_mag = sum(i ** 2 for i in itt) ** (1 / 2)
+        ett_mag = sum(e ** 2 for e in ett) ** (1 / 2)
+
+        dot = sum(i * e for i, e in zip(itt, ett))
+        cos_theta = dot / (itt_mag * ett_mag)
+        theta = degrees(acos(cos_theta))
+
+        return theta
 
 
 @dataclass
@@ -51,7 +117,7 @@ class NetworkGeneticNode:
         self.bound_node: NetworkGeneticNode = None
 
 
-class NetworkGeneticCircuit:
+class NetworkGeneticCircuit(GeneticCircuit):
     def __init__(self, sbol_input: SBOLGeneticCircuit):
         self.graph = nx.Graph()
         self.node_lut = {}
