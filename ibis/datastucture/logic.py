@@ -326,13 +326,13 @@ class CircuitNetwork:
             for key in input_signals:
                 signal_value = input_signals[key]
                 node = self.get_node_by_node_name(key)
-                node.value = signal_value
+                node.boolean_value = signal_value
         else:
             for node, signal_value in zip(
                     self.input_signal_node_list,
                     input_signals,
             ):
-                node.value = signal_value
+                node.boolean_value = signal_value
         # We then run the graph to get the final output.
         # This assumes that we have a singular output. Our approach below is
         # amenable to multiple outputs, but I need to do some additional
