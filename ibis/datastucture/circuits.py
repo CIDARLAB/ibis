@@ -281,14 +281,5 @@ class NetworkGeneticCircuit(GeneticCircuit):
         total_gc = 0
         for node in self.graph.nodes:
             total_len += len(node.sequence)
-            total_gc += sum(1 for bp in node.sequence if bp in 'CG')
+            total_gc += sum(1 for bp in node.sequence if bp in "CG")
         return total_gc / total_len
-
-
-
-
-
-
-
-
-
