@@ -170,7 +170,7 @@ def get_input_and_gate():
         input_file = "test_cello/example_and_gate.xml"
     else:
         # Assumes you are running this at the top level.
-        input_file = "tests/test_circuits/example_and_gate.xml"
+        input_file = "tests/test_cello/example_and_gate.xml"
     return input_file
 
 
