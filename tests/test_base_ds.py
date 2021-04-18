@@ -17,6 +17,7 @@ from ibis.datastucture import NetworkGeneticCircuit, NetworkGeneticNode
 
 import pytest
 
+
 @pytest.fixture
 def get_input_and_gate():
     current_dir = pathlib.Path.cwd().parts[-1]
