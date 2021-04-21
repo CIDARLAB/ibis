@@ -21,18 +21,16 @@ import sympy
 
 @dataclasses.dataclass
 class ResponseFunctionParameter:
-    """
+    """"""
 
-    """
     parameter_name: str
     parameter_map: str
 
 
 @dataclasses.dataclass
 class SensorParameter:
-    """
+    """"""
 
-    """
     name: str
     value: float
     description: str
@@ -40,26 +38,24 @@ class SensorParameter:
 
 @dataclasses.dataclass
 class ResponseFunction:
-    """
+    """"""
 
-    """
     function_name: str
     equation: str
     parameters: List[ResponseFunctionParameter]
     expression = None
 
     def __post_init__(self):
-        self.equation = self.equation.replace('$STATE', 'state')
+        self.equation = self.equation.replace("$STATE", "state")
         self.expression = sympy.sympify(self.equation)
 
     def calculate_score(
-            self,
-            state_input: float,
-            sensor_constants: Dict[str, SensorParameter]):
+        self, state_input: float, sensor_constants: Dict[str, SensorParameter]
+    ):
         # We want our primary equation to remain 'clean' but we need to mutate
         # the symbolic representation of the equation to get what we want.
         temp_resolve = copy.copy(self.expression)
-        param_list = [['state', state_input]]
+        param_list = [["state", state_input]]
         for param in self.parameters:
             param_key = param.parameter_name
             param_value = sensor_constants[param_key].value
@@ -69,9 +65,8 @@ class ResponseFunction:
 
 @dataclasses.dataclass
 class CelloInputSensor:
-    """
+    """"""
 
-    """
     sensor_name: str
     response_function: ResponseFunction
     sensor_parameters: Dict[str, SensorParameter]
@@ -112,22 +107,20 @@ class CelloInput:
 
 def parse_cello_input_file(fp: str):
     if not os.path.isfile(fp):
-        raise RuntimeError(
-            f'Unable to locate input file {fp}, please investigate.'
-        )
-    with open(fp, 'r') as input_file:
+        raise RuntimeError(f"Unable to locate input file {fp}, please investigate.")
+    with open(fp, "r") as input_file:
         cello_input = CelloInput()
         raw_input_file: List[dict] = json.load(input_file)
         # Collect all possible input sensor names, and then aggregate them
         sensor_list = []
-        SensorField = namedtuple('SensorField', ['name', 'model', 'structure'])
+        SensorField = namedtuple("SensorField", ["name", "model", "structure"])
         for obj in raw_input_file:
-            if 'collection' in obj:
-                if obj['collection'] == "input_sensors":
+            if "collection" in obj:
+                if obj["collection"] == "input_sensors":
                     temp_sensor = SensorField(
-                        obj['name'],
-                        obj['model'],
-                        obj['structure'],
+                        obj["name"],
+                        obj["model"],
+                        obj["structure"],
                     )
                     sensor_list.append(temp_sensor)
         for sensor in sensor_list:
@@ -139,38 +132,36 @@ def parse_cello_input_file(fp: str):
             response_function = None
             for i in raw_input_file:
                 # We assume no duplicates within the input file.
-                if i['name'] == sensor_model_label:
+                if i["name"] == sensor_model_label:
                     # Get the response function for this sensor.
-                    func_name = i['functions']['response_function']
+                    func_name = i["functions"]["response_function"]
                     for j in raw_input_file:
-                        if j['collection'] == 'functions':
-                            if j['name'] == func_name:
+                        if j["collection"] == "functions":
+                            if j["name"] == func_name:
                                 parameter_list = []
-                                for k in j['parameters']:
+                                for k in j["parameters"]:
                                     c_param = ResponseFunctionParameter(
-                                        parameter_name=k['name'],
-                                        parameter_map=k['map'],
+                                        parameter_name=k["name"],
+                                        parameter_map=k["map"],
                                     )
-                                    parameter_list.append(
-                                        c_param
-                                    )
+                                    parameter_list.append(c_param)
                                 response_function = ResponseFunction(
                                     function_name=func_name,
-                                    equation=j['equation'],
+                                    equation=j["equation"],
                                     parameters=parameter_list,
                                 )
-                    for l in i['parameters']:
-                        sensor_parameters[l['name']] = SensorParameter(
-                            name=l['name'],
-                            value=l['value'],
-                            description=l['description'],
+                    for l in i["parameters"]:
+                        sensor_parameters[l["name"]] = SensorParameter(
+                            name=l["name"],
+                            value=l["value"],
+                            description=l["description"],
                         )
             # Output
             sensor_outputs = None
             for i in raw_input_file:
                 # We assume no duplicates within the input file.
-                if i['name'] == sensor.structure:
-                    sensor_outputs = i['outputs']
+                if i["name"] == sensor.structure:
+                    sensor_outputs = i["outputs"]
             sensor_obj = CelloInputSensor(
                 sensor_name=name,
                 response_function=response_function,
@@ -184,8 +175,8 @@ def parse_cello_input_file(fp: str):
     return cello_input
 
 
-if __name__ == '__main__':
-    fn = '../../tests/test_cello/test_ucf_files/Eco1C1G1T1.input.json'
+if __name__ == "__main__":
+    fn = "../../tests/test_cello/test_ucf_files/Eco1C1G1T1.input.json"
     out = parse_cello_input_file(fn)
     sensor_list = out.get_available_sensors()
     print(sensor_list)

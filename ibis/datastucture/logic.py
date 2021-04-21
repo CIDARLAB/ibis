@@ -48,7 +48,7 @@ def string_to_logic_function(function_name: str) -> Callable:
 
 
 def NOT(input_a: bool):
-    return ~ input_a
+    return ~input_a
 
 
 def AND(input_a: bool, input_b: bool):
@@ -77,14 +77,13 @@ def XNOR(input_a: bool, input_b: bool):
 
 # --------------------------------- LOGIC NODE ---------------------------------
 class LogicNode:
-
     def __init__(
-            self,
-            boolean_value: Optional[bool] = None,
-            input_signals: Optional[List['LogicNode']] = None,
-            output_signal: Optional['LogicNode'] = None,
-            node_name: Optional[str] = 'test',
-            logical_function: Callable = None
+        self,
+        boolean_value: Optional[bool] = None,
+        input_signals: Optional[List["LogicNode"]] = None,
+        output_signal: Optional["LogicNode"] = None,
+        node_name: Optional[str] = "test",
+        logical_function: Callable = None,
     ):
         """
         A logic node represents a node in our functional equivalent of a
@@ -114,7 +113,6 @@ class LogicNode:
 # ------------------------------- CIRCUIT NETWORK ------------------------------
 @dataclass
 class CircuitNetwork:
-
     def __init__(self, verilog_fp: str):
         """
         A CircuitNetwork represents the boolean logic of the passed in verilog
@@ -127,7 +125,7 @@ class CircuitNetwork:
         self.verilog_fp = verilog_fp
         if not os.path.isfile(verilog_fp):
             raise RuntimeError(
-                f'Unable to locate file {verilog_fp}, please investigate.'
+                f"Unable to locate file {verilog_fp}, please investigate."
             )
         self.input_signal_node_list = []
         self.output_signal_node_list = []
@@ -223,14 +221,14 @@ class CircuitNetwork:
     # ------------------------------- PARSING ----------------------------------
 
     def parse_verilog_file(
-            self,
+        self,
     ):
-        '''
+        """
         Uses Pyverilog (https://github.com/PyHDI/Pyverilog) to parse input
         verilog files into a networkx datastructure. This is kinda hacky for
         now, and should get expanded as we start to handle more complex
         circuits.
-        '''
+        """
         # Note the list containing the filepath. This will give you a very
         # confusing error message if not wrapped in an iterable even though
         # there documentation and code make it very clear you should be able to
@@ -257,9 +255,7 @@ class CircuitNetwork:
             if type(item).__name__ == "Decl":
                 node_attribute = item.list[0]
                 node_type = type(node_attribute).__name__
-                node = LogicNode(
-                    node_name=node_attribute.name
-                )
+                node = LogicNode(node_name=node_attribute.name)
                 self.add_node(node)
                 if node_type == "Input":
                     self.add_input_node(node)
@@ -270,13 +266,9 @@ class CircuitNetwork:
                 # Special class names in pyyosys that correlate to logical
                 # functions. e.g., 'Or', 'And', etc etc.
                 node_logical_function = string_to_logic_function(
-                    str(
-                        type(input_attributes).__name__
-                    )
+                    str(type(input_attributes).__name__)
                 )
-                instantiated_node = LogicNode(
-                    logical_function=node_logical_function
-                )
+                instantiated_node = LogicNode(logical_function=node_logical_function)
                 self.add_node(instantiated_node)
                 # Should be the 'further' node in the network as it was just
                 # added. Might want to think about extending this to have
@@ -284,7 +276,9 @@ class CircuitNetwork:
                 ref_node = list(self.graph.nodes.items())[-1][0]
                 # TODO: How does this handle three inputs? Probably custom
                 # based on class. Test with Struct.
-                if hasattr(input_attributes, 'left') and hasattr(input_attributes, 'right'):
+                if hasattr(input_attributes, "left") and hasattr(
+                    input_attributes, "right"
+                ):
                     # Right Side, i.e. the inputs.
                     left_input_id = input_attributes.right.name
                     right_input_id = input_attributes.left.name
@@ -305,8 +299,8 @@ class CircuitNetwork:
     # ---------------------------- LOGIC SIMULATION ----------------------------
 
     def get_logical_output(
-            self,
-            input_signals: Union[List[bool], Tuple[bool], Dict[str, bool]],
+        self,
+        input_signals: Union[List[bool], Tuple[bool], Dict[str, bool]],
     ) -> bool:
         """
         Get the boolean output of the CircuitNetwork given the passed in
@@ -322,9 +316,9 @@ class CircuitNetwork:
         available_inputs = self.get_available_inputs()
         if len(input_signals) != len(available_inputs):
             raise RuntimeError(
-                f'Requested input signals do not match with available inputs.'
-                f'Requested input signal: {input_signals}\n'
-                f'Available inputs: {available_inputs}\n'
+                f"Requested input signals do not match with available inputs."
+                f"Requested input signal: {input_signals}\n"
+                f"Available inputs: {available_inputs}\n"
             )
         if type(input_signals) == dict:
             for key in input_signals:
@@ -333,8 +327,8 @@ class CircuitNetwork:
                 node.boolean_value = signal_value
         else:
             for node, signal_value in zip(
-                    self.input_signal_node_list,
-                    input_signals,
+                self.input_signal_node_list,
+                input_signals,
             ):
                 node.boolean_value = signal_value
         # We then run the graph to get the final output.
@@ -346,8 +340,8 @@ class CircuitNetwork:
         return res
 
     def perform_traversal(
-            self,
-            root_node: LogicNode,
+        self,
+        root_node: LogicNode,
     ) -> bool:
         """
         Recursive function to parse the outputs of all of the nodes of the
@@ -390,18 +384,18 @@ class CircuitNetwork:
         Pyverilog is messy and doesn't clean up after itself. This should
         probably be run at the exit of the primary Ibis execution as well.
         """
-        cleanup_list = ['parser.out', 'parsetab.py']
+        cleanup_list = ["parser.out", "parsetab.py"]
         for file in cleanup_list:
             if os.path.isfile(file):
                 try:
                     os.remove(file)
                 except PermissionError:
-                    print('Failed to clear prior verilog parsing remnants.')
+                    print("Failed to clear prior verilog parsing remnants.")
 
     def plot_graph(
-            self,
-            save_file: bool = False,
-            output_filename: str = f"test.jpg",
+        self,
+        save_file: bool = False,
+        output_filename: str = f"test.jpg",
     ):
         """
         Plots the network structure. Primarily for troubleshooting and

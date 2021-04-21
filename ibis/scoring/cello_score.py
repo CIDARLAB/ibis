@@ -154,10 +154,10 @@ class CelloRepressor:
         return self.biological_output
 
     def set_biological_inputs(
-            self,
-            biological_inputs: List[
-                Union[Tuple[float, float], "CelloRepressor", BiologicalInputSignal]
-            ],
+        self,
+        biological_inputs: List[
+            Union[Tuple[float, float], "CelloRepressor", BiologicalInputSignal]
+        ],
     ):
         """
         Sets the biological inputs to the repressor.
@@ -181,8 +181,8 @@ class CelloRepressor:
                     )
                 )
             if (
-                    type(chemical_input) == CelloRepressor
-                    or type(chemical_input) == BiologicalInputSignal
+                type(chemical_input) == CelloRepressor
+                or type(chemical_input) == BiologicalInputSignal
             ):
                 input_list.append(chemical_input)
         self.biological_inputs.extend(biological_inputs)
