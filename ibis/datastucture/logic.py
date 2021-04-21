@@ -125,6 +125,10 @@ class CircuitNetwork:
             verilog_fp:
         """
         self.verilog_fp = verilog_fp
+        if not os.path.isfile(verilog_fp):
+            raise RuntimeError(
+                f'Unable to locate file {verilog_fp}, please investigate.'
+            )
         self.input_signal_node_list = []
         self.output_signal_node_list = []
         self.graph = nx.Graph()
@@ -373,7 +377,6 @@ class CircuitNetwork:
                 right = root_node.input_signals[1]
                 l_out = self.perform_traversal(left)
                 r_out = self.perform_traversal(right)
-                print('Here')
                 return root_node.logical_function(l_out, r_out)
         # If we get here, we assume that we're an input node and we
         # just need to return our value.

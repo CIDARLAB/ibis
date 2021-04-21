@@ -11,7 +11,11 @@ import pathlib
 import pytest
 
 from ibis.ingress import parse_sbol_xml_tree
-from ibis.datastucture import NetworkGeneticCircuit, NetworkGeneticNode
+from ibis.datastucture import (
+    NetworkGeneticCircuit,
+    NetworkGeneticNode,
+    parse_cello_input_file,
+)
 
 example_input_dict = {
     "name": "example_and_gate",
@@ -173,6 +177,17 @@ def get_input_and_gate():
         input_file = "tests/test_cello/example_and_gate.xml"
     return input_file
 
+@pytest.fixture
+def get_input_sensor_ucf():
+    current_dir = pathlib.Path.cwd().parts[-1]
+    # Assumes that you are running this file for testing.
+    if current_dir == "tests":
+        input_file = "test_cello/test_ucf_files/Eco1C1G1T1.input.json"
+    else:
+        # Assumes you are running this at the top level.
+        input_file = "tests/test_cello/test_ucf_files/Eco1C1G1T1.input.json"
+    return input_file
+
 
 def test_ingress_module(get_input_and_gate):
     input_file = get_input_and_gate
@@ -202,6 +217,13 @@ def test_graph_filtration(get_input_and_gate):
     # Not useful in an automated testing framework, but if you wanna know what
     # it looks like.
     # gn.plot_graph(filtered_graph=ogn)
+
+def test_ucf_parsing(get_input_sensor_ucf):
+    input_file = get_input_sensor_ucf
+    parsed_input = parse_cello_input_file(input_file)
+    tetr = parsed_input.get_sensor('TetR_sensor')
+    assert round(tetr.get_score(1)) == 4
+
 
 
 if __name__ == "__main__":

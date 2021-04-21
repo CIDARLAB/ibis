@@ -25,3 +25,6 @@ from .parts import (
     get_part_object_from_str,
     PART_LUT,
 )
+from .ucf_parse import (
+    parse_cello_input_file,
+)

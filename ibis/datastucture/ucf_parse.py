@@ -188,6 +188,7 @@ if __name__ == '__main__':
     fn = '../../tests/test_cello/test_ucf_files/Eco1C1G1T1.input.json'
     out = parse_cello_input_file(fn)
     sensor_list = out.get_available_sensors()
+    print(sensor_list)
     for sensor in sensor_list:
         thing = out.get_sensor(sensor)
         print(thing.get_score(1))
