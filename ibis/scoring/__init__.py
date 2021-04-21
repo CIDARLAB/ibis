@@ -17,4 +17,5 @@ from .scorer import (
     validate_input_file,
     generate_requirement_classes,
 )
-from .cello_score import CelloScoring
+
+# from .cello_score import CelloScoring

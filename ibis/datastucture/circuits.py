@@ -118,7 +118,6 @@ class NetworkGeneticNode:
 
 
 class NetworkGeneticCircuit(GeneticCircuit):
-
     def __init__(self, sbol_input: SBOLGeneticCircuit):
         super().__init__()
         self.graph = nx.Graph()
