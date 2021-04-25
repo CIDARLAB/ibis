@@ -6,7 +6,7 @@ from ibis.datastucture import GeneticCircuit
 
 
 def _parse_line(line):
-    fields = line.strip().split(',')
+    fields = line.strip().split(",")
 
     circuit_id = fields[0]
 
@@ -22,8 +22,7 @@ def _parse_line(line):
 
     # experimental data
     cap_value = 20000.0
-    exp_means = [float(x) if float(x) < cap_value else cap_value
-                 for x in fields[13:21]]
+    exp_means = [float(x) if float(x) < cap_value else cap_value for x in fields[13:21]]
 
     # TODO: modify for Jackson's logic structure
     gc = GeneticCircuit(2, 2)
@@ -41,8 +40,11 @@ def parse_blade_file():
     """
     Load data file from BLADE paper.
     """
-    fn = os.path.join(os.path.dirname(__file__), 'test_blade',
-                      '41587_2017_BFnbt3805_MOESM250_ESM-1.csv')
+    fn = os.path.join(
+        os.path.dirname(__file__),
+        "test_blade",
+        "41587_2017_BFnbt3805_MOESM250_ESM-1.csv",
+    )
     with open(fn) as f:
         f.readline()  # header
         circuits = dict(_parse_line(line) for line in f)
@@ -55,7 +57,7 @@ def test_blade(parse_blade_file):
     """
     circs = parse_blade_file
     for i, (gc, ta) in circs.items():
-        if i == '99':
+        if i == "99":
             # For some reason 99 has a listed angle of 0.7, when it should be
             # ~9? I think it's an issue with BLADE data and therefore not my
             # fault.
