@@ -43,8 +43,8 @@ class GeneticCircuit:
         return self._intended_truth_table
 
     @intended_truth_table.setter
-    def intended_truth_table(self, value: list[int]):
-        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
+    def intended_truth_table(self, value: List[int]):
+        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
         assert all(x in (0, 1) for x in value)
         self._intended_truth_table = value
 
@@ -53,8 +53,8 @@ class GeneticCircuit:
         return self._exp_data
 
     @exp_data.setter
-    def exp_data(self, value: list[float]):
-        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
+    def exp_data(self, value: List[float]):
+        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
         self._exp_data = value
 
     def dynamic_range(self) -> float:
@@ -120,12 +120,14 @@ class NetworkGeneticNode:
 
 class NetworkGeneticCircuit(GeneticCircuit):
     def __init__(self, sbol_input: SBOLGeneticCircuit):
+        super().__init__()
         self.graph = nx.Graph()
         self.node_lut = {}
         self.parse_sbol_input(sbol_input)
 
     def parse_sbol_input(self, sbol_input: SBOLGeneticCircuit):
         """
+        Parses Inputted SBOL.
 
         Args:
             sbol_input:
@@ -275,3 +277,16 @@ class NetworkGeneticCircuit(GeneticCircuit):
             plt.show()
         else:
             plt.savefig(output_filename)
+
+    def calculate_gc_content_percentage(self) -> float:
+        """
+
+        Returns:
+            Calculate the GC-content in a genetic circuit.
+        """
+        total_len = 0
+        total_gc = 0
+        for node in self.graph.nodes:
+            total_len += len(node.sequence)
+            total_gc += sum(1 for bp in node.sequence if bp in "CG")
+        return total_gc / total_len

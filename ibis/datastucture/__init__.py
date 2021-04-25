@@ -13,8 +13,7 @@ from .circuits import (
     NetworkGeneticCircuit,
 )
 from .logic import (
-    InputSignal,
-    LogicFunction,
+    CircuitNetwork,
 )
 from .parts import (
     BasePart,
@@ -26,4 +25,7 @@ from .parts import (
     EngineeredRegion,
     get_part_object_from_str,
     PART_LUT,
+)
+from .ucf_parse import (
+    parse_cello_input_file,
 )

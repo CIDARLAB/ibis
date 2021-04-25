@@ -33,6 +33,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
+
+      # -----------------------------------------------------------------------
+      #   Install external tool dependencies like iverilog
+      # -----------------------------------------------------------------------
+      - name: Install Ubuntu Dependencies
+        run: |
+          sudo apt-get install iverilog
+
       # -----------------------------------------------------------------------
       #   Install baseline Poetry, check for caching, and then install our env.
       # -----------------------------------------------------------------------
