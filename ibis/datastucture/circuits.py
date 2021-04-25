@@ -29,10 +29,11 @@ class GeneticCircuit:
     simulating the circuit via Cello
     """
 
-    def __init__(self):
+    def __init__(self, num_inputs=2, num_outputs=1):
+        self.num_inputs: int = num_inputs
+        self.num_outputs: int = num_outputs
+        # TODO: modify for Jackson's logic structure
         self._intended_truth_table: List = None
-        self.num_inputs: int = None
-        self.num_outputs: int = None
         self._exp_data: int = None  # want better name, can be sim or exp
         # might want separate sim_data variable?
         # add things needed for other circuits, e.g. noise for SNR?
@@ -43,7 +44,7 @@ class GeneticCircuit:
 
     @intended_truth_table.setter
     def intended_truth_table(self, value: list[int]):
-        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
+        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
         assert all(x in (0, 1) for x in value)
         self._intended_truth_table = value
 
@@ -53,7 +54,7 @@ class GeneticCircuit:
 
     @exp_data.setter
     def exp_data(self, value: list[float]):
-        assert value == 2 ** (self.num_inputs + self.num_outputs - 1)
+        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
         self._exp_data = value
 
     def dynamic_range(self) -> float:
