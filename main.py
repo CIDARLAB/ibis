@@ -186,7 +186,8 @@ def score(
     for solver, requirement in zip(requested_solvers, requested_requirements):
         solver_class = scoring_map[solver]
         solver_obj = solver_class(network, requirement)
-        solver_obj.score()
+        res = solver_obj.score()
+        print(res)
 
 
 if __name__ == "__main__":

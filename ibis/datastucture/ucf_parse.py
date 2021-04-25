@@ -111,23 +111,12 @@ class CelloInputs:
             logical_input: Union[List[bool], Tuple[bool], Dict[str, bool]],
     ):
         out_scores = []
-        # if len(logical_input) != len(self.get_available_sensors()):
-        #     raise RuntimeError(
-        #         'Inputted logical values are incorrect for specified circuit.'
-        #     )
-        # if type(logical_input) == dict:
         for key in logical_input:
             boolean_value = logical_input[key]
             internal_sensor = self.get_sensor(key)
             # I think what I should be doing is kind of sweeping across
             # -1 to +1 and getting the curve that way and comparing the two
             out_scores.append(internal_sensor.get_score(int(boolean_value)))
-        # if type(logical_input) == list:
-        #     avail_sensors = self.get_available_sensors()
-        #     for index, sensor_key in enumerate(avail_sensors):
-        #         internal_sensor = self.get_sensor(sensor_key)
-        #         state = int(logical_input[index])
-        #         out_scores.append(internal_sensor.get_score(state))
         return out_scores
 
 
