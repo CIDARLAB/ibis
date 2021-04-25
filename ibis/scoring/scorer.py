@@ -101,6 +101,7 @@ def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
 
     """
     from ibis.scoring.cello_score import CelloRequirement
+    from ibis.scoring.assembly_score import AssemblyRequirement
 
     requirement_map = {
         "cello": CelloRequirement,
@@ -285,6 +286,12 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
                 anno = req_annotations[k].annotation
                 anno_dict[k] = anno
             requirement_dict[scorer] = anno_dict
+        # They could be using an older input file that has entries for a
+        # specific solver, but we shouldn't care about them if they aren't
+        # requested.
+        for key in list(input_dict.keys()):
+            if key not in requested_scorers:
+                del input_dict[key]
         # Not purposefully contained within the loop because we might have to
         # do some additional calculation or pulling at this point.
         # Now we validate each of the metrics.
@@ -329,8 +336,11 @@ def generate_requirement_classes(input_fp: str, requested_scorers: List[str]):
         input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
         for scorer in requested_scorers:
             requirements = req_map[scorer]
-            input_keys_for_requirement = input_dict[scorer]
-            requirement_cls = requirements(**input_keys_for_requirement)
+            try:
+                requirement_cls = requirements()
+            except:
+                input_keys_for_requirement = input_dict[scorer]
+                requirement_cls = requirements(**input_keys_for_requirement)
             out_list.append(requirement_cls)
     return out_list
 
