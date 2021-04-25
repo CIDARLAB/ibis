@@ -6,6 +6,7 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
 from .circuits import (
+    GeneticCircuit,
     SBOLGeneticCircuit,
     SBOLGeneticGroup,
     NetworkGeneticNode,
