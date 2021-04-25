@@ -13,7 +13,7 @@ from .circuits import (
     NetworkGeneticCircuit,
 )
 from .logic import (
-    CircuitNetwork,
+    LogicNetwork,
 )
 from .parts import (
     BasePart,

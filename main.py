@@ -125,7 +125,7 @@ def validate(
 
 
 @app.command()
-def solve(
+def score(
     requested_solvers: List[str] = typer.Argument(
         ...,
         help="The Input Solvers",

@@ -24,8 +24,11 @@ import matplotlib.pyplot as plt
 from matplotlib import ticker
 import scipy.optimize as opt
 
-# from ibis.datastucture.logic import BiologicalInputSignal, LogicFunction
-from ibis.datastucture.circuits import NetworkGeneticCircuit
+from ibis.datastucture import (
+    NetworkGeneticCircuit,
+    LogicNetwork,
+    parse_cello_input_file,
+)
 from ibis.scoring.scorer import BaseRequirement, BaseScoring
 
 
@@ -42,11 +45,11 @@ class CelloRequirement(BaseRequirement):
     """
 
     def __init__(
-        self,
-        ucf_fp: Path = None,
-        input_signal_fp: Path = None,
-        output_signal_fp: Path = None,
-        verilog_file_fp: Path = None,
+            self,
+            ucf_fp: str = None,
+            input_signal_fp: str = None,
+            output_signal_fp: str = None,
+            verilog_file_fp: str = None,
     ):
         self.ucf_fp = ucf_fp
         self.input_signal_fp = input_signal_fp
@@ -62,9 +65,9 @@ class CelloRequirement(BaseRequirement):
 
 class CelloScoring(BaseScoring):
     def __init__(
-        self,
-        network_graph: NetworkGeneticCircuit,
-        requirement: CelloRequirement,
+            self,
+            network_graph: NetworkGeneticCircuit,
+            requirement: CelloRequirement,
     ):
         super().__init__(network_graph, requirement)
         self.ucf_fp = requirement.ucf_fp
@@ -72,9 +75,42 @@ class CelloScoring(BaseScoring):
         self.output_signal_fp = requirement.output_signal_fp
         self.verilog_file_fp = requirement.verilog_file_fp
 
+        self.input_sensors = parse_cello_input_file(self.input_signal_fp)
+        self.logic_network = LogicNetwork(self.verilog_file_fp)
+
     def score(self):
-        for node in self.network_graph.graph.nodes:
-            print(node)
+        """
+        Function to score efficacy of a gate.
+        """
+        df = pd.DataFrame(columns=["logical_input", "biological_input", "response"])
+        logical_inputs = list(
+            itertools.product(
+                [True, False],
+                repeat=len(self.logic_network.get_available_inputs())
+            )
+        )
+        high_off = float("-inf")
+        low_on = float("inf")
+        # We basically iterate over all possibilities of the truth table.
+        for logical_input in logical_inputs:
+            truth = self.logic_network.get_logical_output(logical_input)
+            log_input = {
+                'LacI_sensor': logical_input[0],
+                'TetR_sensor': logical_input[1],
+            }
+            response = self.input_sensors.generate_score_for_sensor(
+                log_input
+            )
+            # If this is True, our signal is high. If it is False, our signal
+            # is low. We use this to get the lowest one and highest off
+            # respectively.
+            if truth:
+                if response < low_on:
+                    low_on = response
+            if not truth:
+                if response > high_off:
+                    high_off = response
+        return np.log10(high_off / low_on)
 
     def get_requirements(self):
         return CelloRequirement
@@ -82,12 +118,12 @@ class CelloScoring(BaseScoring):
 
 class CelloRepressor:
     def __init__(
-        self,
-        n: float,
-        k: float,
-        y_min: float,
-        y_max: float,
-        number_of_inputs: int,
+            self,
+            n: float,
+            k: float,
+            y_min: float,
+            y_max: float,
+            number_of_inputs: int,
     ):
         """
 
@@ -117,7 +153,7 @@ class CelloRepressor:
         self.biological_output: int = 0
 
         # Attributes related to the logical input/output to the Repressor.
-        self.logical_function: LogicFunction = LogicFunction.INITIAL
+        self.logical_function: Callable
         self.logical_output: bool = None
         self.logical_inputs: [List[Union[int, CelloRepressor]]] = None
 
@@ -138,26 +174,26 @@ class CelloRepressor:
         """
         current_x = 0
         signal_index = 1 if self.get_logical_output() else 0
-        for index, input_signal in enumerate(self.biological_inputs):
-            if type(input_signal) is CelloRepressor:
-                current_x += input_signal.calculate_response_function()
-            if type(input_signal) is tuple:
-                current_x += input_signal[signal_index]
-            if type(input_signal) is BiologicalInputSignal:
-                if signal_index:
-                    current_x += input_signal.on_value
-                else:
-                    current_x += input_signal.off_value
+        # for index, input_signal in enumerate(self.biological_inputs):
+        #     if type(input_signal) is CelloRepressor:
+        #         current_x += input_signal.calculate_response_function()
+        #     if type(input_signal) is tuple:
+        #         current_x += input_signal[signal_index]
+        #     if type(input_signal) is BiologicalInputSignal:
+        #         if signal_index:
+        #             current_x += input_signal.on_value
+        #         else:
+        #             current_x += input_signal.off_value
         self.biological_output = self.y_min + (
-            (self.y_max - self.y_min) / (1.0 + (current_x / self.k) ** self.n)
+                (self.y_max - self.y_min) / (1.0 + (current_x / self.k) ** self.n)
         )
         return self.biological_output
 
     def set_biological_inputs(
-        self,
-        biological_inputs: List[
-            Union[Tuple[float, float], "CelloRepressor", BiologicalInputSignal]
-        ],
+            self,
+            biological_inputs: List[
+                Union[Tuple[float, float], "CelloRepressor"]
+            ],
     ):
         """
         Sets the biological inputs to the repressor.
@@ -166,30 +202,31 @@ class CelloRepressor:
             biological_inputs: A list of biological inputs to the repressor.
 
         """
-        if len(self.biological_inputs) + 1 > self.number_of_inputs:
-            raise RuntimeError("Too many inputs into gate.")
-        input_list = []
-        for chemical_input in biological_inputs:
-            if type(chemical_input) == Tuple:
-                input_list.append(
-                    BiologicalInputSignal(
-                        label="N/A",  # Possibly bad form. I think you'd have a db
-                        # backing this in production that would probably have all
-                        # signals predefined.
-                        off_value=chemical_input[0],
-                        on_value=chemical_input[1],
-                    )
-                )
-            if (
-                type(chemical_input) == CelloRepressor
-                or type(chemical_input) == BiologicalInputSignal
-            ):
-                input_list.append(chemical_input)
-        self.biological_inputs.extend(biological_inputs)
+        pass
+        # if len(self.biological_inputs) + 1 > self.number_of_inputs:
+        #     raise RuntimeError("Too many inputs into gate.")
+        # input_list = []
+        # for chemical_input in biological_inputs:
+        #     if type(chemical_input) == Tuple:
+        #         input_list.append(
+        #             BiologicalInputSignal(
+        #                 label="N/A",  # Possibly bad form. I think you'd have a db
+        #                 # backing this in production that would probably have all
+        #                 # signals predefined.
+        #                 off_value=chemical_input[0],
+        #                 on_value=chemical_input[1],
+        #             )
+        #         )
+        #     if (
+        #         type(chemical_input) == CelloRepressor
+        #         or type(chemical_input) == BiologicalInputSignal
+        #     ):
+        #         input_list.append(chemical_input)
+        # self.biological_inputs.extend(biological_inputs)
 
     def set_logical_inputs(
-        self,
-        logical_inputs: List[Union[int, "CelloRepressor"]],
+            self,
+            logical_inputs: List[Union[int, "CelloRepressor"]],
     ):
         """
         Sets the logical inputs to the repressor. This can either be via a
@@ -216,24 +253,25 @@ class CelloRepressor:
         # There's an argument to be made here that's a bit silly and the
         # caller could just directly reference the enumerated logic value,
         # but I don't like the extra cognitive overhead.
-        if logical_function == "AND":
-            self.logical_function = LogicFunction.AND
-        elif logical_function == "NOT":
-            self.logical_function = LogicFunction.NOT
-        elif logical_function == "OR":
-            self.logical_function = LogicFunction.OR
-        elif logical_function == "XOR":
-            self.logical_function = LogicFunction.XOR
-        elif logical_function == "NAND":
-            self.logical_function = LogicFunction.NAND
-        elif logical_function == "NOR":
-            self.logical_function = LogicFunction.NOR
-        elif logical_function == "XNOR":
-            self.logical_function = LogicFunction.XNOR
-        else:
-            raise RuntimeError(
-                f"Passed in Logical Function {logical_function} not defined."
-            )
+        pass
+        # if logical_function == "AND":
+        #     self.logical_function = LogicFunction.AND
+        # elif logical_function == "NOT":
+        #     self.logical_function = LogicFunction.NOT
+        # elif logical_function == "OR":
+        #     self.logical_function = LogicFunction.OR
+        # elif logical_function == "XOR":
+        #     self.logical_function = LogicFunction.XOR
+        # elif logical_function == "NAND":
+        #     self.logical_function = LogicFunction.NAND
+        # elif logical_function == "NOR":
+        #     self.logical_function = LogicFunction.NOR
+        # elif logical_function == "XNOR":
+        #     self.logical_function = LogicFunction.XNOR
+        # else:
+        #     raise RuntimeError(
+        #         f"Passed in Logical Function {logical_function} not defined."
+        #     )
 
     def get_input_signal_total(self) -> float:
         """
@@ -272,33 +310,34 @@ class CelloRepressor:
         Returns:
             The logical output of the repressor.
         """
-        computed_input_signals = []
-        for input_signal in self.logical_inputs:
-            if type(input_signal) == CelloRepressor:
-                computed_input_signals.append(input_signal.get_logical_output())
-            else:
-                computed_input_signals.append(input_signal)
-        if self.logical_function == LogicFunction.INITIAL:
-            raise RuntimeError("Logical Function has not been set.")
-        if self.logical_function == LogicFunction.NOT:
-            if len(computed_input_signals) > 1:
-                raise RuntimeError("Cannot NOT multiple inputs.")
-            else:
-                return ~computed_input_signals[0] & 0xF
-        if len(computed_input_signals) != 2:
-            raise RuntimeError("Need two binary inputs to perform logical operations")
-        if self.logical_function == LogicFunction.AND:
-            return (computed_input_signals[0] & computed_input_signals[1]) & 0xF
-        if self.logical_function == LogicFunction.OR:
-            return (computed_input_signals[0] | computed_input_signals[1]) & 0xF
-        if self.logical_function == LogicFunction.XOR:
-            return (computed_input_signals[0] ^ computed_input_signals[1]) & 0xF
-        if self.logical_function == LogicFunction.NAND:
-            return (~(computed_input_signals[0] & computed_input_signals[1])) & 0xF
-        if self.logical_function == LogicFunction.NOR:
-            return (~(computed_input_signals[0] | computed_input_signals[1])) & 0xF
-        if self.logical_function == LogicFunction.XNOR:
-            return (~(computed_input_signals[0] ^ computed_input_signals[1])) & 0xF
+        pass
+        # computed_input_signals = []
+        # for input_signal in self.logical_inputs:
+        #     if type(input_signal) == CelloRepressor:
+        #         computed_input_signals.append(input_signal.get_logical_output())
+        #     else:
+        #         computed_input_signals.append(input_signal)
+        # if self.logical_function == LogicFunction.INITIAL:
+        #     raise RuntimeError("Logical Function has not been set.")
+        # if self.logical_function == LogicFunction.NOT:
+        #     if len(computed_input_signals) > 1:
+        #         raise RuntimeError("Cannot NOT multiple inputs.")
+        #     else:
+        #         return ~computed_input_signals[0] & 0xF
+        # if len(computed_input_signals) != 2:
+        #     raise RuntimeError("Need two binary inputs to perform logical operations")
+        # if self.logical_function == LogicFunction.AND:
+        #     return (computed_input_signals[0] & computed_input_signals[1]) & 0xF
+        # if self.logical_function == LogicFunction.OR:
+        #     return (computed_input_signals[0] | computed_input_signals[1]) & 0xF
+        # if self.logical_function == LogicFunction.XOR:
+        #     return (computed_input_signals[0] ^ computed_input_signals[1]) & 0xF
+        # if self.logical_function == LogicFunction.NAND:
+        #     return (~(computed_input_signals[0] & computed_input_signals[1])) & 0xF
+        # if self.logical_function == LogicFunction.NOR:
+        #     return (~(computed_input_signals[0] | computed_input_signals[1])) & 0xF
+        # if self.logical_function == LogicFunction.XNOR:
+        #     return (~(computed_input_signals[0] ^ computed_input_signals[1])) & 0xF
 
     def get_linear_coefficients(self) -> List[float]:
         """
@@ -371,10 +410,10 @@ class CelloRepressor:
 
 # ------------------------ Publicly Available Functions ------------------------
 def graph_response_function(
-    func: Callable,
-    start: int = 0.001,
-    stop: int = 1000,
-    number_of_observations: int = 1000000,
+        func: Callable,
+        start: int = 0.001,
+        stop: int = 1000,
+        number_of_observations: int = 1000000,
 ):
     """
     Generates a graph for the passed in function in the same style as the log
@@ -402,9 +441,9 @@ def graph_response_function(
 
 
 def optimize_repressor(
-    input_repressor: CelloRepressor,
-    optimization_method: str,
-    bio_optimization: str = "DNA",
+        input_repressor: CelloRepressor,
+        optimization_method: str,
+        bio_optimization: str = "DNA",
 ):
     """
     Monolithic entrypoint and wrapper around the optimization functionality
@@ -537,7 +576,7 @@ def optimizable_response_function_dna(x, input_repressor: CelloRepressor) -> flo
 
 
 def optimizable_response_function_dna_and_protein(
-    x, input_repressor: CelloRepressor
+        x, input_repressor: CelloRepressor
 ) -> float:
     """
     Alters the linear coefficents that determine the score of a repressor and

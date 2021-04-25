@@ -112,7 +112,7 @@ class LogicNode:
 
 # ------------------------------- CIRCUIT NETWORK ------------------------------
 @dataclass
-class CircuitNetwork:
+class LogicNetwork:
     def __init__(self, verilog_fp: str):
         """
         A CircuitNetwork represents the boolean logic of the passed in verilog
@@ -129,7 +129,7 @@ class CircuitNetwork:
             )
         self.input_signal_node_list = []
         self.output_signal_node_list = []
-        self.graph = nx.Graph()
+        self.graph = nx.DiGraph()
         self.cleanup()
         self.parse_verilog_file()
 

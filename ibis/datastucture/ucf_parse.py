@@ -14,6 +14,8 @@ import json
 from typing import (
     Dict,
     List,
+    Union,
+    Tuple,
 )
 
 import sympy
@@ -50,7 +52,7 @@ class ResponseFunction:
         self.expression = sympy.sympify(self.equation)
 
     def calculate_score(
-        self, state_input: float, sensor_constants: Dict[str, SensorParameter]
+            self, state_input: float, sensor_constants: Dict[str, SensorParameter]
     ):
         # We want our primary equation to remain 'clean' but we need to mutate
         # the symbolic representation of the equation to get what we want.
@@ -83,7 +85,7 @@ class CelloInputSensor:
 
 
 @dataclasses.dataclass
-class CelloInput:
+class CelloInputs:
     sensor_table: Dict[str, CelloInputSensor] = None
 
     def __post_init__(self):
@@ -104,12 +106,36 @@ class CelloInput:
     def get_sensor_parameters_for_sensor(self, sensor_name: str):
         return self.sensor_table[sensor_name].sensor_parameters
 
+    def generate_score_for_sensor(
+            self,
+            logical_input: Union[List[bool], Tuple[bool], Dict[str, bool]],
+    ):
+        out_scores = []
+        # if len(logical_input) != len(self.get_available_sensors()):
+        #     raise RuntimeError(
+        #         'Inputted logical values are incorrect for specified circuit.'
+        #     )
+        # if type(logical_input) == dict:
+        for key in logical_input:
+            boolean_value = logical_input[key]
+            internal_sensor = self.get_sensor(key)
+            # I think what I should be doing is kind of sweeping across
+            # -1 to +1 and getting the curve that way and comparing the two
+            out_scores.append(internal_sensor.get_score(int(boolean_value)))
+        # if type(logical_input) == list:
+        #     avail_sensors = self.get_available_sensors()
+        #     for index, sensor_key in enumerate(avail_sensors):
+        #         internal_sensor = self.get_sensor(sensor_key)
+        #         state = int(logical_input[index])
+        #         out_scores.append(internal_sensor.get_score(state))
+        return out_scores
+
 
 def parse_cello_input_file(fp: str):
     if not os.path.isfile(fp):
         raise RuntimeError(f"Unable to locate input file {fp}, please investigate.")
     with open(fp, "r") as input_file:
-        cello_input = CelloInput()
+        cello_input = CelloInputs()
         raw_input_file: List[dict] = json.load(input_file)
         # Collect all possible input sensor names, and then aggregate them
         sensor_list = []
