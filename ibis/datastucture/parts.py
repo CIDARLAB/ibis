@@ -22,32 +22,32 @@ class BasePart:
 
 @dataclass
 class Promoter(BasePart):
-    pass
+    node_color: str = "#1A659E"
 
 
 @dataclass
 class RibosomeEntrySite(BasePart):
-    pass
+    node_color: str = "#FF6B35"
 
 
 @dataclass
 class CodingSequence(BasePart):
-    pass
+    node_color: str = "#401F3E"
 
 
 @dataclass
 class Terminator(BasePart):
-    pass
+    node_color: str = "#157F1F"
 
 
 @dataclass
 class RibonucleaseSite(BasePart):
-    pass
+    node_color: str = "#2CA58D"
 
 
 @dataclass
 class EngineeredRegion(BasePart):
-    pass
+    node_color: str = "#FCBA04"
 
 
 PART_LUT = {

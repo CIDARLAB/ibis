@@ -12,7 +12,7 @@ import pathlib
 
 import pytest
 
-from ibis.datastucture.logic import CircuitNetwork
+from ibis.datastucture.logic import LogicNetwork
 
 
 @pytest.fixture
@@ -28,7 +28,7 @@ def test_and_gate(get_test_verilog_directory):
     path = get_test_verilog_directory
     file_location = os.path.join(path, "and_gate.v")
     # Exercise the truth table. Trivial I know. Simple AND Table, 2 Inputs 1 Out
-    c_net = CircuitNetwork(verilog_fp=file_location)
+    c_net = LogicNetwork(verilog_fp=file_location)
     assert c_net.get_logical_output([False, False]) is False
     assert c_net.get_logical_output([True, False]) is False
     assert c_net.get_logical_output([False, True]) is False
@@ -39,7 +39,7 @@ def test_or_gate(get_test_verilog_directory):
     path = get_test_verilog_directory
     file_location = os.path.join(path, "or.v")
     # Exercise the truth table. Trivial I know. Simple AND Table, 2 Inputs 1 Out
-    c_net = CircuitNetwork(verilog_fp=file_location)
+    c_net = LogicNetwork(verilog_fp=file_location)
     assert c_net.get_logical_output([False, False]) is False
     assert c_net.get_logical_output([True, False]) is True
     assert c_net.get_logical_output([False, True]) is True

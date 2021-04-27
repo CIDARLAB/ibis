@@ -35,7 +35,7 @@ def _parse_line(line):
     return circuit_id, (gc, true_angle)
 
 
-@pytest.fixture
+# @pytest.fixture
 def parse_blade_file():
     """
     Load data file from BLADE paper.
@@ -51,11 +51,11 @@ def parse_blade_file():
     return circuits
 
 
-def test_blade(parse_blade_file):
+def test_blade():
     """
     Tests instantiation of GeneticCircuit class and vector_proximity method.
     """
-    circs = parse_blade_file
+    circs = parse_blade_file()
     for i, (gc, ta) in circs.items():
         if i == "99":
             # For some reason 99 has a listed angle of 0.7, when it should be
@@ -64,3 +64,6 @@ def test_blade(parse_blade_file):
             continue
         vp = round(gc.vector_proximity(), 1)
         assert abs(vp - ta) < 0.11  # room for rounding errors
+
+if __name__ == '__main__':
+    test_blade()

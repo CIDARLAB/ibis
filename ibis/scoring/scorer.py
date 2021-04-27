@@ -101,9 +101,13 @@ def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
 
     """
     from ibis.scoring.cello_score import CelloRequirement
+    from ibis.scoring.blade_score import BladeRequirement
+    from ibis.scoring.assembly_score import AssemblyRequirement
 
     requirement_map = {
         "cello": CelloRequirement,
+        "blade": BladeRequirement,
+        "assembly": AssemblyRequirement,
     }
     return requirement_map
 
@@ -148,6 +152,11 @@ class BaseScoring(metaclass=abc.ABCMeta):
         """Extract text from the data set"""
         raise NotImplementedError
 
+    @abc.abstractmethod
+    def report(self):
+        """Extract text from the data set"""
+        raise NotImplementedError
+
 
 # ------------------------- Scoring Utility Functions --------------------------
 # Various utilities that allow attribute access or retrieve specific information
@@ -162,9 +171,13 @@ def get_scorer_map() -> Dict[str, Type[BaseScoring]]:
 
     """
     from ibis.scoring.cello_score import CelloScoring
+    from ibis.scoring.blade_score import BladeScoring
+    from ibis.scoring.assembly_score import AssemblyScoring
 
     scoring_map = {
         "cello": CelloScoring,
+        "blade": BladeScoring,
+        "assembly": AssemblyScoring,
     }
     return scoring_map
 
@@ -245,10 +258,14 @@ def generate_template_yaml(
         requirements = req_map[scorer]
         req_annotations = inspect.getdoc(requirements)
         sig_annotations = inspect.signature(requirements)
+        try:
+            anno = req_annotations.replace("    ", "").split("Args:")[1].splitlines()
+        except AttributeError:
+            anno = "Field not described in file"
         raw_annotations = list(
             filter(
                 lambda x: len(x) > 1,
-                req_annotations.replace("    ", "").split("Args:")[1].splitlines(),
+                anno,
             )
         )
         annotation_dict = {}
@@ -285,6 +302,12 @@ def validate_input_file(input_fp: str, requested_scorers: List[str]):
                 anno = req_annotations[k].annotation
                 anno_dict[k] = anno
             requirement_dict[scorer] = anno_dict
+        # They could be using an older input file that has entries for a
+        # specific solver, but we shouldn't care about them if they aren't
+        # requested.
+        for key in list(input_dict.keys()):
+            if key not in requested_scorers:
+                del input_dict[key]
         # Not purposefully contained within the loop because we might have to
         # do some additional calculation or pulling at this point.
         # Now we validate each of the metrics.
@@ -329,8 +352,11 @@ def generate_requirement_classes(input_fp: str, requested_scorers: List[str]):
         input_dict = yaml.load(input_file, Loader=yaml.FullLoader)
         for scorer in requested_scorers:
             requirements = req_map[scorer]
-            input_keys_for_requirement = input_dict[scorer]
-            requirement_cls = requirements(**input_keys_for_requirement)
+            try:
+                requirement_cls = requirements()
+            except:
+                input_keys_for_requirement = input_dict[scorer]
+                requirement_cls = requirements(**input_keys_for_requirement)
             out_list.append(requirement_cls)
     return out_list
 

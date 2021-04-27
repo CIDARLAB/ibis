@@ -50,6 +50,9 @@ class GoodScoring(BaseScoring):
     def get_requirements(self):
         pass
 
+    def report(self):
+        pass
+
 
 class GoodRequirements(BaseRequirement):
     def validate(self):

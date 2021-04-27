@@ -44,7 +44,7 @@ class GeneticCircuit:
 
     @intended_truth_table.setter
     def intended_truth_table(self, value: List[int]):
-        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
+        # assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
         assert all(x in (0, 1) for x in value)
         self._intended_truth_table = value
 
@@ -121,7 +121,7 @@ class NetworkGeneticNode:
 class NetworkGeneticCircuit(GeneticCircuit):
     def __init__(self, sbol_input: SBOLGeneticCircuit):
         super().__init__()
-        self.graph = nx.Graph()
+        self.graph = nx.DiGraph()
         self.node_lut = {}
         self.parse_sbol_input(sbol_input)
 
@@ -237,6 +237,9 @@ class NetworkGeneticCircuit(GeneticCircuit):
 
     def filter_graph(self, filter_criteria: str) -> nx.Graph:
         """
+        Filter by node type. Node types include:
+            - 'bound' nodes
+            - 'linear' nodes
 
         Args:
             filter_criteria:
@@ -244,7 +247,7 @@ class NetworkGeneticCircuit(GeneticCircuit):
         Returns:
 
         """
-        filtered_graph = nx.Graph()
+        filtered_graph = nx.DiGraph()
         for node_1, node_2, attr_dict in self.graph.edges(data=True):
             if attr_dict["edge_type"] == filter_criteria:
                 filtered_graph.add_node(node_1)
@@ -252,15 +255,26 @@ class NetworkGeneticCircuit(GeneticCircuit):
                 filtered_graph.add_edge(node_1, node_2, **attr_dict)
         return filtered_graph
 
+    def generate_node_color_list(self, input_graph: nx.DiGraph) -> List[str]:
+        out_list = []
+        for node in input_graph.nodes:
+            out_list.append(node.part_class.node_color)
+        return out_list
+
+    def draw_linear(self):
+        pass
+
+
     def plot_graph(
-        self,
-        save_file: bool = False,
-        output_filename: str = f"test.jpg",
-        filtered_graph: nx.Graph = None,
+            self,
+            save_file: bool = False,
+            output_filename: str = f"test.jpg",
+            filtered_graph: nx.Graph = None,
     ):
         """
 
         Args:
+            graph_type:
             save_file:
             output_filename:
             filtered_graph:
@@ -272,7 +286,19 @@ class NetworkGeneticCircuit(GeneticCircuit):
         labels = {}
         for node in list(graph.nodes):
             labels[node] = node.key_name
-        nx.draw(graph, labels=labels, with_labels=True)
+        node_colors = self.generate_node_color_list(graph)
+        # pos = nx.bipartite_layout(graph, graph.nodes, align='horizontal')
+        pos = nx.spiral_layout(graph)
+        # pos = nx.spring_layout(graph)
+        nx.draw(
+            graph,
+            pos=pos,
+            arrowsize=20,
+            verticalalignment='bottom',
+            labels=labels,
+            with_labels=True,
+            node_color=node_colors,
+        )
         if not save_file:
             plt.show()
         else:
