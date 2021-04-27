@@ -44,7 +44,7 @@ class GeneticCircuit:
 
     @intended_truth_table.setter
     def intended_truth_table(self, value: List[int]):
-        assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
+        # assert len(value) == 2 ** (self.num_inputs + self.num_outputs - 1)
         assert all(x in (0, 1) for x in value)
         self._intended_truth_table = value
 

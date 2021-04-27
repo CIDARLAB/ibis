@@ -40,3 +40,5 @@ class TemplateScoring(BaseScoring):
     def get_requirements(self):
         return TemplateRequirement
 
+    def report(self):
+        print('Howdy.')

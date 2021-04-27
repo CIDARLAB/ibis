@@ -1,14 +1,12 @@
 """
 --------------------------------------------------------------------------------
 Description:
-Primary Entrypoint into <scoring-project>
+Primary Entrypoint into Ibis
 
 Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
-import datetime
 import os
-import time
 from typing import (
     List,
     Optional,
@@ -82,13 +80,7 @@ def generate_template(
     output_fn: Optional[str] = "input.yml",
 ):
     """
-
-    Args:
-        requested_solvers:
-        output_fn:
-
-    Returns:
-
+    Generates a template input file for the requested solvers.
     """
     if requested_solvers is not None:
         typer.echo(f"Generating template yaml file for all available solvers...")
@@ -103,25 +95,6 @@ def generate_template(
         output_fn=output_fn,
     )
     typer.echo(f"Template File {output_fn} written to {os.getcwd()}")
-
-
-@app.command()
-def validate(
-    input_fn: Optional[str] = "input.yml",
-    verbose: Optional[bool] = False,
-):
-    """
-
-    Args:
-        input_fn:
-        verbose:
-
-    Returns:
-
-    """
-    if not os.path.isfile(input_fn):
-        typer.echo(f"Unable to find {input_fn}. Please Investigate.")
-        raise typer.Exit()
 
 
 @app.command()
@@ -185,9 +158,12 @@ def score(
     scoring_map = get_scorer_map()
     for solver, requirement in zip(requested_solvers, requested_requirements):
         solver_class = scoring_map[solver]
-        solver_obj = solver_class(network, requirement)
-        res = solver_obj.score()
-        print(res)
+        try:
+            solver_obj = solver_class(network, requirement)
+        except TypeError:
+            solver_obj = solver_class(requirement)
+        solver_obj.score()
+        solver_obj.report()
 
 
 if __name__ == "__main__":

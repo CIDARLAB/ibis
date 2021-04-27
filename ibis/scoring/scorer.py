@@ -101,10 +101,13 @@ def get_requirement_map() -> Dict[str, Type[BaseRequirement]]:
 
     """
     from ibis.scoring.cello_score import CelloRequirement
+    from ibis.scoring.blade_score import BladeRequirement
     from ibis.scoring.assembly_score import AssemblyRequirement
 
     requirement_map = {
         "cello": CelloRequirement,
+        "blade": BladeRequirement,
+        "assembly": AssemblyRequirement,
     }
     return requirement_map
 
@@ -149,6 +152,11 @@ class BaseScoring(metaclass=abc.ABCMeta):
         """Extract text from the data set"""
         raise NotImplementedError
 
+    @abc.abstractmethod
+    def report(self):
+        """Extract text from the data set"""
+        raise NotImplementedError
+
 
 # ------------------------- Scoring Utility Functions --------------------------
 # Various utilities that allow attribute access or retrieve specific information
@@ -163,9 +171,13 @@ def get_scorer_map() -> Dict[str, Type[BaseScoring]]:
 
     """
     from ibis.scoring.cello_score import CelloScoring
+    from ibis.scoring.blade_score import BladeScoring
+    from ibis.scoring.assembly_score import AssemblyScoring
 
     scoring_map = {
         "cello": CelloScoring,
+        "blade": BladeScoring,
+        "assembly": AssemblyScoring,
     }
     return scoring_map
 
@@ -246,10 +258,14 @@ def generate_template_yaml(
         requirements = req_map[scorer]
         req_annotations = inspect.getdoc(requirements)
         sig_annotations = inspect.signature(requirements)
+        try:
+            anno = req_annotations.replace("    ", "").split("Args:")[1].splitlines()
+        except AttributeError:
+            anno = "Field not described in file"
         raw_annotations = list(
             filter(
                 lambda x: len(x) > 1,
-                req_annotations.replace("    ", "").split("Args:")[1].splitlines(),
+                anno,
             )
         )
         annotation_dict = {}

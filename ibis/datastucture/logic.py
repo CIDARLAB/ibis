@@ -8,6 +8,7 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 """
 from dataclasses import dataclass
 import os
+import itertools
 from typing import (
     Callable,
     Optional,
@@ -19,6 +20,8 @@ from typing import (
 
 import matplotlib.pyplot as plt
 import networkx as nx
+import pandas as pd
+import numpy as np
 
 from pyverilog.vparser.parser import parse
 
@@ -78,12 +81,12 @@ def XNOR(input_a: bool, input_b: bool):
 # --------------------------------- LOGIC NODE ---------------------------------
 class LogicNode:
     def __init__(
-        self,
-        boolean_value: Optional[bool] = None,
-        input_signals: Optional[List["LogicNode"]] = None,
-        output_signal: Optional["LogicNode"] = None,
-        node_name: Optional[str] = "test",
-        logical_function: Callable = None,
+            self,
+            boolean_value: Optional[bool] = None,
+            input_signals: Optional[List["LogicNode"]] = None,
+            output_signal: Optional["LogicNode"] = None,
+            node_name: Optional[str] = "test",
+            logical_function: Callable = None,
     ):
         """
         A logic node represents a node in our functional equivalent of a
@@ -218,10 +221,16 @@ class LogicNetwork:
             out_list.append(node.node_name)
         return out_list
 
+    def get_number_of_inputs(self):
+        return len(self.input_signal_node_list)
+
+    def get_number_of_outputs(self):
+        return len(self.output_signal_node_list)
+
     # ------------------------------- PARSING ----------------------------------
 
     def parse_verilog_file(
-        self,
+            self,
     ):
         """
         Uses Pyverilog (https://github.com/PyHDI/Pyverilog) to parse input
@@ -277,7 +286,7 @@ class LogicNetwork:
                 # TODO: How does this handle three inputs? Probably custom
                 # based on class. Test with Struct.
                 if hasattr(input_attributes, "left") and hasattr(
-                    input_attributes, "right"
+                        input_attributes, "right"
                 ):
                     # Right Side, i.e. the inputs.
                     left_input_id = input_attributes.right.name
@@ -299,8 +308,9 @@ class LogicNetwork:
     # ---------------------------- LOGIC SIMULATION ----------------------------
 
     def get_logical_output(
-        self,
-        input_signals: Union[List[bool], Tuple[bool], Dict[str, bool]],
+            self,
+            input_signals: Union[List[bool], Tuple[bool], Dict[str, bool]],
+            output_index: int = 0,
     ) -> bool:
         """
         Get the boolean output of the CircuitNetwork given the passed in
@@ -327,21 +337,64 @@ class LogicNetwork:
                 node.boolean_value = signal_value
         else:
             for node, signal_value in zip(
-                self.input_signal_node_list,
-                input_signals,
+                    self.input_signal_node_list,
+                    input_signals,
             ):
                 node.boolean_value = signal_value
         # We then run the graph to get the final output.
         # This assumes that we have a singular output. Our approach below is
         # amenable to multiple outputs, but I need to do some additional
         # research before I pursue it.
-        output_node = self.output_signal_node_list[0]
+        output_node = self.output_signal_node_list[output_index]
         res = self.perform_traversal(output_node)
         return res
 
+    def generate_truth_table(self):
+        logical_inputs = list(
+            itertools.product(
+                [True, False],
+                repeat=len(self.get_available_inputs())
+            )
+        )
+        # These are implicitly in canonical discrete mathematics ordering for
+        # construction of a truth table.
+        out_array = np.zeros(
+            shape=(
+                len(logical_inputs),
+                self.get_number_of_inputs() + self.get_number_of_outputs(),
+            )
+        )
+        for logical_input_index, logical_input in enumerate(logical_inputs):
+            input_offset = len(logical_input)
+            for truth_index, truth_value in enumerate(logical_input):
+                out_array[logical_input_index][truth_index] = truth_value
+            for logical_output_index in range(self.get_number_of_outputs()):
+                res = self.get_logical_output(logical_input, logical_output_index)
+                out_array[logical_input_index][input_offset+logical_output_index] = res
+        return out_array
+
+    def generate_truth_vector(self, input_array: np.ndarray, output_index: int):
+        """
+
+        Args:
+            input_array:
+            output_index:
+
+        Returns:
+
+        """
+        logical_inputs = list(
+            itertools.product(
+                [True, False],
+                repeat=len(self.get_available_inputs())
+            )
+        )
+        input_offset = len(logical_inputs[0])
+        return input_array[input_offset + output_index, :].T
+
     def perform_traversal(
-        self,
-        root_node: LogicNode,
+            self,
+            root_node: LogicNode,
     ) -> bool:
         """
         Recursive function to parse the outputs of all of the nodes of the
@@ -393,9 +446,9 @@ class LogicNetwork:
                     print("Failed to clear prior verilog parsing remnants.")
 
     def plot_graph(
-        self,
-        save_file: bool = False,
-        output_filename: str = f"test.jpg",
+            self,
+            save_file: bool = False,
+            output_filename: str = f"test.jpg",
     ):
         """
         Plots the network structure. Primarily for troubleshooting and
