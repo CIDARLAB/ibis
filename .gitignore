@@ -133,3 +133,6 @@ dmypy.json
 
 # Pytest Output
 .pytest_cache
+
+# Generated Docs
+docs/build
