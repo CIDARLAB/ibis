@@ -1,4 +1,3 @@
-
 import copy
 import random
 from typing import (
@@ -14,7 +13,7 @@ from PIL import (
     Image,
 )
 import tqdm
-
+from matplotlib.patches import Rectangle
 
 valid_repressor_names = [
     'AmeR',
@@ -195,8 +194,100 @@ def generate_random_graph(
 
     return g
 
+def recursive_droplet_search(inner_graph, input_droplet):
+    pi = 'partition_index'
+    partition_index = None
+    input_neighbors = list(nx.neighbors(inner_graph, input_droplet['handle']))
+    neighbor_list = copy.deepcopy(input_neighbors)
+    while input_neighbors:
+        random.shuffle(input_neighbors)
+        _selected_node_index = input_neighbors.pop()
+        _selected_node = inner_graph.nodes()[_selected_node_index]
+        if pi in _selected_node:
+            partition_index = _selected_node[pi]
+            print(f'A-{partition_index=}')
+            return partition_index
+    while True:
+        successor_list = copy.deepcopy(neighbor_list)
+        while successor_list:
+            random.shuffle(successor_list)
+            _selected_node_index = successor_list.pop()
+            _selected_node = inner_graph.nodes()[_selected_node_index]
+            partition_index = recursive_droplet_search(
+                inner_graph=inner_graph,
+                input_droplet=_selected_node,
+            )
+            print(f'D-{partition_index=}')
+            if partition_index:
+                print(f'B-{partition_index=}')
+                return partition_index
+    print(f'C-{partition_index}')
 
-if __name__ == '__main__':
+
+def generate_fake_partition(input_graph: nx.DiGraph, partition_num: int):
+    pi = 'partition_index'
+
+    # We take in the graph and the partition number.
+    # We have some sort of high level check to see if there are more partitions
+    # than nodes, for example.
+    # Once that's done we'll start with the first node and traverse both in x and y.
+    # This takes this form of going to nodes in the same rank as themselves and
+    # other nodes that are at least spatially aligned. There could be a notion
+    # of nodes requiring to be within a degree of each other, but I think that will
+    # be confusing visually from people, even if it doesn't represent the biological
+    # reality.
+    if len(input_graph.nodes) < partition_num:
+        raise RuntimeError(
+            f'Cannot partition network into more partitions than node.'
+        )
+    # We assume that we need to pick nodes to occupy each partition to ensure
+    # that all partitions at least have one node and some distribution across
+    # the network.
+    pi = 'partition_index'
+    current_node = input_graph.nodes()[1]
+    partition_points = {}
+    for i in range(partition_num):
+        current_node[pi] = i
+        partition_points[i] = current_node['handle']
+        current_node = random.choice(input_graph.nodes())
+        while hasattr(current_node, pi):
+            current_node = random.choice(input_graph.nodes())
+    # We've seeded our network with our partition points, and now we need to
+    # grow them out. For this initial pass I'm just going to see what's up,
+    # by we probably need some sort of cognizance of overlap of the area of the
+    # partition.
+    # Let's call this a droplet merge. Think of a bead of water absorbing other
+    # beads of water.
+    undirected_graph = input_graph.to_undirected()
+    for droplet_node in input_graph.nodes(data=True):
+        if pi not in droplet_node[1]:
+            # We recursively move through our edges looking for someone who's
+            # already in a partition.
+            thing = recursive_droplet_search(
+                inner_graph=undirected_graph,
+                input_droplet=droplet_node[1],
+            )
+            print(f'{thing=}')
+            droplet_node[1][pi] = thing
+    return input_graph
+
+def reorder_for_partition_position(input_graph: nx.DiGraph, partition_num: int):
+    # We'll assume a grid like structure.
+    for i in range(partition_num):
+        nodes_of_partition = []
+        for node in input_graph.nodes(data=True):
+            print(node[1]['partition_index'])
+            if node[1]['partition_index'] == i:
+                nodes_of_partition.append(node[1])
+
+        for index, j in enumerate(nodes_of_partition):
+            x_pos = index * 50
+            y_pos = i % 3 * 50
+            j['partiton_position'] = (x_pos, y_pos)
+    return input_graph
+
+
+def generate_visualization():
     write_list = []
     for i in tqdm.tqdm(range(15)):
         INPUT_NUM = random.randint(2, 5)
@@ -245,3 +336,61 @@ if __name__ == '__main__':
         f'example_graphs.gif',
         draw_array,
     )
+
+
+if __name__ == '__main__':
+    MAX_RANKS = 10
+    NUM_OF_PARTITIONS = 4
+    o = generate_random_graph(
+        input_num=2,
+        output_num=1,
+        minimum_nodes_per_rank=2,
+        maximum_nodes_per_rank=3,
+        minimum_ranks=5,
+        maximum_ranks=MAX_RANKS,
+    )
+    # We need to be able to position by node positions
+    # We then need to color by layer.
+    # pos_list = [node['pos'] for node in o.nodes]
+    f, ax = plt.subplots(1, 1, figsize=(8, 5))
+    pos_list = []
+    for node in o.nodes(data=True):
+        pos_list.append(node[1]['pos'])
+    color_list = []
+    color_lookup = sns.color_palette('deep', MAX_RANKS)
+    for node in o.nodes(data=True):
+        color = color_lookup[int(node[1]['rank'])]
+        color_list.append(color)
+    nx.draw(
+        o,
+        pos=pos_list,
+        node_color=color_list,
+    )
+    plt.show()
+    plt.clf()
+    o = generate_fake_partition(o, NUM_OF_PARTITIONS)
+    reorder_for_partition_position(o, NUM_OF_PARTITIONS)
+    part_pos = []
+    for node in o.nodes(data=True):
+        part_pos.append(node[1]['partiton_position'])
+    part_color_list = []
+    color_lookup = sns.color_palette('bright', NUM_OF_PARTITIONS)
+    for node in o.nodes(data=True):
+        color = color_lookup[int(node[1]['partition_index'])]
+        part_color_list.append(color)
+    nx.draw(
+        o,
+        pos=part_pos,
+        node_color=color_list,
+    )
+    plt.show()
+    plt.clf()
+    nx.draw(
+        o,
+        pos=part_pos,
+        node_color=part_color_list,
+        alpha=0.6,
+    )
+    ax.add_patch(Rectangle((0, 0), 0.1, 0.1, linewidth=1, edgecolor='b', facecolor='none'))
+    plt.show()
+
