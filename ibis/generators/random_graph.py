@@ -4,16 +4,14 @@ from typing import (
     List,
 )
 
+import imageio
 import matplotlib.pyplot as plt
 import networkx as nx
 import seaborn as sns
-
-import imageio
+import tqdm
 from PIL import (
     Image,
 )
-import tqdm
-from matplotlib.patches import Rectangle
 
 valid_repressor_names = [
     'AmeR',
@@ -96,6 +94,8 @@ def generate_random_graph(
         maximum_nodes_per_rank: int,
         minimum_ranks: int,
         maximum_ranks: int,
+        max_exit_degree: int = 2,
+        edge_propensity: float = 15,
 ):
     g = nx.DiGraph()
     # We assume that we start with one input.
@@ -123,12 +123,14 @@ def generate_random_graph(
         # --------------------------- END OF GRAPH -----------------------------
         elif j == total_ranks - 1:
             new_nodes = output_num
+            print(new_nodes)
             try:
                 prior_nodes = [y for x, y in g.nodes(data=True) if y['rank'] == j - 1]
             except KeyError:
                 continue
             start_node_counter = node_counter
             for node in range(new_nodes):
+                print(2)
                 output_node = PartitionNode()
                 output_node.randomize()
                 g.add_node(
@@ -147,12 +149,20 @@ def generate_random_graph(
                 g.add_edge(prior_node['handle'], i)
             while prior_nodes:
                 random.shuffle(prior_nodes)
-                lucky_child = random.choice(
-                    range(
-                        start_node_counter,
-                        end_node_counter,
+                while True:
+                    lucky_child = random.choice(
+                        range(
+                            start_node_counter,
+                            end_node_counter,
+                        )
                     )
-                )
+                    lucky_degree = g.in_degree(lucky_child)
+                    print(f'{lucky_degree}')
+                    if type(lucky_degree) == int:
+                        if g.in_degree(lucky_child) < max_exit_degree:
+                            break
+                    else:
+                        break
                 lucky_parent = prior_nodes.pop()
                 g.add_edge(lucky_parent['handle'], lucky_child)
         # ------------------------- MIDDLE OF GRAPH ----------------------------
@@ -176,27 +186,53 @@ def generate_random_graph(
                 node_counter += 1
             end_node_counter = node_counter
             # Ensure that everyone has an ancestor...
+            copy_nodes = copy.deepcopy(prior_nodes)
             for i in range(start_node_counter, end_node_counter):
-                prior_node = random.choice(prior_nodes)
-                g.add_edge(prior_node['handle'], i)
+                if not copy_nodes:
+                    while True:
+                        prior_node = random.choice(
+                            prior_nodes,
+                        )
+                        prior_degree = g.in_degree(prior_node)
+                        if type(prior_degree) == int:
+                            if g.in_degree(prior_node) < max_exit_degree:
+                                break
+                        else:
+                            break
+                    g.add_edge(prior_node['handle'], i)
+                else:
+                    random.shuffle(copy_nodes)
+                    prior_node = copy_nodes.pop()
+                    g.add_edge(prior_node['handle'], i)
+                # if random.randint(0, 100) < edge_propensity:
+                #     if len(list(g.edges(prior_node['handle']))) < max_exit_degree:
+                #         random_next_node = random.randint(start_node_counter, end_node_counter)
+                #         g.add_edge(prior_node['handle'], random_next_node)
             # But due to the nature of the graph we can't have any orphaned
             # parents either.
             while prior_nodes:
                 random.shuffle(prior_nodes)
-                lucky_child = random.choice(
-                    range(
-                        start_node_counter,
-                        end_node_counter,
+                while True:
+                    lucky_child = random.choice(
+                        range(
+                            start_node_counter,
+                            end_node_counter,
+                        )
                     )
-                )
+                    # print(f'{g.in_degree(lucky_child)=}')
+                    # print(f'{prior_nodes}')
+                    if g.in_degree(lucky_child) < max_exit_degree:
+                        # print(f'{g.in_degree(lucky_child)=}')
+                        # print(f'{max_exit_degree=}')
+                        break
                 lucky_parent = prior_nodes.pop()
                 g.add_edge(lucky_parent['handle'], lucky_child)
 
     return g
 
+
 def recursive_droplet_search(inner_graph, input_droplet):
     pi = 'partition_index'
-    partition_index = None
     input_neighbors = list(nx.neighbors(inner_graph, input_droplet['handle']))
     neighbor_list = copy.deepcopy(input_neighbors)
     while input_neighbors:
@@ -221,7 +257,6 @@ def recursive_droplet_search(inner_graph, input_droplet):
             if partition_index:
                 print(f'B-{partition_index=}')
                 return partition_index
-    print(f'C-{partition_index}')
 
 
 def generate_fake_partition(input_graph: nx.DiGraph, partition_num: int):
@@ -271,6 +306,7 @@ def generate_fake_partition(input_graph: nx.DiGraph, partition_num: int):
             droplet_node[1][pi] = thing
     return input_graph
 
+
 def reorder_for_partition_position(input_graph: nx.DiGraph, partition_num: int):
     # We'll assume a grid like structure.
     for i in range(partition_num):
@@ -290,11 +326,12 @@ def reorder_for_partition_position(input_graph: nx.DiGraph, partition_num: int):
 def generate_visualization():
     write_list = []
     for i in tqdm.tqdm(range(15)):
-        INPUT_NUM = random.randint(2, 5)
-        OUTPUT_NUM = random.randint(1, 4)
+        INPUT_NUM = random.randint(2, 4)
 
-        MIN_NODES = random.randint(2, 5)
-        MAX_NODES = MIN_NODES + random.randint(1, 4)
+        MIN_NODES = random.randint(2, 3)
+        MAX_NODES = MIN_NODES + random.randint(0, 1)
+
+        OUTPUT_NUM = random.randint(2, 3)
 
         MIN_RANKS = 15
         MAX_RANKS = 30
@@ -339,20 +376,24 @@ def generate_visualization():
 
 
 if __name__ == '__main__':
-    MAX_RANKS = 10
-    NUM_OF_PARTITIONS = 4
+    test_num = 10
+    INPUT_NUM = random.randint(0, 2)
+
+    MIN_NODES = INPUT_NUM + random.randint(-1, 3)
+    MAX_NODES = MIN_NODES + random.randint(0, 1)
+
+    OUTPUT_NUM = random.randint(MAX_NODES-2, MAX_NODES-1)
+
+    MIN_RANKS = 10
+    MAX_RANKS = 15
     o = generate_random_graph(
-        input_num=2,
-        output_num=1,
-        minimum_nodes_per_rank=2,
-        maximum_nodes_per_rank=3,
-        minimum_ranks=5,
+        input_num=INPUT_NUM,
+        output_num=OUTPUT_NUM,
+        minimum_nodes_per_rank=MIN_NODES,
+        maximum_nodes_per_rank=MAX_NODES,
+        minimum_ranks=MIN_RANKS,
         maximum_ranks=MAX_RANKS,
     )
-    # We need to be able to position by node positions
-    # We then need to color by layer.
-    # pos_list = [node['pos'] for node in o.nodes]
-    f, ax = plt.subplots(1, 1, figsize=(8, 5))
     pos_list = []
     for node in o.nodes(data=True):
         pos_list.append(node[1]['pos'])
@@ -361,36 +402,12 @@ if __name__ == '__main__':
     for node in o.nodes(data=True):
         color = color_lookup[int(node[1]['rank'])]
         color_list.append(color)
+    plt.figure(3, figsize=(12, 12))
     nx.draw(
         o,
         pos=pos_list,
         node_color=color_list,
     )
-    plt.show()
-    plt.clf()
-    o = generate_fake_partition(o, NUM_OF_PARTITIONS)
-    reorder_for_partition_position(o, NUM_OF_PARTITIONS)
-    part_pos = []
-    for node in o.nodes(data=True):
-        part_pos.append(node[1]['partiton_position'])
-    part_color_list = []
-    color_lookup = sns.color_palette('bright', NUM_OF_PARTITIONS)
-    for node in o.nodes(data=True):
-        color = color_lookup[int(node[1]['partition_index'])]
-        part_color_list.append(color)
-    nx.draw(
-        o,
-        pos=part_pos,
-        node_color=color_list,
-    )
-    plt.show()
-    plt.clf()
-    nx.draw(
-        o,
-        pos=part_pos,
-        node_color=part_color_list,
-        alpha=0.6,
-    )
-    ax.add_patch(Rectangle((0, 0), 0.1, 0.1, linewidth=1, edgecolor='b', facecolor='none'))
-    plt.show()
-
+    # plt.show()
+    plt.savefig(f'testcase_{test_num}.png')
+    nx.write_edgelist(o, path=f'testcase_{test_num}.edgelist')
