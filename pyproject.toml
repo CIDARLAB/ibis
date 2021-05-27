@@ -26,6 +26,7 @@ sympy = "^1.8"
 seaborn = "^0.11.1"
 imageio = "^2.9.0"
 tqdm = "^4.60.0"
+pygraphviz = "^1.7"
 
 [tool.poetry.dev-dependencies]
 Sphinx = "^3.5.4"

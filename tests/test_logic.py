@@ -11,11 +11,12 @@ import os
 import pathlib
 
 import pytest
-
+import networkx as nx
+import matplotlib.pyplot as plt
 from ibis.datastucture.logic import LogicNetwork
 
 
-@pytest.fixture
+# @pytest.fixture
 def get_test_verilog_directory():
     current_dir = pathlib.Path.cwd().parts[-1]
     # Assumes that you are running this file for testing.
@@ -47,8 +48,15 @@ def test_or_gate(get_test_verilog_directory):
 
 
 def test_struct():
-    # TODO: When we start doing multi-input circuits.
-    pass
+    path = get_test_verilog_directory()
+    file_location = os.path.join(path, "struct.v")
+    c_net = LogicNetwork(verilog_fp=file_location)
+    c_net.plot_graph()
+
+    # assert c_net.get_logical_output([False, False]) is False
+    # assert c_net.get_logical_output([True, False]) is False
+    # assert c_net.get_logical_output([False, True]) is False
+    # assert c_net.get_logical_output([True, True]) is True
 
 
 def test_sr_latch():
@@ -57,5 +65,6 @@ def test_sr_latch():
 
 
 if __name__ == "__main__":
-    test_and_gate()
-    test_or_gate()
+    # test_and_gate()
+    # test_or_gate()
+    test_struct()
