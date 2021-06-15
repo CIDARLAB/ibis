@@ -7,6 +7,7 @@ Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
 import os
+from pathlib import Path
 from typing import (
     List,
     Optional,
@@ -16,7 +17,11 @@ import pkg_resources
 import typer
 from rich.console import Console
 
-from ibis.datastucture import NetworkGeneticCircuit
+from ibis.datastucture import (
+    NetworkGeneticCircuit,
+    LogicNetwork,
+)
+
 from ibis.ingress import parse_sbol_xml_tree
 from ibis.scoring import (
     get_requirement_map,
@@ -164,6 +169,34 @@ def score(
             solver_obj = solver_class(requirement)
         solver_obj.score()
         solver_obj.report()
+
+@app.command()
+def synthesize_logic_graph(
+        input_fp: str,
+        visualize_graph: bool = True,
+        save_edgelist: bool = True,
+        output_fp: str = None,
+):
+    if not os.path.exists(input_fp):
+        raise RuntimeError(f'Unable to find {input_fp}. Please investigate.')
+    fn = Path(input_fp).stem
+    if Path(input_fp).suffix != '.v':
+        raise RuntimeError(
+            f'Input File {fn} does not seem to be a verilog '
+            f'file. Please investigate.'
+        )
+    lnetwork = LogicNetwork(verilog_fp=input_fp)
+    # Maybe I put a truth table here?
+    if visualize_graph:
+        lnetwork.plot_graph(save_file=True, output_filename=f'{fn}.jpg')
+    if save_edgelist:
+        if output_fp is None:
+            output_fp = f'{fn}.edgelist'
+        lnetwork.save_netlist(output_fp=output_fp)
+    lnetwork.cleanup()
+
+
+
 
 
 if __name__ == "__main__":

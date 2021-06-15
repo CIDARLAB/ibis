@@ -141,6 +141,7 @@ class LogicNetwork:
         self.output_signal_node_list = []
         self.function_counter = {}
         self.graph = nx.DiGraph()
+        self.simple_graph = nx.DiGraph()
         self.cleanup()
         self.parse_verilog_file()
 
@@ -520,14 +521,11 @@ class LogicNetwork:
                     print("Failed to clear prior verilog parsing remnants.")
 
     def rank_nodes(self):
-        for node_name in self.get_available_inputs():
+        for node_name in self.get_available_outputs():
             node = self.get_node_by_node_name(node_name)
             # All input nodes have a rank of zero.
             node.node_rank = 0
             # Should be unique.
-
-            nx_node = [n for n, v in self.graph.nodes(data=True) if v['node_name'] == node.node_name][0]
-            rank_score = 1
 
     def plot_graph(
             self,
@@ -550,8 +548,28 @@ class LogicNetwork:
         # Then we create an implicit ordering based on these locations
         for node in list(self.graph.nodes):
             labels[node] = node.node_name
-        nx.draw(self.graph, labels=labels, with_labels=True)
+        # I kind of like the Kamada graph.
+        # pos = nx.kamada_kawai_layout(self.graph)
+        plt.figure(num=None, figsize=(15, 15), dpi=80)
+        nx.draw(
+            self.graph,
+            labels=labels,
+            pos=nx.nx_agraph.graphviz_layout(self.graph, prog='dot'),
+            with_labels=True,
+            horizontalalignment='left',
+            verticalalignment='bottom',
+        )
         if not save_file:
             plt.show()
         else:
             plt.savefig(output_filename)
+
+    def calculate_simple_graph(self):
+        pass
+
+    def save_netlist(
+            self,
+            output_fp: str
+    ):
+        simple_graph = nx.convert_node_labels_to_integers(self.graph)
+        nx.write_edgelist(simple_graph, output_fp, data=False)
