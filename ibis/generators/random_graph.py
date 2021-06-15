@@ -12,6 +12,7 @@ import tqdm
 from PIL import (
     Image,
 )
+from networkx.drawing.nx_agraph import graphviz_layout
 
 valid_repressor_names = [
     'AmeR',
@@ -87,7 +88,8 @@ class PartitionNode:
         }
 
 
-def generate_random_graph(
+# ------------ Random Graph based on Ranks traversing left to right ------------
+def generate_random_rank_graph(
         input_num: int,
         output_num: int,
         minimum_nodes_per_rank: int,
@@ -231,6 +233,182 @@ def generate_random_graph(
     return g
 
 
+def degree_check(graph, node, maximum_degree):
+    if (graph.in_degree(node) + graph.out_degree(node)) > maximum_degree:
+        return False
+    return True
+
+
+# ----------------- Random Graph in more of a tree like format -----------------
+def generate_random_tree_graph(
+        input_nodes: int = 3,
+        output_nodes: int = 2,
+        total_nodes: int = 20,
+        input_chance: int = 5,
+        output_chance: int = 5,
+        edge_propensity: int = 25,
+):
+    '''
+    Our constraints:
+
+        - Each graph contains 3-5 input vertices, 1-2 output vertex, and the
+            rest primitive vertices
+        - Each primitive vertex has a degree of 2 or 3
+        - Two vertices with two edges cannot be neighbors
+        - No self-loops, cycles, or parallel edges are allowed.
+        - Each primitive vertex has a path from at least one of the input vertices,
+            as well as a path to the output vertex.
+        - The output vertex has variable logic states under different combinations
+            of input states.
+        - The final graph is connected.
+
+    '''
+
+    def total_exit_condition():
+        criteria = [
+            total_node_count >= total_nodes,
+            input_node_count >= input_nodes,
+            output_node_count >= output_nodes,
+        ]
+        return all(criteria)
+
+    def inputs_available():
+        return not input_node_count >= input_nodes
+
+    def outputs_available():
+        return not output_node_count >= output_nodes
+
+    g = nx.DiGraph()
+    center_point = 100
+    x_delta_modifier = 25
+    y_delta_modifier = 100
+    y_start = 400
+    # -------------------------------- COUNTERS --------------------------------
+    rank_count = 0
+    input_node_count = 0
+    output_node_count = 0
+    total_node_count = 0
+    node_streak = 0
+    # ------------------------------- ROOT NODE --------------------------------
+    root_node = PartitionNode()
+    g.add_node(
+        total_node_count,
+        node_type="input",
+        rank=rank_count,
+        handle=total_node_count,
+        pos=(center_point, y_start),
+        **root_node.return_as_dict(),
+    )
+    input_node_count += 1
+    total_node_count += 1
+    # --------------------- ADDITIONAL ROOT LEVEL INPUTS -----------------------
+    if random.randint(0, 100) < input_chance:
+        input_node = PartitionNode()
+        g.add_node(
+            total_node_count,
+            node_type="input",
+            rank=rank_count,
+            handle=total_node_count,
+            pos=(center_point + x_delta_modifier, y_start),
+            **input_node.return_as_dict(),
+        )
+        input_node_count += 1
+        total_node_count += 1
+    current_rank_nodes = [y for x, y in g.nodes(data=True) if y['rank'] == rank_count]
+    demarc_point = len(current_rank_nodes) / 2
+    for index, node_ref in enumerate(current_rank_nodes):
+        polarity = -1 if index <= demarc_point else 1
+        distance = len(current_rank_nodes) - index
+        x_position = (x_delta_modifier * polarity * distance) + center_point
+        y_position = y_start - (rank_count * y_delta_modifier)
+        g.nodes[node_ref['handle']]['pos'] = (x_position, y_position)
+    rank_count += 1
+    # --------------------------- PRIMITIVE LAYERS -----------------------------
+    while not total_exit_condition():
+        # We might be adding an input node, which does not necessitate an
+        # ancestor.
+        if inputs_available():
+            if random.randint(0, 100) < input_chance:
+                input_node = PartitionNode()
+                g.add_node(
+                    total_node_count,
+                    node_type="input",
+                    rank=rank_count,
+                    handle=total_node_count,
+                    pos=(0, 0),
+                    **input_node.return_as_dict(),
+                )
+                input_node_count += 1
+                total_node_count += 1
+        # We first ensure that every prior node that is not an output node
+        # has a child.
+        prior_nodes = [y for x, y in g.nodes(data=True) if y['rank'] == rank_count - 1 and y['node_type'] != 'output']
+        edge_copy = copy.deepcopy(prior_nodes)
+        random.shuffle(prior_nodes)
+        for prior_node in prior_nodes:
+            if outputs_available():
+                if random.randint(0, 100) < output_chance:
+                    output_node = PartitionNode()
+                    g.add_node(
+                        total_node_count,
+                        node_type="output",
+                        rank=rank_count,
+                        handle=total_node_count,
+                        pos=(0, 0),
+                        **output_node.return_as_dict(),
+                    )
+                    g.add_edge(prior_node['handle'], total_node_count)
+                    output_node_count += 1
+                    total_node_count += 1
+                    continue
+            primitive_node = PartitionNode()
+            g.add_node(
+                total_node_count,
+                node_type="middle",
+                rank=rank_count,
+                handle=total_node_count,
+                pos=(0, 0),
+                **primitive_node.return_as_dict(),
+            )
+            g.add_edge(prior_node['handle'], total_node_count)
+            if random.randint(0, 100) < edge_propensity + (edge_propensity * node_streak):
+                random_counter = 0
+                while True:
+                    random.shuffle(edge_copy)
+                    lucky_node = edge_copy.pop()
+                    if g.in_degree(lucky_node['handle']) + g.out_degree(lucky_node['handle']) < 3:
+                        g.add_edge(lucky_node['handle'], total_node_count)
+                        break
+                    if random_counter > 15:
+                        break
+                    random_counter += 1
+                    node_streak = 0
+            else:
+                node_streak += 1
+            total_node_count += 1
+        # Given the tree like structure of the wanted output,
+        # we reorder the positions of the ranked nodes to create a waterfall effect downward.
+        current_rank_nodes = [y for x, y in g.nodes(data=True) if y['rank'] == rank_count]
+        demarc_point = len(current_rank_nodes) / 2
+        for index, node_ref in enumerate(current_rank_nodes):
+            polarity = -1 if index <= demarc_point else 1
+            distance = len(current_rank_nodes) - index
+            predecessor = list(g.predecessors(node_ref['handle']))
+            if predecessor:
+                ancestor_x, ancestor_y = g.nodes[predecessor[0]]['pos']
+            else:
+                ancestor_x = center_point
+            if len(current_rank_nodes) == 1:
+                x_position = center_point
+            else:
+                x_position = (x_delta_modifier * polarity * distance) + center_point
+            y_position = y_start - (rank_count * y_delta_modifier)
+            g.nodes[node_ref['handle']]['pos'] = (x_position, y_position)
+        rank_count += 1
+    return g
+
+
+# ------------------------ NAIEVE PARTITIONING ATTEMPTS ------------------------
 def recursive_droplet_search(inner_graph, input_droplet):
     pi = 'partition_index'
     input_neighbors = list(nx.neighbors(inner_graph, input_droplet['handle']))
@@ -335,7 +513,7 @@ def generate_visualization():
 
         MIN_RANKS = 15
         MAX_RANKS = 30
-        o = generate_random_graph(
+        o = generate_random_rank_graph(
             input_num=INPUT_NUM,
             output_num=OUTPUT_NUM,
             minimum_nodes_per_rank=MIN_NODES,
@@ -376,38 +554,71 @@ def generate_visualization():
 
 
 if __name__ == '__main__':
-    test_num = 10
-    INPUT_NUM = random.randint(0, 2)
-
-    MIN_NODES = INPUT_NUM + random.randint(-1, 3)
-    MAX_NODES = MIN_NODES + random.randint(0, 1)
-
-    OUTPUT_NUM = random.randint(MAX_NODES-2, MAX_NODES-1)
-
-    MIN_RANKS = 10
-    MAX_RANKS = 15
-    o = generate_random_graph(
-        input_num=INPUT_NUM,
-        output_num=OUTPUT_NUM,
-        minimum_nodes_per_rank=MIN_NODES,
-        maximum_nodes_per_rank=MAX_NODES,
-        minimum_ranks=MIN_RANKS,
-        maximum_ranks=MAX_RANKS,
-    )
+    g = generate_random_tree_graph()
+    labels = {}
+    # Then we create an implicit ordering based on these locations
+    for node_index in list(g.nodes):
+        labels[node_index] = g.nodes[node_index]['handle']
     pos_list = []
-    for node in o.nodes(data=True):
+    for node in g.nodes(data=True):
         pos_list.append(node[1]['pos'])
     color_list = []
-    color_lookup = sns.color_palette('deep', MAX_RANKS)
-    for node in o.nodes(data=True):
-        color = color_lookup[int(node[1]['rank'])]
+    color_lookup = sns.color_palette('deep', 3)
+    color_dict = {
+        'input': 0,
+        'middle': 1,
+        'output': 2,
+
+    }
+    for node in g.nodes(data=True):
+        color_index = color_dict[node[1]['node_type']]
+        print(color_index)
+        color = color_lookup[color_index]
         color_list.append(color)
+    nx.nx_agraph.write_dot(g, 'test.dot')
+
     plt.figure(3, figsize=(12, 12))
     nx.draw(
-        o,
+        g,
         pos=pos_list,
+        labels=labels,
         node_color=color_list,
     )
-    # plt.show()
-    plt.savefig(f'testcase_{test_num}.png')
-    nx.write_edgelist(o, path=f'testcase_{test_num}.edgelist')
+    plt.show()
+
+# if __name__ == '__main__':
+#     test_num = 10
+#     INPUT_NUM = random.randint(0, 2)
+#
+#     MIN_NODES = INPUT_NUM + random.randint(-1, 3)
+#     MAX_NODES = MIN_NODES + random.randint(0, 1)
+#
+#     OUTPUT_NUM = random.randint(MAX_NODES - 2, MAX_NODES - 1)
+#
+#     MIN_RANKS = 10
+#     MAX_RANKS = 15
+#     o = generate_random_rank_graph(
+#         input_num=INPUT_NUM,
+#         output_num=OUTPUT_NUM,
+#         minimum_nodes_per_rank=MIN_NODES,
+#         maximum_nodes_per_rank=MAX_NODES,
+#         minimum_ranks=MIN_RANKS,
+#         maximum_ranks=MAX_RANKS,
+#     )
+#     pos_list = []
+#     for node in o.nodes(data=True):
+#         pos_list.append(node[1]['pos'])
+#     color_list = []
+#     color_lookup = sns.color_palette('deep', MAX_RANKS)
+#     for node in o.nodes(data=True):
+#         color = color_lookup[int(node[1]['rank'])]
+#         color_list.append(color)
+#     plt.figure(3, figsize=(12, 12))
+#     nx.draw(
+#         o,
+#         pos=pos_list,
+#         node_color=color_list,
+#     )
+#     # plt.show()
+#     plt.savefig(f'testcase_{test_num}.png')
+#     nx.write_edgelist(o, path=f'testcase_{test_num}.edgelist')

@@ -38,16 +38,22 @@ def string_to_logic_function(function_name: str) -> Callable:
         Non-evaluated logic function.
 
     """
+    function_name = function_name.upper()
     function_lut = {
-        "Not": NOT,
-        "And": AND,
-        "Or": OR,
-        "Xor": XOR,
-        "Nand": NAND,
-        "Nor": NOR,
-        "Xnor": XNOR,
+        "WIRE": WIRE,
+        "NOT": NOT,
+        "AND": AND,
+        "OR": OR,
+        "XOR": XOR,
+        "NAND": NAND,
+        "NOR": NOR,
+        "XNOR": XNOR,
     }
     return function_lut[function_name]
+
+
+def WIRE(input_a: bool):
+    return input_a
 
 
 def NOT(input_a: bool):
@@ -85,7 +91,7 @@ class LogicNode:
             boolean_value: Optional[bool] = None,
             input_signals: Optional[List["LogicNode"]] = None,
             output_signal: Optional["LogicNode"] = None,
-            node_name: Optional[str] = "test",
+            node_name: Optional[str] = "temp",
             logical_function: Callable = None,
     ):
         """
@@ -111,6 +117,7 @@ class LogicNode:
         self.output_signal = output_signal
         self.node_name = node_name
         self.logical_function = logical_function
+        self.node_rank = None
 
 
 # ------------------------------- CIRCUIT NETWORK ------------------------------
@@ -132,7 +139,9 @@ class LogicNetwork:
             )
         self.input_signal_node_list = []
         self.output_signal_node_list = []
+        self.function_counter = {}
         self.graph = nx.DiGraph()
+        self.simple_graph = nx.DiGraph()
         self.cleanup()
         self.parse_verilog_file()
 
@@ -144,7 +153,16 @@ class LogicNetwork:
         Args:
             node: The node to add to the network.
         """
-        self.graph.add_node(node)
+        if node.logical_function is not None:
+            if node.logical_function.__name__ not in self.function_counter:
+                self.function_counter[node.logical_function.__name__] = 1
+            else:
+                self.function_counter[node.logical_function.__name__] += 1
+        if node.node_name == 'temp':
+            f_name = node.logical_function.__name__
+            f_index = self.function_counter[node.logical_function.__name__]
+            node.node_name = f'{f_name}{f_index}'.upper()
+        self.graph.add_node(node, node_name=node.node_name)
 
     def add_input_node(self, node: LogicNode):
         """
@@ -256,20 +274,77 @@ class LogicNetwork:
         # This works much like a header in C++. As we are doing a single module
         # for this initial pass, we'll always default to the initial definition
         # position
+        # TODO: I think the internals get jumbled depending on the circuit. This
+        # below statement only works for struct, for example.
+        for port in ast.description.definitions[0].portlist.ports:
+            node_type = type(port.first).__name__
+            node = LogicNode(node_name=port.first.name)
+            self.add_node(node)
+            if node_type == "Input":
+                self.add_input_node(node)
+            if node_type == "Output":
+                self.add_output_node(node)
         for item in ast.description.definitions[0].items:
             # At this point each item composes either a declaration, or an
             # assignment. A declaration can just be the instantiation of an
             # input, and an assignment is typically taking a series of inputs
             # and applying a boolean function to them.
             if type(item).__name__ == "Decl":
-                node_attribute = item.list[0]
-                node_type = type(node_attribute).__name__
-                node = LogicNode(node_name=node_attribute.name)
-                self.add_node(node)
-                if node_type == "Input":
-                    self.add_input_node(node)
-                if node_type == "Output":
-                    self.add_output_node(node)
+                # Unsure if other ways of wire declaration will work. I think
+                # this might also cause a presumption on the implicit ordering
+                # of the input nodes into the circuit.
+                if len(item.list) > 1:
+                    for wire in item.list:
+                        node = LogicNode(
+                            node_name=wire.name,
+                            logical_function=string_to_logic_function('WIRE'),
+                        )
+                        self.add_node(node)
+                else:
+                    node_attribute = item.list[0]
+                    node_type = type(node_attribute).__name__
+                    node = LogicNode(node_name=node_attribute.name)
+                    self.add_node(node)
+                    if node_type == "Input":
+                        self.add_input_node(node)
+                    if node_type == "Output":
+                        self.add_output_node(node)
+            # This is for something like a not gate.
+            if type(item).__name__ == "InstanceList":
+                node_attribute = item.instances[0]
+                node_logical_function = string_to_logic_function(
+                    node_attribute.module,
+                )
+                temp_node = LogicNode(logical_function=node_logical_function)
+                self.add_node(temp_node)
+                # I know that this is wrong. Need to figure out a way to
+                # discern, it's not within the datastructure. Might have to
+                # sort them in some capacity. I think given the fact that you
+                # know the logical structure of it based on the string key,
+                # you could presume some things and always be right.
+                output = item.instances[0].portlist[0]
+                inputs = item.instances[0].portlist[1:]
+                for logical_input in inputs:
+                    start_node = self.get_node_by_node_name(logical_input.argname.name)
+                    self.add_edge(start_node, temp_node)
+                output_node = self.get_node_by_node_name(output.argname.name)
+                self.add_edge(temp_node, output_node)
+
+                # start_node = None
+                # out_node = None
+                # for port in node_attribute.portlist:
+                #     if port.argname.name in self.get_available_inputs():
+                #         start_node = self.get_node_by_node_name(port.argname.name)
+                #     if port.argname.name in self.get_available_outputs():
+                #         out_node = self.get_node_by_node_name(port.argname.name)
+                #     else:
+                #         # This will label not gates with their respective out
+                #         # wire labels. It might not be ok.
+                #         temp_node.node_name = port.argname.name
+                # if start_node is None:
+                #     self.add_edge(temp_node, out_node)
+                # if out_node is None:
+                #     self.add_edge(start_node, temp_node)
             if type(item).__name__ == "Assign":
                 input_attributes = item.right.var
                 # Special class names in pyyosys that correlate to logical
@@ -370,7 +445,7 @@ class LogicNetwork:
                 out_array[logical_input_index][truth_index] = truth_value
             for logical_output_index in range(self.get_number_of_outputs()):
                 res = self.get_logical_output(logical_input, logical_output_index)
-                out_array[logical_input_index][input_offset+logical_output_index] = res
+                out_array[logical_input_index][input_offset + logical_output_index] = res
         return out_array
 
     def generate_truth_vector(self, input_array: np.ndarray, output_index: int):
@@ -445,8 +520,17 @@ class LogicNetwork:
                 except PermissionError:
                     print("Failed to clear prior verilog parsing remnants.")
 
+    def rank_nodes(self):
+        for node_name in self.get_available_outputs():
+            node = self.get_node_by_node_name(node_name)
+            # All input nodes have a rank of zero.
+            node.node_rank = 0
+            # Should be unique.
+
     def plot_graph(
             self,
+            x_delta: int = 100,
+            y_delta: int = 50,
             save_file: bool = False,
             output_filename: str = f"test.jpg",
     ):
@@ -460,10 +544,32 @@ class LogicNetwork:
             output_filename: What to save the file as.
         """
         labels = {}
+        self.rank_nodes()
+        # Then we create an implicit ordering based on these locations
         for node in list(self.graph.nodes):
             labels[node] = node.node_name
-        nx.draw(self.graph, labels=labels, with_labels=True)
+        # I kind of like the Kamada graph.
+        # pos = nx.kamada_kawai_layout(self.graph)
+        plt.figure(num=None, figsize=(15, 15), dpi=80)
+        nx.draw(
+            self.graph,
+            labels=labels,
+            pos=nx.nx_agraph.graphviz_layout(self.graph, prog='dot'),
+            with_labels=True,
+            horizontalalignment='left',
+            verticalalignment='bottom',
+        )
         if not save_file:
             plt.show()
         else:
             plt.savefig(output_filename)
+
+    def calculate_simple_graph(self):
+        pass
+
+    def save_netlist(
+            self,
+            output_fp: str
+    ):
+        simple_graph = nx.convert_node_labels_to_integers(self.graph)
+        nx.write_edgelist(simple_graph, output_fp, data=False)
