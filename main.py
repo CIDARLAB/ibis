@@ -32,6 +32,9 @@ from ibis.scoring import (
     validate_input_file,
     generate_requirement_classes,
 )
+from ibis.utility import (
+    plot_cell_edgelist,
+)
 
 console = Console()
 app = typer.Typer()
@@ -81,8 +84,8 @@ def complete_name(incomplete: str):
 # ---------------------------- Application Commands ----------------------------
 @app.command()
 def generate_template(
-    requested_solvers: Optional[List[str]] = typer.Option(None),
-    output_fn: Optional[str] = "input.yml",
+        requested_solvers: Optional[List[str]] = typer.Option(None),
+        output_fn: Optional[str] = "input.yml",
 ):
     """
     Generates a template input file for the requested solvers.
@@ -104,23 +107,23 @@ def generate_template(
 
 @app.command()
 def score(
-    requested_solvers: List[str] = typer.Argument(
-        ...,
-        help="The Input Solvers",
-    ),
-    sbol_filepath: str = typer.Option(
-        os.path.join(os.getcwd(), "tests", "test_cello", "example_and_gate.xml"),
-        help="Filepath: location of the SBOL file that constitutes the genetic "
-        "circuit",
-    ),
-    parameter_filepath: str = typer.Option(
-        os.path.join(os.getcwd(), "input.yml"),
-        help="Filepath: location of the SBOL file that constitutes the genetic "
-        "circuit",
-    ),
-    out_filepath: str = typer.Option(
-        "output", help="Filepath: location to write the output of the solved function"
-    ),
+        requested_solvers: List[str] = typer.Argument(
+            ...,
+            help="The Input Solvers",
+        ),
+        sbol_filepath: str = typer.Option(
+            os.path.join(os.getcwd(), "tests", "test_cello", "example_and_gate.xml"),
+            help="Filepath: location of the SBOL file that constitutes the genetic "
+                 "circuit",
+        ),
+        parameter_filepath: str = typer.Option(
+            os.path.join(os.getcwd(), "input.yml"),
+            help="Filepath: location of the SBOL file that constitutes the genetic "
+                 "circuit",
+        ),
+        out_filepath: str = typer.Option(
+            "output", help="Filepath: location to write the output of the solved function"
+        ),
 ):
     """
     Takes an SBOL file, evaluates the quality of a genetic circuit, and then outputs performance metrics.
@@ -149,8 +152,8 @@ def score(
     # required to compute the score. Individual errors are propagated via the
     # function.
     if not validate_input_file(
-        input_fp=parameter_filepath,
-        requested_scorers=requested_solvers,
+            input_fp=parameter_filepath,
+            requested_scorers=requested_solvers,
     ):
         raise RuntimeError(f"Input File failed to pass validation. Exiting.")
     # We should now be good to go so we just move forward with parsing the input
@@ -169,6 +172,7 @@ def score(
             solver_obj = solver_class(requirement)
         solver_obj.score()
         solver_obj.report()
+
 
 @app.command()
 def synthesize_logic_graph(
@@ -196,7 +200,19 @@ def synthesize_logic_graph(
     lnetwork.cleanup()
 
 
-
+@app.command()
+def visualize_edgelist(
+        input_fp: str,
+):
+    if not os.path.exists(input_fp):
+        raise RuntimeError(f'Unable to find {input_fp}. Please investigate.')
+    fn = Path(input_fp).stem
+    if Path(input_fp).suffix != '.edgelist':
+        raise RuntimeError(
+            f'Input File {fn} does not seem to be a verilog '
+            f'file. Please investigate.'
+        )
+    plot_cell_edgelist(input_fp)
 
 
 if __name__ == "__main__":
