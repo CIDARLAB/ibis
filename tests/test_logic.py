@@ -25,9 +25,9 @@ def get_test_verilog_directory():
     return os.path.join("tests", "test_verilog")
 
 
-def test_and_gate(get_test_verilog_directory):
-    path = get_test_verilog_directory
-    file_location = os.path.join(path, "and_gate.v")
+def test_and_gate():
+    path = get_test_verilog_directory()
+    file_location = os.path.join(path, "and.v")
     # Exercise the truth table. Trivial I know. Simple AND Table, 2 Inputs 1 Out
     c_net = LogicNetwork(verilog_fp=file_location)
     assert c_net.get_logical_output([False, False]) is False
@@ -36,8 +36,16 @@ def test_and_gate(get_test_verilog_directory):
     assert c_net.get_logical_output([True, True]) is True
 
 
-def test_or_gate(get_test_verilog_directory):
-    path = get_test_verilog_directory
+def test_and_expansion():
+    path = get_test_verilog_directory()
+    file_location = os.path.join(path, "and.v")
+    # Exercise the truth table. Trivial I know. Simple AND Table, 2 Inputs 1 Out
+    c_net = LogicNetwork(verilog_fp=file_location)
+    c_net.perform_nor_logic_expansion()
+    c_net.plot_graph()
+
+def test_or_gate():
+    path = get_test_verilog_directory()
     file_location = os.path.join(path, "or.v")
     # Exercise the truth table. Trivial I know. Simple AND Table, 2 Inputs 1 Out
     c_net = LogicNetwork(verilog_fp=file_location)
@@ -51,12 +59,7 @@ def test_struct():
     path = get_test_verilog_directory()
     file_location = os.path.join(path, "struct.v")
     c_net = LogicNetwork(verilog_fp=file_location)
-    c_net.plot_graph()
-
-    # assert c_net.get_logical_output([False, False]) is False
-    # assert c_net.get_logical_output([True, False]) is False
-    # assert c_net.get_logical_output([False, True]) is False
-    # assert c_net.get_logical_output([True, True]) is True
+    thing = c_net.get_logical_output([True, True, True])
 
 
 def test_sr_latch():
@@ -64,7 +67,5 @@ def test_sr_latch():
     pass
 
 
-if __name__ == "__main__":
-    # test_and_gate()
-    # test_or_gate()
-    test_struct()
+if __name__ == '__main__':
+    test_and_expansion()

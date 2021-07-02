@@ -6,6 +6,7 @@ Functionality related to parsing verilog and generating logical networks.
 Written by W.R. Jackson, Ben Bremer, Eric South
 --------------------------------------------------------------------------------
 """
+import copy
 from dataclasses import dataclass
 import os
 import itertools
@@ -50,7 +51,6 @@ def string_to_logic_function(function_name: str) -> Callable:
         "XNOR": XNOR,
     }
     return function_lut[function_name]
-
 
 def WIRE(input_a: bool):
     return input_a
@@ -239,6 +239,16 @@ class LogicNetwork:
             out_list.append(node.node_name)
         return out_list
 
+    def get_logic_function_nodes(self):
+        """
+        Returns a list of logic function node *names*.
+        """
+        out_list = []
+        for node in self.graph.nodes:
+            if node.logical_function is not None:
+                out_list.append(node)
+        return out_list
+
     def get_number_of_inputs(self):
         return len(self.input_signal_node_list)
 
@@ -246,6 +256,233 @@ class LogicNetwork:
         return len(self.output_signal_node_list)
 
     # ------------------------------- PARSING ----------------------------------
+    def perform_nor_logic_expansion(
+            self
+    ):
+        """
+        If you want a visual representation of what's happening here:
+        https://en.wikipedia.org/wiki/NOR_logic.
+
+        Mutates the logic graph structure in place to only use NOR gates.
+        This is needed for using things in a genetic circuit/Cello based
+        operation, so I'm explicitly requiring calling this functionality to
+        divorce the two conceptually.
+
+        Returns:
+
+        """
+        for node in self.get_logic_function_nodes():
+            if node.logical_function.__name__ == "NOR":
+                continue
+            elif node.logical_function.__name__ == "NOT":
+                original_node: LogicNode = node
+                input_sig = original_node.input_signals[0]
+                new_node = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig, input_sig],
+                    node_name=original_node.node_name,
+                )
+                predecessor = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_node(new_node)
+                self.graph.add_edge(predecessor, new_node)
+                self.graph.add_edge(new_node, successor)
+                self.graph.remove_edge(predecessor, original_node)
+                self.graph.remove_edge(original_node, successor)
+                self.graph.remove_node(original_node)
+            elif node.logical_function.__name__ == "OR":
+                original_node: LogicNode = node
+                input_sig_a, input_sig_b = original_node.input_signals
+                nor_one = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, input_sig_b],
+                    node_name=f'{original_node.node_name}_0',
+                )
+                nor_two = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_one.output_signal, nor_one.output_signal],
+                    node_name=f'{original_node.node_name}_1',
+                )
+                self.graph.add_node(nor_one)
+                self.graph.add_node(nor_two)
+                predecessor_a, predecessor_b = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_edge(predecessor_a, nor_one)
+                self.graph.add_edge(predecessor_b, nor_one)
+                self.graph.add_edge(nor_one, nor_two)
+                self.graph.add_edge(nor_two, successor)
+                self.graph.remove_edge(predecessor_a, original_node)
+                self.graph.remove_edge(predecessor_b, original_node)
+                self.graph.remove_edge(original_node, successor)
+                self.graph.remove_node(original_node)
+            elif node.logical_function.__name__ == "AND":
+                original_node: LogicNode = node
+                input_sig_a, input_sig_b = original_node.input_signals
+                nor_one = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, input_sig_a],
+                    node_name=f'{original_node.node_name}_0',
+                )
+                nor_two = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_b, input_sig_b],
+                    node_name=f'{original_node.node_name}_1',
+                )
+                nor_three = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_one.output_signal, nor_two.output_signal],
+                    node_name=f'{original_node.node_name}_2',
+                )
+
+                self.graph.add_node(nor_one)
+                self.graph.add_node(nor_two)
+                self.graph.add_node(nor_three)
+                predecessor_a, predecessor_b = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_edge(predecessor_a, nor_one)
+                self.graph.add_edge(predecessor_b, nor_two)
+                self.graph.add_edge(nor_one, nor_three)
+                self.graph.add_edge(nor_two, nor_three)
+                self.graph.add_edge(nor_three, successor)
+                self.graph.remove_edge(predecessor_a, original_node)
+                self.graph.remove_edge(predecessor_b, original_node)
+                self.graph.remove_node(original_node)
+            elif node.logical_function.__name__ == "NAND":
+                original_node: LogicNode = node
+                input_sig_a, input_sig_b = original_node.input_signals
+                nor_one = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, input_sig_a],
+                    node_name=f'{original_node.node_name}_0',
+                )
+                nor_two = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_b, input_sig_b],
+                    node_name=f'{original_node.node_name}_1',
+                )
+                nor_three = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_one.output_signal, nor_two.output_signal],
+                    node_name=f'{original_node.node_name}_2',
+                )
+                nor_four = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_three.output_signal, nor_three.output_signal],
+                    node_name=f'{original_node.node_name}_3',
+                )
+                self.graph.add_node(nor_one)
+                self.graph.add_node(nor_two)
+                self.graph.add_node(nor_three)
+                self.graph.add_node(nor_four)
+                predecessor_a, predecessor_b = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_edge(predecessor_a, nor_one)
+                self.graph.add_edge(predecessor_b, nor_two)
+                self.graph.add_edge(nor_one, nor_three)
+                self.graph.add_edge(nor_two, nor_three)
+                self.graph.add_edge(nor_three, nor_four)
+                self.graph.add_edge(nor_four, successor)
+                self.graph.remove_edge(predecessor_a, original_node)
+                self.graph.remove_edge(predecessor_b, original_node)
+                self.graph.remove_edge(original_node, successor)
+                self.graph.remove_node(original_node)
+            elif node.logical_function.__name__ == "XNOR":
+                original_node: LogicNode = node
+                input_sig_a, input_sig_b = original_node.input_signals
+                nor_one = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, input_sig_b],
+                    node_name=f'{original_node.node_name}_0',
+                )
+                nor_two = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, nor_one.output_signal],
+                    node_name=f'{original_node.node_name}_1',
+                )
+                nor_three = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_b, nor_one.output_signal],
+                    node_name=f'{original_node.node_name}_2',
+                )
+                nor_four = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_two.output_signal, nor_three.output_signal],
+                    node_name=f'{original_node.node_name}_3',
+                )
+                self.graph.add_node(nor_one)
+                self.graph.add_node(nor_two)
+                self.graph.add_node(nor_three)
+                self.graph.add_node(nor_four)
+                predecessor_a, predecessor_b = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_edge(predecessor_a, nor_one)
+                self.graph.add_edge(predecessor_b, nor_two)
+                self.graph.add_edge(predecessor_a, nor_two)
+                self.graph.add_edge(predecessor_b, nor_three)
+                self.graph.add_edge(nor_one, nor_two)
+                self.graph.add_edge(nor_one, nor_three)
+                self.graph.add_edge(nor_two, nor_four)
+                self.graph.add_edge(nor_three, nor_four)
+                self.graph.add_edge(nor_four, successor)
+                self.graph.remove_edge(predecessor_a, original_node)
+                self.graph.remove_edge(predecessor_b, original_node)
+                self.graph.remove_edge(original_node, successor)
+                self.graph.remove_node(original_node)
+            elif node.logical_function.__name__ == "XOR":
+                original_node: LogicNode = node
+                input_sig_a, input_sig_b = original_node.input_signals
+                nor_one = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, input_sig_b],
+                    node_name=f'{original_node.node_name}_0',
+                )
+                nor_two = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_a, nor_one.output_signal],
+                    node_name=f'{original_node.node_name}_1',
+                )
+                nor_three = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[input_sig_b, nor_one.output_signal],
+                    node_name=f'{original_node.node_name}_2',
+                )
+                nor_four = LogicNode(
+                    logical_function=NOR,
+                    input_signals=[nor_two.output_signal, nor_three.output_signal],
+                    node_name=f'{original_node.node_name}_3',
+                )
+                self.graph.add_node(nor_one)
+                self.graph.add_node(nor_two)
+                self.graph.add_node(nor_three)
+                self.graph.add_node(nor_four)
+                predecessor_a, predecessor_b = self.graph.predecessors(original_node)
+                successor = self.graph.successors(original_node)
+                # We presume that these guys only have one. Probably safe,
+                # but we may want a len check.
+                self.graph.add_edge(predecessor_a, nor_one)
+                self.graph.add_edge(predecessor_b, nor_two)
+                self.graph.add_edge(predecessor_a, nor_two)
+                self.graph.add_edge(predecessor_b, nor_three)
+                self.graph.add_edge(nor_one, nor_two)
+                self.graph.add_edge(nor_one, nor_three)
+                self.graph.add_edge(nor_two, nor_four)
+                self.graph.add_edge(nor_three, nor_four)
+                self.graph.add_edge(nor_four, successor)
+                self.graph.remove_edge(predecessor_a, original_node)
+                self.graph.remove_edge(predecessor_b, original_node)
+                self.graph.remove_edge(original_node, successor)
+                self.graph.remove_node(original_node)
+
 
     def parse_verilog_file(
             self,
@@ -277,6 +514,7 @@ class LogicNetwork:
         # TODO: I think the internals get jumbled depending on the circuit. This
         # below statement only works for struct, for example.
         for port in ast.description.definitions[0].portlist.ports:
+
             node_type = type(port.first).__name__
             node = LogicNode(node_name=port.first.name)
             self.add_node(node)
@@ -529,8 +767,6 @@ class LogicNetwork:
 
     def plot_graph(
             self,
-            x_delta: int = 100,
-            y_delta: int = 50,
             save_file: bool = False,
             output_filename: str = f"test.jpg",
     ):
